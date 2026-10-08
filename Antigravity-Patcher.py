@@ -311,6 +311,16 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Also includes": "还包括", "global settings": "全局设置",
     "when working in this project.": "（当在此项目中工作时）。",
     "Toggle Sidebar": "切换侧边栏", "View Split Diff": "分屏查看差异", "Collapse All": "全部折叠",
+    "Maximize Pane": "最大化窗格", "maximize pane": "最大化窗格",
+    "Restore Pane": "还原窗格", "restore pane": "还原窗格",
+    "Toggle Auxiliary Pane": "切换辅助窗格",
+    "Viewing Diff": "正在查看差异", "viewing diff": "正在查看差异",
+    "View Diff": "查看差异", "view diff": "查看差异",
+    "View File": "查看文件", "view file": "查看文件",
+    "Show Whitespace Changes": "显示空白字符更改",
+    "Hide Whitespace Changes": "隐藏空白字符更改",
+    "Collapse Diffs": "折叠差异", "Expand Diffs": "展开差异",
+    "View Stacked Diff": "上下查看差异",
     "Split": "拆分", "Split Right": "向右拆分", "Split Down": "向下拆分",
     "Replace With New": "替换为新对话", "Remove From Split": "从拆分中移除",
     "Fork": "分支", "View Debug": "查看调试信息",
@@ -466,7 +476,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   };
 
   const coreWords = {
-    "preview": "预览", "raw": "源码",
+    "preview": "预览", "raw": "源码", "diff": "差异",
     "split": "拆分", "name": "名称", "prompt": "提示词",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
@@ -628,6 +638,9 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^(\d+) files? changed$/))) {
       return text.replace(trimmed, m[1] + " 个文件已修改");
+    }
+    if ((m = trimmed.match(/^View Diff for (.+)$/))) {
+      return text.replace(trimmed, "查看 " + m[1] + " 的差异");
     }
     if ((m = trimmed.match(/^Last (\d+) days?$/i))) return text.replace(trimmed, "最近 " + m[1] + " 天");
     if ((m = trimmed.match(/^Last (\d+) hours?$/i))) return text.replace(trimmed, "最近 " + m[1] + " 小时");
