@@ -116,6 +116,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Choose a predefined security preset for the agent. This controls terminal auto-execution policy, and file access policy.": "为智能体选择一个预定义的安全预设。这将控制终端自动执行策略和文件访问策略。",
     "Default": "默认", "Always Ask": "总是询问", "Always Proceed": "自动执行",
     "Artifact Review Policy": "工件审核策略",
+    "Plan Review Policy": "计划审阅策略",
+    "and select": "并选择",
+    "to have the agent generate a plan.": "即可让智能体生成计划。",
+    "to have the agent generate a plan": "即可让智能体生成计划",
+    "Type": "类型",
     "Specifies Agent's behavior when asking for review on artifacts, which are documents it creates to enable a richer conversation experience.": "指定智能体在请求审核工件时的行为，工件是其为提供更丰富对话体验而创建的文档。",
     "File Access Rules": "文件访问规则", "Configure allowed and denied paths for file reads and writes.": "配置允许和拒绝的文件读取和写入路径。",
     "Network Access Rules": "网络访问规则", "Configure allowed and denied URLs for reading.": "配置允许和拒绝读取的 URL。",
@@ -720,6 +725,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     if (node.nodeType === Node.TEXT_NODE) {
       // Avoid modifying code snippets or editor content
       if (node.parentElement && node.parentElement.closest && node.parentElement.closest('pre, code, .monaco-editor')) {
+        return;
+      }
+      if (node.textContent.trim() === "Type" && node.parentElement && node.parentElement.textContent.indexOf("generate a plan") !== -1) {
+        node.textContent = node.textContent.replace("Type", "输入");
         return;
       }
       const translated = translateText(node.textContent);
