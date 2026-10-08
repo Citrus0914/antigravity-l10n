@@ -70,7 +70,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     "No conversations yet": "暂无对话", "Open IDE": "打开 IDE", "Window": "窗口",
     "Review": "审阅", "Email": "电子邮箱", "Upgrade": "升级", "Not in Project": "未分组项目",
     "Ask anything, @ to mention, / for actions": "输入任何问题，使用 @ 提及，使用 / 执行操作",
-    "Status": "状态", "Sort Conversations": "对话排序", "Worktree": "工作区树",
+    "Status": "状态", "Sort Conversations": "对话排序", "Worktree": "工作树", "Worktrees": "工作树",
+    "Local": "本地", "local": "本地",
+    "New Worktree": "新建工作树", "New worktree": "新建工作树",
+    "Previous Worktrees": "历史工作树", "Previous worktrees": "历史工作树",
+    "No previous worktrees": "暂无历史工作树", "Loading worktrees...": "正在加载工作树...",
+    "Select Worktree": "选择工作树", "Select worktree": "选择工作树",
+    "Select Environment": "选择环境", "Select environment": "选择环境",
+    "Search past workspaces...": "搜索历史工作区...", "Search past worktrees...": "搜索历史工作树...",
+    "No environments found": "未找到环境", "Unknown Environment": "未知环境", "Unknown worktree": "未知工作树",
+    "New Fig Share?": "新建 Fig 共享？",
+    "Start in a new Fig share (go/fig-shares)": "在新的 Fig 共享中启动 (go/fig-shares)",
+    "Configure Branches": "配置分支", "Select Default Branch": "选择默认分支", "Select branch": "选择分支",
+    "New Fig Workspace": "新建 Fig 工作区",
     "New Project": "新建项目", "Quick Start": "快速开始",
     "Select Project": "选择项目", "Select project": "选择项目",
     "Select Workspace": "选择工作区", "Select workspace": "选择工作区", "Select workspace...": "选择工作区...",
@@ -500,7 +512,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -815,6 +827,24 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if (trimmed === "No matching") {
       return text.replace(trimmed, "未找到匹配的");
+    }
+    if ((m = trimmed.match(/^Select Environment\s*\((.+)\)$/i))) {
+      return "选择环境 (" + m[1] + ")";
+    }
+    if ((m = trimmed.match(/^Work locally on\s+(.+)$/i))) {
+      return "在 " + m[1] + " 上本地工作";
+    }
+    if ((m = trimmed.match(/^Worktree from\s+(.+)$/i))) {
+      return "从 " + m[1] + " 创建工作树";
+    }
+    if ((m = trimmed.match(/^Work in\s+(.+)$/i))) {
+      return "在 " + m[1] + " 中工作";
+    }
+    if ((m = trimmed.match(/^Automatically create a new (.+) workspace when the conversation starts$/i))) {
+      return "对话开始时自动创建新的 " + m[1] + " 工作区";
+    }
+    if ((m = trimmed.match(/^(.+),\s+and reuse\s+(.+)$/i))) {
+      return translateText(m[1]) + "，并复用 " + m[2];
     }
 
     // Prefix Rules Matching
