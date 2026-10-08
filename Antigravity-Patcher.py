@@ -308,6 +308,13 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Scheduled Tasks": "已计划任务",
     "Scheduled Task": "已计划任务",
     "Scheduled": "已计划",
+    "Create with Prompt": "使用提示词创建",
+    "Create with prompt": "使用提示词创建",
+    "create with prompt": "使用提示词创建",
+    "Name": "名称",
+    "name": "名称",
+    "Prompt": "提示词",
+    "prompt": "提示词",
     "Search automations...": "搜索自动化...",
     "Search tasks...": "搜索任务...",
     "Search plugins...": "搜索插件...",
@@ -390,6 +397,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   };
 
   const coreWords = {
+    "name": "名称", "prompt": "提示词",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
