@@ -97,6 +97,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Configure agent execution, queued message delivery, and permissions.": "配置智能体执行、排队消息发送以及权限。",
     "Execution": "执行", "Agent Settings": "智能体设置", "Agent Behavior": "智能体行为",
     "File Permissions": "文件权限", "Network Permissions": "网络权限",
+    "Global Permissions": "全局权限", "Tool Permissions": "工具权限",
+    "Controls the actions the agent can take.": "控制智能体可以执行的操作。",
+    "Controls the actions the agent can take": "控制智能体可以执行的操作",
+    "Modified in": "修改于",
+    "Modify permissions for file, terminal, and MCP tools.": "修改文件、终端和 MCP 工具的权限。",
+    "Modify permissions for file, terminal, and MCP tools": "修改文件、终端和 MCP 工具的权限",
+    "Configure global allowed and denied resource permissions.": "配置全局允许和拒绝的资源权限。",
+    "Inherits your Global Permissions when working in this project.": "在此项目中工作时继承您的全局权限。",
+    "Manually customize individual settings.": "手动自定义各项设置。",
+    "Whether the agent asks you to review its documents.": "智能体是否请求您审阅其文档。",
+    "Whether the agent asks you to review its documents": "智能体是否请求您审阅其文档",
+    "Untitled project": "未命名项目", "Inherit Global": "继承全局",
+    "managed by your organization": "由您的组织管理",
     "Queued Messages": "排队消息", "Configure when follow-up messages are sent.": "配置发送后续消息的时机。",
     "Queue": "排队", "Send Immediately": "立即发送", "Keyboard shortcuts": "键盘快捷键",
     "Security Preset": "安全预设", 
@@ -679,6 +692,9 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^(\d+):00\s+(AM|PM)$/))) {
       return text.replace(trimmed, (m[2] === "AM" ? "上午 " : "下午 ") + m[1] + ":00");
+    }
+    if ((m = trimmed.match(/^(\d+)\s+projects?$/i))) {
+      return text.replace(trimmed, m[1] + " 个项目");
     }
 
     // Prefix Rules Matching
