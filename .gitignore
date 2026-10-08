@@ -49,3 +49,6 @@ desktop.ini
 *.bak
 *.backup
 *.tmp
+
+# Cache and extracted bundles
+tools/latest_frontend.js
