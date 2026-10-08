@@ -301,7 +301,92 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Kick off work on your computer and continue working with your agents from your phone or another device. Turn on Remote Control in app settings.": "在电脑上启动工作，并可以通过手机或其他设备继续与智能体协同工作。请在应用设置中开启“远程控制”。",
     "Kick off work on your computer and continue working with your agents from your phone or another device.": "在电脑上启动工作，并可以通过手机或其他设备继续与智能体协同工作。",
     "Turn on Remote Control in app settings.": "请在应用设置中开启“远程控制”。",
-    "Turn on Remote Control in app settings": "请在应用设置中开启“远程控制”"
+    "Turn on Remote Control in app settings": "请在应用设置中开启“远程控制”",
+
+    // Automations & Scheduled Tasks (自动化与计划任务)
+    "Automations": "自动化",
+    "Scheduled Tasks": "已计划任务",
+    "Scheduled Task": "已计划任务",
+    "Scheduled": "已计划",
+    "Search automations...": "搜索自动化...",
+    "Search tasks...": "搜索任务...",
+    "Search plugins...": "搜索插件...",
+    "Add automation": "添加自动化",
+    "Add scheduled task": "添加已计划任务",
+    "Add Automation": "添加自动化",
+    "Add Scheduled Task": "添加已计划任务",
+    "New Automation": "新建自动化",
+    "New Scheduled Task": "新建已计划任务",
+    "No automations configured.": "未配置任何自动化。",
+    "No scheduled tasks configured.": "未配置任何已计划任务。",
+    "Sidecar feature is not available.": "Sidecar 功能不可用。",
+    "Back to Automations": "返回自动化",
+    "Back to Scheduled Tasks": "返回已计划任务",
+    "Back to UI Plugins": "返回 UI 插件",
+    "Creating…": "正在创建…",
+    "Creating...": "正在创建...",
+    "Enter automation name...": "输入自动化名称...",
+    "Enter scheduled task name...": "输入已计划任务名称...",
+    "Select workspace": "选择工作区",
+    "No projects created": "未创建任何项目",
+    "You don't have any projects created. Please create a project first.": "您尚未创建任何项目。请先创建一个项目。",
+    "Schedule": "计划",
+    "Trigger": "触发器",
+    "Frequency": "执行频率",
+    "Hourly": "每小时",
+    "Daily": "每天",
+    "Weekly": "每周",
+    "Custom": "自定义",
+    "Select Day": "选择星期",
+    "Select Hour": "选择时间",
+    "Monday": "周一",
+    "Tuesday": "周二",
+    "Wednesday": "周三",
+    "Thursday": "周四",
+    "Friday": "周五",
+    "Saturday": "周六",
+    "Sunday": "周日",
+    "Cron expression e.g. 0 */6 * * *": "Cron 表达式，例如 0 */6 * * *",
+    "Enter a prompt for the agent to run...": "输入供智能体执行的提示词...",
+    "Prompt to execute on schedule...": "按计划执行的提示词...",
+    "All automations run as Flash.": "所有自动化均以 Flash 模型运行。",
+    "All scheduled tasks run as Flash.": "所有已计划任务均以 Flash 模型运行。",
+    "Manage Permissions": "管理权限",
+    "Run Now": "立即运行",
+    "View Logs": "查看日志",
+    "Task Logs": "任务日志",
+    "Close Logs Modal": "关闭日志弹窗",
+    "builtin": "内置",
+    "Delete Task": "删除任务",
+    "Delete Automation": "删除自动化",
+    "Edit task title": "编辑任务标题",
+    "Edit automation title": "编辑自动化标题",
+    "Open project settings": "打开项目设置",
+    "Uptime": "运行时间",
+    "Process Error: ": "进程错误：",
+    "Manager Error: ": "管理器错误：",
+    "Events": "事件",
+    "Loading events...": "正在加载事件...",
+    "No events recorded.": "暂无事件记录。",
+    "This sidecar runs from a path that is not officially supported. Make sure your code is in a trusted location in google3.": "此 Sidecar 运行路径不受官方支持。请确保您的代码位于受信任的位置。",
+    "This sidecar failed to start.": "此 Sidecar 启动失败。",
+    "Not scheduled": "未安排计划",
+    "Command execution": "命令执行",
+    "Stopped": "已停止",
+    "Starting": "正在启动",
+    "Backoff": "等待重试",
+
+    // Sidebar Filter & Display Options (侧边栏筛选与显示选项)
+    "Only Unread": "仅未读",
+    "Archived": "已归档",
+    "Decorations": "装饰效果",
+    "Display": "显示",
+    "Pinned Chats Only": "仅固定对话",
+    "Workspace + Worktree": "工作区 + 工作树",
+    "Project + Worktree": "项目 + 工作树",
+    "UI Extensions": "UI 扩展",
+    "UI extensions": "UI 扩展",
+    "UI Plugins": "UI 插件"
   };
 
   const coreWords = {
@@ -313,7 +398,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "workspace": "工作区", "workspaces": "工作区", "directory": "目录", "folder": "文件夹", "file": "文件", "files": "文件",
     "command": "命令", "commands": "命令", "terminal": "终端", "console": "控制台", "output": "输出", "input": "输入",
     "error": "错误", "warning": "警告", "info": "信息", "success": "成功", "failed": "失败", "pending": "等待中", "running": "运行中",
-    "yes": "是", "no": "否", "true": "真", "false": "假", "on": "开", "off": "关", "enable": "启用", "disable": "禁用",
+    "yes": "是", "no": "否", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝"
   };
@@ -529,6 +614,63 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if (text.indexOf("Add an MCP server above") !== -1) {
       text = text.replace(/Add an MCP server above or add a custom one via the MCP Config\./g, "请在上方添加 MCP 服务器，或通过 MCP 配置添加自定义服务器。");
+    }
+
+    // Automations dynamic translations
+    if ((m = trimmed.match(/^No (automations|scheduled tasks) matching your search$/i))) {
+      return text.replace(trimmed, "未找到匹配您搜索的" + (m[1].toLowerCase() === "automations" ? "自动化" : "已计划任务"));
+    }
+    if ((m = trimmed.match(/^Automation "(.+)" not found\.?$/))) {
+      return text.replace(trimmed, '未找到自动化 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Task "(.+)" not found\.?$/))) {
+      return text.replace(trimmed, '未找到任务 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^A (automation|scheduled task) with ID (.+) already exists\.?$/))) {
+      let typeStr = m[1] === "automation" ? "自动化" : "已计划任务";
+      return text.replace(trimmed, "ID 为 " + m[2] + " 的" + typeStr + "已存在。");
+    }
+    if ((m = trimmed.match(/^Created automation "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已创建自动化 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to create (automation|scheduled task)\.?$/))) {
+      return text.replace(trimmed, "创建" + (m[1] === "automation" ? "自动化" : "已计划任务") + "失败。");
+    }
+    if ((m = trimmed.match(/^Deleted "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已删除 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to delete "(.+)"\.?$/))) {
+      return text.replace(trimmed, '删除 "' + m[1] + '" 失败。');
+    }
+    if ((m = trimmed.match(/^Restarted "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已重启 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Enabled "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已启用 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to save "(.+)"\.?$/))) {
+      return text.replace(trimmed, '保存 "' + m[1] + '" 失败。');
+    }
+    if ((m = trimmed.match(/^Triggered (.+)$/))) {
+      return text.replace(trimmed, "触发于 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Are you sure you want to delete (.+)\? This action cannot be undone\.?$/))) {
+      return text.replace(trimmed, "您确定要删除 " + m[1] + " 吗？此操作无法撤销。");
+    }
+    if (trimmed.indexOf("Agents created by this") !== -1 && trimmed.indexOf("run in a dedicated") !== -1) {
+      return "由此自动化创建的智能体将在具有独立权限的专用空间中运行。您可以在设置页面更改权限。";
+    }
+    if (trimmed === "Your changes were not saved. Please try again.") {
+      return text.replace(trimmed, "您的更改未保存。请重试。");
+    }
+    if (trimmed === "around") {
+      return text.replace(trimmed, "大约在");
+    }
+    if (trimmed === "on") {
+      return text.replace(trimmed, "于");
+    }
+    if ((m = trimmed.match(/^(\d+):00\s+(AM|PM)$/))) {
+      return text.replace(trimmed, (m[2] === "AM" ? "上午 " : "下午 ") + m[1] + ":00");
     }
 
     // Prefix Rules Matching
