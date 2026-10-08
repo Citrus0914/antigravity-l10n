@@ -315,6 +315,12 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Replace With New": "替换为新对话", "Remove From Split": "从拆分中移除",
     "Fork": "分支", "View Debug": "查看调试信息",
     "Conversation ID": "对话 ID", "Worktree Name": "工作树名称",
+    "Preview": "预览", "preview": "预览", "Raw": "源码", "raw": "源码",
+    "Open in Preview Tab": "在预览标签页中打开", "New Preview": "新建预览",
+    "Copy Content": "复制内容", "Copy Path": "复制路径", "Copy Relative Path": "复制相对路径",
+    "Export as PDF": "导出为 PDF", "Export Artifact": "导出工件",
+    "Show in File Explorer": "在文件资源管理器中显示", "Reveal in Finder": "在访达中显示", "Show in File Manager": "在文件管理器中显示",
+    "Open in Notebook View": "在 Notebook 视图中打开",
     "Learn more about": "了解更多关于",
     "Configure the agent's visual theme and display preferences.": "配置智能体的视觉主题和显示偏好。",
     "Contrast": "对比度", "Strong": "增强",
@@ -460,6 +466,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   };
 
   const coreWords = {
+    "preview": "预览", "raw": "源码",
     "split": "拆分", "name": "名称", "prompt": "提示词",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
