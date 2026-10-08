@@ -311,6 +311,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Also includes": "还包括", "global settings": "全局设置",
     "when working in this project.": "（当在此项目中工作时）。",
     "Toggle Sidebar": "切换侧边栏", "View Split Diff": "分屏查看差异", "Collapse All": "全部折叠",
+    "Split": "拆分", "Split Right": "向右拆分", "Split Down": "向下拆分",
+    "Replace With New": "替换为新对话", "Remove From Split": "从拆分中移除",
+    "Fork": "分支", "View Debug": "查看调试信息",
+    "Conversation ID": "对话 ID", "Worktree Name": "工作树名称",
     "Learn more about": "了解更多关于",
     "Configure the agent's visual theme and display preferences.": "配置智能体的视觉主题和显示偏好。",
     "Contrast": "对比度", "Strong": "增强",
@@ -456,7 +460,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   };
 
   const coreWords = {
-    "name": "名称", "prompt": "提示词",
+    "split": "拆分", "name": "名称", "prompt": "提示词",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
