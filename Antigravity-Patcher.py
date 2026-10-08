@@ -786,8 +786,10 @@ DOM_TRANSLATOR_INJECTION = r"""
         return;
       }
       if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
-        node.parentElement.textContent = "删除项目";
-        return;
+        if (node.textContent === "Delete ") {
+          node.textContent = "删除";
+          return;
+        }
       }
       const translated = translateText(node.textContent);
       if (translated !== node.textContent) {
