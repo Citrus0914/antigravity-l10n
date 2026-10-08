@@ -284,6 +284,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Toggle Sidebar": "切换侧边栏", "View Split Diff": "分屏查看差异", "Collapse All": "全部折叠",
     "Learn more about": "了解更多关于",
     "Configure the agent's visual theme and display preferences.": "配置智能体的视觉主题和显示偏好。",
+    "Contrast": "对比度", "Strong": "增强",
     "Chat Settings": "聊天设置", "Verbose Agent Chat": "详细的智能体对话",
     "Display and preserve intermediate thinking steps.": "显示并保留中间思考过程。",
     "Conversation Width": "对话宽度", "Configure the maximum width of the conversation panel.": "配置对话面板的最大宽度。",
