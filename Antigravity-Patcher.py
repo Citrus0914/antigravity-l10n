@@ -178,6 +178,18 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Edit workspace name": "编辑工作区名称",
     "All Workspaces": "所有工作区",
     "All Projects": "所有项目",
+    "Delete Project": "删除项目",
+    "Delete Workspace": "删除工作区",
+    "Permanently delete": "永久删除",
+    "This will permanently delete": "这将永久删除",
+    "1 active conversation": "1 个活动对话",
+    "1 archived conversation": "1 个已归档对话",
+    "active conversation": "活动对话",
+    "active conversations": "活动对话",
+    "archived conversation": "已归档对话",
+    "archived conversations": "已归档对话",
+    "within it.": "。",
+    "within it": "",
     "Terminal & Tooling Permissions": "终端与工具权限",
     "Terminal Commands": "终端命令", "Configure allowed terminal commands.": "配置允许执行的终端命令。",
     "Commands Outside Sandbox": "沙盒外命令", "Configure allowed commands outside the sandbox.": "配置允许在沙盒外执行的命令。",
@@ -730,6 +742,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(\d+)\s+projects?$/i))) {
       return text.replace(trimmed, m[1] + " 个项目");
     }
+    if ((m = trimmed.match(/^(\d+)\s+active conversations?$/i))) {
+      return text.replace(trimmed, m[1] + " 个活动对话");
+    }
+    if ((m = trimmed.match(/^(\d+)\s+archived conversations?$/i))) {
+      return text.replace(trimmed, m[1] + " 个已归档对话");
+    }
+    if ((m = trimmed.match(/^Are you sure you want to delete the (project|workspace)\s+(.+)\?$/i))) {
+      let typeStr = m[1].toLowerCase() === "project" ? "项目" : "工作区";
+      return text.replace(trimmed, "您确定要删除" + typeStr + " " + m[2] + " 吗？");
+    }
+    if (trimmed.indexOf("is managed by the") !== -1 && trimmed.indexOf("automation and can only be deleted") !== -1) {
+      return text.replace("is managed by the", "由").replace("automation and can only be deleted by deleting that automation.", "自动化管理，只能通过删除该自动化来进行删除。");
+    }
 
     // Prefix Rules Matching
     for (let i = 0; i < textPrefixRules.length; i++) {
@@ -758,6 +783,10 @@ DOM_TRANSLATOR_INJECTION = r"""
       }
       if (node.textContent.trim() === "Type" && node.parentElement && node.parentElement.textContent.indexOf("generate a plan") !== -1) {
         node.textContent = node.textContent.replace("Type", "输入");
+        return;
+      }
+      if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
+        node.parentElement.textContent = "删除项目";
         return;
       }
       const translated = translateText(node.textContent);
