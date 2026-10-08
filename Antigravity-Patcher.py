@@ -264,6 +264,17 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Keep the app accessible from the menu bar and running in the background when all windows are closed.": "应用将可以从系统托盘访问，并在所有窗口关闭时继续在后台运行。",
     "Notification Settings": "通知设置", "To modify notification settings, open your operating system's system preferences.": "要修改通知设置，请打开操作系统的系统偏好设置。",
     "Open System Preferences": "打开系统偏好设置",
+    "App version": "应用版本",
+    "App Version": "应用版本",
+    "Automatic Check for Updates": "自动检查更新",
+    "Automatically prompt you to restart the app when a new update is available. When disabled, you can check for updates manually from the app menu.": "有新更新可用时自动提示您重启应用。禁用后，您可以从应用菜单中手动检查更新。",
+    "Automatically prompt you to restart the app when a new update is available.": "有新更新可用时自动提示您重启应用。",
+    "When disabled, you can check for updates manually from the app menu.": "禁用后，您可以从应用菜单中手动检查更新。",
+    "Enable Remote Control": "启用远程控制",
+    "Manage your conversations from the companion website.": "从配套网站管理您的对话。",
+    "Inline Actions": "行内操作",
+    "Include Jetski Default Customizations": "包含 Jetski 默认自定义项",
+    "Include default customizations, such as default skills.": "包含默认自定义项，例如默认技能。",
 
     // Conversations Tab & Permissions
     "Agent settings and permissions for conversations outside of projects.": "针对项目外对话的智能体设置和权限。",
