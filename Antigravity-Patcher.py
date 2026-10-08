@@ -72,6 +72,29 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Ask anything, @ to mention, / for actions": "输入任何问题，使用 @ 提及，使用 / 执行操作",
     "Status": "状态", "Sort Conversations": "对话排序", "Worktree": "工作区树",
     "New Project": "新建项目", "Quick Start": "快速开始",
+    "Select Project": "选择项目", "Select project": "选择项目",
+    "Select Workspace": "选择工作区", "Select workspace": "选择工作区", "Select workspace...": "选择工作区...",
+    "No Project": "无项目", "No Workspace": "无工作区", "New Workspace": "新建工作区",
+    "No project selected": "未选择项目", "No workspace selected": "未选择工作区",
+    "No project selected or project management not available.": "未选择项目或项目管理不可用。",
+    "No workspaces open.": "没有打开的工作区。",
+    "No projects found": "未找到项目", "No workspaces found": "未找到工作区",
+    "No matching projects": "未找到匹配的项目", "No matching workspaces": "未找到匹配的工作区",
+    "Search Projects": "搜索项目", "Search Recent Workspaces": "搜索最近的工作区",
+    "Search Recent Projects": "搜索最近的项目", "Search Workspaces": "搜索工作区",
+    "Select a folder.": "选择文件夹。",
+    "Instantly create a new project and folder to start building.": "立即创建新项目和文件夹以开始构建。",
+    "Project Settings": "项目设置",
+    "CitC Workspace": "CitC 工作区", "Work in a CitC workspace.": "在 CitC 工作区中工作。",
+    "Cog Workspace": "Cog 工作区", "Work in a Cog workspace.": "在 Cog 工作区中工作。",
+    "ABFS Workspace (Alpha)": "ABFS 工作区 (Alpha)", "Work in an ABFS workspace.": "在 ABFS 工作区中工作。",
+    "Create a new project using normal folders and/or citc workspaces.": "使用常规文件夹和/或 CitC 工作区创建新项目。",
+    "Google3 projects are being deprecated. Select an individual workspace or folder instead.": "Google3 项目即将被弃用。请改选单个工作区或文件夹。",
+    "Google3 projects are being deprecated.": "Google3 项目即将被弃用。",
+    "Create a new Piper (g4) workspace from your initial prompt. Customize in General Settings, under Advanced.": "根据您的初始提示词创建新的 Piper (g4) 工作区。可在常规设置的“高级”中自定义。",
+    "Create a new JJ workspace from your initial prompt. Customize in General Settings, under Advanced.": "根据您的初始提示词创建新的 JJ 工作区。可在常规设置的“高级”中自定义。",
+    "Create a new Cog (GoB) workspace from your initial prompt. Customize in General Settings, under Advanced.": "根据您的初始提示词创建新的 Cog (GoB) 工作区。可在常规设置的“高级”中自定义。",
+    "Create a new Fig workspace from your initial prompt. Customize in General Settings, under Advanced.": "根据您的初始提示词创建新的 Fig 工作区。可在常规设置的“高级”中自定义。",
     "Good response": "好的回答", "Bad response": "差的回答",
 
     // General Settings Page
@@ -477,7 +500,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -779,6 +802,20 @@ DOM_TRANSLATOR_INJECTION = r"""
     if (trimmed.indexOf("is managed by the") !== -1 && trimmed.indexOf("automation and can only be deleted") !== -1) {
       return text.replace("is managed by the", "由").replace("automation and can only be deleted by deleting that automation.", "自动化管理，只能通过删除该自动化来进行删除。");
     }
+    if ((m = trimmed.match(/^Select (project|workspace),\s*current:\s*(.+)$/i))) {
+      let typeStr = m[1].toLowerCase() === "project" ? "项目" : "工作区";
+      let cur = m[2].trim();
+      let transCur = dictionary[cur] || cur;
+      return "选择" + typeStr + "，当前：" + transCur;
+    }
+    if ((m = trimmed.match(/^select workspace:\s*(.+)$/i))) {
+      let cur = m[1].trim();
+      let transCur = dictionary[cur] || cur;
+      return "选择工作区：" + transCur;
+    }
+    if (trimmed === "No matching") {
+      return text.replace(trimmed, "未找到匹配的");
+    }
 
     // Prefix Rules Matching
     for (let i = 0; i < textPrefixRules.length; i++) {
@@ -812,6 +849,22 @@ DOM_TRANSLATOR_INJECTION = r"""
       if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
         if (node.textContent === "Delete ") {
           node.textContent = "删除";
+          return;
+        }
+      }
+      if (node.parentElement && (node.parentElement.textContent.indexOf("No projects found") !== -1 || node.parentElement.textContent.indexOf("No workspaces found") !== -1)) {
+        if (node.textContent === "No ") {
+          node.textContent = "未找到";
+          return;
+        }
+        if (node.textContent === " found") {
+          node.textContent = "";
+          return;
+        }
+      }
+      if (node.parentElement && (node.parentElement.textContent.indexOf("No matching projects") !== -1 || node.parentElement.textContent.indexOf("No matching workspaces") !== -1)) {
+        if (node.textContent === "No matching ") {
+          node.textContent = "未找到匹配的";
           return;
         }
       }
