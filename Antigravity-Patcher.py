@@ -964,11 +964,22 @@ MENU_TRANSLATOR_INJECTION = r"""
     'About Antigravity': '关于 Antigravity', 'Services': '服务', 'Hide Antigravity': '隐藏 Antigravity',
     'Hide Others': '隐藏其他', 'Show All': '显示全部', 'Force Reload': '强制重新加载',
     'Reload': '重新加载', 'Actual Size': '实际大小', 'Zoom In': '放大', 'Zoom Out': '缩小',
-    'Toggle Full Screen': '切换全屏'
+    'Toggle Full Screen': '切换全屏',
+    // 托盘与系统菜单
+    'No agents running': '无智能体运行中',
+    'Open Antigravity': '打开 Antigravity',
+    'Quit': '退出',
+    'Connect to WSL': '连接到 WSL',
+    'Reopen Locally': '在本地重新打开',
+    'Docs': '文档'
   };
   function translateMenu(menuItem) {
-    if (menuItem.label && menuTranslationMap[menuItem.label]) {
-      menuItem.label = menuTranslationMap[menuItem.label];
+    if (menuItem.label) {
+      if (menuTranslationMap[menuItem.label]) {
+        menuItem.label = menuTranslationMap[menuItem.label];
+      } else if (menuItem.label.startsWith('Open ')) {
+        menuItem.label = '打开 ' + menuItem.label.slice(5);
+      }
     }
     if (menuItem.submenu && menuItem.submenu.items) {
       menuItem.submenu.items.forEach(translateMenu);
@@ -1095,12 +1106,40 @@ def apply_patch():
     preload_path = os.path.join(UNPACKED_APP_DIR, "dist", "preload.js")
     menu_path = os.path.join(UNPACKED_APP_DIR, "dist", "menu.js")
     tray_path = os.path.join(UNPACKED_APP_DIR, "dist", "tray.js")
+    main_path = os.path.join(UNPACKED_APP_DIR, "dist", "main.js")
 
     append_once(preload_path, DOM_TRANSLATOR_INJECTION, "Antigravity Chinese Localization Engine", "Web UI Injection")
     append_once(menu_path, MENU_TRANSLATOR_INJECTION, "Antigravity Chinese Localization Engine - Menu", "Menu Translator Injection")
 
-    replace_in_file(tray_path, "'Show Antigravity'", "'显示 Antigravity'")
-    replace_in_file(tray_path, "'Quit'", "'退出'")
+    # 汉化托盘菜单初始状态与主进程确认退出弹窗 (main.js)
+    replace_in_file(main_path, "label: 'No agents running'", "label: '无智能体运行中'")
+    replace_in_file(main_path, "label: `Open ${electron_1.app.getName()}`", "label: `打开 ${electron_1.app.getName()}`")
+    replace_in_file(main_path, "label: 'Quit',", "label: '退出',")
+    replace_in_file(main_path, "title: 'Confirm Quit'", "title: '确认退出'")
+    replace_in_file(main_path, "message: 'Are you sure you want to quit?'", "message: '您确定要退出吗？'")
+    replace_in_file(main_path, "detail: 'There may be agents or background tasks running.'", "detail: '可能有智能体或后台任务正在运行。'")
+    replace_in_file(main_path, "buttons: ['Cancel', 'Quit']", "buttons: ['取消', '退出']")
+
+    # 汉化托盘动态智能体计数 (tray.js)
+    if os.path.exists(tray_path):
+        with open(tray_path, "r", encoding="utf-8") as f:
+            tray_code = f.read()
+        old_counter = "(count > 0 ? `${count}` : 'No') +\n                    ' agent' +\n                    (count === 1 ? '' : 's') +\n                    ' running'"
+        new_counter = "count > 0 ? `${count} 个智能体运行中` : '无智能体运行中'"
+        is_crlf = "\r\n" in tray_code
+        target_str = old_counter.replace("\n", "\r\n") if is_crlf else old_counter
+        if target_str in tray_code:
+            tray_code = tray_code.replace(target_str, new_counter)
+            with open(tray_path, "w", encoding="utf-8") as f:
+                f.write(tray_code)
+            print(f"[成功] 执行目标替换 (tray.js 智能体计数器)")
+        elif new_counter in tray_code:
+            print(f"[跳过] 目标已替换 (tray.js 智能体计数器)")
+
+    # 汉化主菜单 WSL 与 Docs 辅助项 (menu.js)
+    replace_in_file(menu_path, "label: 'Docs'", "label: '文档'")
+    replace_in_file(menu_path, "label: 'Connect to WSL'", "label: '连接到 WSL'")
+    replace_in_file(menu_path, "label: 'Reopen Locally'", "label: '在本地重新打开'")
 
     # 3. 汉化 loadingOverlay (Splash Screen)
     loading_path = os.path.join(UNPACKED_APP_DIR, "dist", "loadingOverlay.js")
