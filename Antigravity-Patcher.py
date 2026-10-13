@@ -150,6 +150,25 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Security Preset": "安全预设", 
     "Choose a predefined security preset for the agent. This controls terminal auto-execution policy, and file access policy.": "为智能体选择一个预定义的安全预设。这将控制终端自动执行策略和文件访问策略。",
     "Default": "默认", "Always Ask": "总是询问", "Always Proceed": "自动执行",
+    "Turbo": "极速", "turbo": "极速",
+    "Use Global Settings": "使用全局设置", "use global settings": "使用全局设置",
+    "Global Permission Settings": "全局权限设置",
+    "This project overrides your global permission settings.": "此项目覆盖了您的全局权限设置。",
+    "This project overrides your global permission settings": "此项目覆盖了您的全局权限设置",
+    "This workspace overrides your global permission settings.": "此工作区覆盖了您的全局权限设置。",
+    "This workspace overrides your global permission settings": "此工作区覆盖了您的全局权限设置",
+    "Every command requires approval.": "每条命令都需要批准。",
+    "Every command requires approval": "每条命令都需要批准",
+    "Ask before sensitive operations.": "在敏感操作前询问。",
+    "Ask before sensitive operations": "在敏感操作前询问",
+    "Run all commands without restrictions.": "无限制运行所有命令。",
+    "Run all commands without restrictions": "无限制运行所有命令",
+    "Security agent decides if commands run.": "由安全智能体决定是否运行命令。",
+    "Security agent decides if commands run": "由安全智能体决定是否运行命令",
+    "Automatically decide if commands run.": "自动决定是否运行命令。",
+    "Automatically decide if commands run": "自动决定是否运行命令",
+    "Vetted (Preview)": "已审核 (预览)", "Vetted": "已审核",
+    "Auto (Preview)": "自动 (预览)", "Auto": "自动",
     "Artifact Review Policy": "工件审核策略",
     "Plan Review Policy": "计划审阅策略",
     "and select": "并选择",
@@ -512,7 +531,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -846,6 +865,21 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(.+),\s+and reuse\s+(.+)$/i))) {
       return translateText(m[1]) + "，并复用 " + m[2];
     }
+    if ((m = trimmed.match(/^This (project|workspace) overrides your global permission settings\.?$/i))) {
+      let typeStr = m[1].toLowerCase() === "project" ? "此项目" : "此工作区";
+      return text.replace(trimmed, typeStr + "覆盖了您的全局权限设置。");
+    }
+    if ((m = trimmed.match(/^Agent permissions preset selector,\s*current:\s*(.+)$/i))) {
+      let cur = m[1].trim();
+      let transCur = dictionary[cur] || cur;
+      return "智能体权限预设选择器，当前：" + transCur;
+    }
+    if ((m = trimmed.match(/^Failed to save project settings:\s*(.+)$/i))) {
+      return text.replace(trimmed, "保存项目设置失败：" + m[1]);
+    }
+    if ((m = trimmed.match(/^Failed to save settings:\s*(.+)$/i))) {
+      return text.replace(trimmed, "保存设置失败：" + m[1]);
+    }
 
     // Prefix Rules Matching
     for (let i = 0; i < textPrefixRules.length; i++) {
@@ -874,6 +908,10 @@ DOM_TRANSLATOR_INJECTION = r"""
       }
       if (node.textContent.trim() === "Type" && node.parentElement && node.parentElement.textContent.indexOf("generate a plan") !== -1) {
         node.textContent = node.textContent.replace("Type", "输入");
+        return;
+      }
+      if (node.textContent === " Settings" && node.parentElement && node.parentElement.closest && node.parentElement.closest('[data-testid="permissions-project-options"]')) {
+        node.textContent = "设置";
         return;
       }
       if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
