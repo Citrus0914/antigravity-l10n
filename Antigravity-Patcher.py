@@ -177,6 +177,17 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Default": "默认", "Always Ask": "总是询问", "Always Proceed": "自动执行",
     "Turbo": "极速", "turbo": "极速",
     "Use Global Settings": "使用全局设置", "use global settings": "使用全局设置",
+    "Permission Settings": "权限设置", "Permissions Settings": "权限设置",
+    "Permission Preset": "权限预设", "Permission preset": "权限预设",
+    "Permission Presets": "权限预设", "Permission presets": "权限预设",
+    "Permission Details": "权限详情",
+    "Inherits your Global Permissions when working in these conversations.": "在这些对话中工作时继承您的全局权限。",
+    "Inherits your Global Permissions when working in these conversations": "在这些对话中工作时继承您的全局权限",
+    "when working in this project": "在此项目中工作",
+    "when working in these conversations": "在这些对话中工作",
+    "in this project": "在此项目中",
+    "in these conversations": "在这些对话中",
+    "when working": "工作时",
     "Global Permission Settings": "全局权限设置",
     "This project overrides your global permission settings.": "此项目覆盖了您的全局权限设置。",
     "This project overrides your global permission settings": "此项目覆盖了您的全局权限设置",
@@ -647,7 +658,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -1050,6 +1061,33 @@ DOM_TRANSLATOR_INJECTION = r"""
       if (node.textContent === " Settings" && node.parentElement && node.parentElement.closest && node.parentElement.closest('[data-testid="permissions-project-options"]')) {
         node.textContent = "设置";
         return;
+      }
+      if (node.parentElement && (node.parentElement.textContent.indexOf("when working") !== -1 || node.parentElement.textContent.indexOf("Global Permissions") !== -1 || node.parentElement.textContent.indexOf("全局权限") !== -1)) {
+        if (node.textContent === "Also includes" || node.textContent === "还包括") {
+          if (node.parentElement.textContent.indexOf("in these conversations") !== -1) {
+            node.textContent = "在这些对话中工作时还包括";
+            return;
+          } else {
+            node.textContent = "在此项目中工作时还包括";
+            return;
+          }
+        }
+        if (node.textContent === "when working " || node.textContent.trim() === "when working") {
+          node.textContent = "";
+          return;
+        }
+        if (node.textContent === "in this project" || node.textContent === "in these conversations") {
+          node.textContent = "";
+          return;
+        }
+        if (node.textContent === " " && node.previousSibling && node.previousSibling.tagName === "SPAN" && node.previousSibling.textContent.indexOf("全局权限") !== -1) {
+          node.textContent = "";
+          return;
+        }
+        if (node.textContent === "." && node.previousSibling && (node.previousSibling.textContent === "" || node.previousSibling.textContent === "in this project" || node.previousSibling.textContent === "in these conversations")) {
+          node.textContent = "。";
+          return;
+        }
       }
       if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
         if (node.textContent === "Delete ") {
