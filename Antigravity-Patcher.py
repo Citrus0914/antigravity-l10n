@@ -586,12 +586,68 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Project + Worktree": "项目 + 工作树",
     "UI Extensions": "UI 扩展",
     "UI extensions": "UI 扩展",
-    "UI Plugins": "UI 插件"
+    "UI Plugins": "UI 插件",
+
+    // Conversation & System Notifications / Toasts (会话与系统通知/弹窗)
+    "Conversation unavailable": "对话不可用",
+    "The conversation could not be loaded because its data was not found.": "无法加载该对话，因为未找到其数据。",
+    "The conversation could not be loaded because its data was not found": "无法加载该对话，因为未找到其数据",
+    "This conversation is not on disk. Delete it to remove it from your sidebar.": "此对话未在磁盘上找到。将其删除可从侧边栏中移除。",
+    "This conversation is also open in another app. Sending messages from both may cause conflicts.": "此对话也在另一个应用中打开。同时在两处发送消息可能会导致冲突。",
+    "Conversation copied as Markdown to clipboard": "对话已作为 Markdown 复制到剪贴板",
+    "Failed to delete conversation": "删除对话失败",
+    "Failed to stop conversation": "停止对话失败",
+    "Failed to stop agent": "停止智能体失败",
+    "Failed to rename conversation": "重命名对话失败",
+    "Failed to start conversation": "启动对话失败",
+    "Failed to fork conversation": "分支对话失败",
+    "Fork warning": "分支警告",
+    "Close split view and go to forked conversation": "关闭拆分视图并前往分支对话",
+    "A folder in this project could not be loaded because its location is invalid.": "此项目中的某个文件夹无法加载，因为其位置无效。",
+    "A folder in this project could not be loaded because its location is invalid": "此项目中的某个文件夹无法加载，因为其位置无效",
+    "Failed to save project": "保存项目失败",
+    "Failed to create workspace.": "创建工作区失败。",
+    "Failed to create workspace": "创建工作区失败",
+    "Failed to create worktree": "创建工作树失败",
+    "Starting in local workspace.": "正在本地工作区中启动。",
+    "Starting in local workspace": "正在本地工作区中启动",
+    "Failed to create terminal": "创建终端失败",
+    "Failed to continue": "继续失败",
+    "Failed to proceed": "继续执行失败",
+    "Failed to upload HTML artifact to Drive": "上传 HTML 工件到 Google 云端硬盘失败",
+    "Uploaded to Google Drive": "已上传到 Google 云端硬盘",
+    "Uploading to Google Drive…": "正在上传到 Google 云端硬盘…",
+    "Uploading to Google Drive...": "正在上传到 Google 云端硬盘…",
+    "Link copied to clipboard.": "链接已复制到剪贴板。",
+    "Link copied to clipboard": "链接已复制到剪贴板",
+    "Telemetry is disabled in Settings": "遥测功能已在设置中禁用",
+    "Enable telemetry in Settings before changing per-conversation telemetry.": "在更改单对话遥测设置之前，请先在“设置”中启用遥测。",
+    "Authentication expired": "身份验证已过期",
+    "Your session has expired. Please log back in to continue.": "您的会话已过期。请重新登录以继续。",
+    "No Models Available": "无可用模型",
+    "No models are available for your current project or account. Please check your project settings and IAM permissions.": "您当前的项目或账号没有可用模型。请检查您的项目设置和 IAM 权限。",
+    "Select Model to Send Message": "选择模型以发送消息",
+    "Select a model using the model selector in the input box": "使用输入框中的模型选择器选择模型",
+    "Voice recording is unavailable while the Chief of Staff mic is on": "在 Chief of Staff 麦克风开启时，语音录制不可用",
+    "Chief of Staff voice mode is active": "Chief of Staff 语音模式已激活",
+    "Chief of Staff voice mode stopped": "Chief of Staff 语音模式已停止",
+    "Chief of Staff voice message failed": "Chief of Staff 语音消息失败",
+    "Your changes were not saved. Please try again.": "您的更改未保存。请重试。",
+    "Too many requests, please try again in a bit!": "请求过多，请稍后重试！",
+    "An error occurred while submitting your feedback. Please try again.": "提交反馈时出错，请重试。",
+    "Thank you! Your feedback has been submitted successfully.": "谢谢！您的反馈已成功提交。",
+    "Preview is not available for this file type.": "此文件类型不支持预览。",
+    "Inline PDF preview is not available in this environment.": "在此环境中不支持行内 PDF 预览。",
+    "Failed to render diagram": "渲染图表失败",
+    "Failed to render math": "渲染数学公式失败",
+    "Failed to load comments": "加载评论失败",
+    "Failed to load resources": "加载资源失败",
+    "Failed to open created workspace": "打开创建的工作区失败"
   };
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -939,6 +995,27 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^Failed to save settings:\s*(.+)$/i))) {
       return text.replace(trimmed, "保存设置失败：" + m[1]);
+    }
+    if ((m = trimmed.match(/^(\d+) folders in this project could not be loaded because their locations are invalid\.?$/i))) {
+      return text.replace(trimmed, m[1] + " 个此项目中的文件夹无法加载，因为它们的位置无效。");
+    }
+    if ((m = trimmed.match(/^Cannot add folder: "([^"]+)" is not a valid folder location\.?$/i))) {
+      return text.replace(trimmed, "无法添加文件夹：“" + m[1] + "”不是有效的文件夹路径。");
+    }
+    if ((m = trimmed.match(/^Failed to resolve folder:\s*(.+)$/i))) {
+      return text.replace(trimmed, "解析文件夹失败：" + m[1]);
+    }
+    if ((m = trimmed.match(/^Failed to (create|select|save|delete) (workspace|project)(?::\s*(.+))?$/i))) {
+      let actMap = {"create": "创建", "select": "选择", "save": "保存", "delete": "删除"};
+      let typeMap = {"workspace": "工作区", "project": "项目"};
+      let actCn = actMap[m[1].toLowerCase()] || m[1];
+      let typeCn = typeMap[m[2].toLowerCase()] || m[2];
+      let rest = m[3] ? "：" + m[3] : "";
+      return text.replace(trimmed, actCn + typeCn + "失败" + rest);
+    }
+    if ((m = trimmed.match(/^Duplicate (project|workspace) name$/i))) {
+      let typeCn = m[1].toLowerCase() === "workspace" ? "工作区" : "项目";
+      return text.replace(trimmed, "重复的" + typeCn + "名称");
     }
 
     // Prefix Rules Matching
