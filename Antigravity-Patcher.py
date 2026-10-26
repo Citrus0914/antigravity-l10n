@@ -973,11 +973,21 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(\d+)\s+projects?$/i))) {
       return text.replace(trimmed, m[1] + " 个项目");
     }
-    if ((m = trimmed.match(/^(\d+)\s+active conversations?$/i))) {
-      return text.replace(trimmed, m[1] + " 个活动对话");
+    if ((m = trimmed.match(/^(\d+)\s+active conversations?\s+and\s+(\d+)\s+archived conversations?\.?$/i))) {
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, m[1] + " 个活动对话和 " + m[2] + " 个已归档对话" + dot);
     }
-    if ((m = trimmed.match(/^(\d+)\s+archived conversations?$/i))) {
-      return text.replace(trimmed, m[1] + " 个已归档对话");
+    if ((m = trimmed.match(/^(\d+)\s+archived conversations?\s+and\s+(\d+)\s+active conversations?\.?$/i))) {
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, m[1] + " 个已归档对话和 " + m[2] + " 个活动对话" + dot);
+    }
+    if ((m = trimmed.match(/^(\d+)\s+active conversations?\.?$/i))) {
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, m[1] + " 个活动对话" + dot);
+    }
+    if ((m = trimmed.match(/^(\d+)\s+archived conversations?\.?$/i))) {
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, m[1] + " 个已归档对话" + dot);
     }
     if ((m = trimmed.match(/^Are you sure you want to delete the (project|workspace)\s+(.+)\?$/i))) {
       let typeStr = m[1].toLowerCase() === "project" ? "项目" : "工作区";
