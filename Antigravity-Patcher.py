@@ -72,7 +72,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Search conversations with": "在左上角使用",
     "in the top left.": "搜索对话。",
     "in the top left": "搜索对话",
-    "View archived in the sidebar": "在侧边栏中查看已归档",
+    "View archived in the sidebar": "在侧边栏中查看已归档内容",
+    "View archived in the sidebar (": "在侧边栏 (",
+    "menu).": "菜单) 中查看已归档内容。",
+    " menu).": " 菜单) 中查看已归档内容。",
     "menu)": "菜单)",
     "menu": "菜单",
     "Search conversations...": "搜索对话...",
@@ -84,8 +87,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Mark All as Read": "全部标记为已读",
     "Mark all as read": "全部标记为已读",
     "Conversation Archived": "对话已归档",
-    "View archived in the sidebar (![filter](icon://filter_list) menu).": "在侧边栏中查看已归档 (![filter](icon://filter_list) 菜单)。",
-    "View archived in the sidebar (Display options menu).": "在侧边栏中查看已归档 (显示选项菜单)。",
+    "View archived in the sidebar (![filter](icon://filter_list) menu).": "在侧边栏 (![filter](icon://filter_list) 菜单) 中查看已归档内容。",
+    "Undo": "撤销", "undo": "撤销", "Redo": "重做", "redo": "重做",
+    "View archived in the sidebar (Display options menu).": "在侧边栏 (显示选项菜单) 中查看已归档内容。",
+    "View archived in the sidebar (Display options menu)": "在侧边栏 (显示选项菜单) 中查看已归档内容",
     "Open Conversation History": "打开历史对话",
     "Search across files...": "跨文件搜索...",
     "Search file contents...": "搜索文件内容...",
@@ -836,7 +841,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
     "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "extension": "扩展", "extensions": "扩展", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成",
-    "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
+    "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
     "copy": "复制", "paste": "粘贴", "cut": "剪切", "rename": "重命名", "duplicate": "制作副本",
@@ -1332,6 +1337,14 @@ DOM_TRANSLATOR_INJECTION = r"""
           node.textContent = "% 剩余";
           return;
         }
+      }
+      if (node.textContent === "View archived in the sidebar (" || node.textContent.trim() === "View archived in the sidebar (") {
+        node.textContent = "在侧边栏 (";
+        return;
+      }
+      if (node.textContent.indexOf("menu).") !== -1 && node.parentElement && (node.parentElement.textContent.indexOf("View archived in the sidebar") !== -1 || node.parentElement.textContent.indexOf("在侧边栏") !== -1)) {
+        node.textContent = node.textContent.replace("menu).", "菜单) 中查看已归档内容。");
+        return;
       }
       const translated = translateText(node.textContent);
       if (translated !== node.textContent) {
