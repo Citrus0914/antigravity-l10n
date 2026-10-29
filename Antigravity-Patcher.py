@@ -1287,6 +1287,17 @@ DOM_TRANSLATOR_INJECTION = r"""
       characterData: true
     });
   });
+
+  // 注册全局快捷刷新支持 (解决新版本 Ctrl+R 与 F5 无法重新加载的问题)
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'r' || e.key === 'R')) {
+      e.preventDefault();
+      window.location.reload();
+    } else if (e.key === 'F5') {
+      e.preventDefault();
+      window.location.reload();
+    }
+  }, true);
 })();
 """
 
@@ -1491,7 +1502,36 @@ def apply_patch():
                 f.write(patched_loading)
             print(f"[成功] 已成功汉化启动加载界面 ({os.path.basename(loading_path)})")
 
-    # 4. 禁用原生 app.asar
+    # 4. 注入主进程快捷键重载 (keybindings.js)
+    keybindings_path = os.path.join(UNPACKED_APP_DIR, "dist", "keybindings.js")
+    if os.path.exists(keybindings_path):
+        with open(keybindings_path, "r", encoding="utf-8") as f:
+            kb_code = f.read()
+        if "win.webContents.reload()" not in kb_code:
+            target_str = "actions.onQuitRequested();\n                event.preventDefault();\n            }"
+            repl_str = (
+                "actions.onQuitRequested();\n"
+                "                event.preventDefault();\n"
+                "            }\n"
+                "            if (isCmdOrCtrl && input.key.toLowerCase() === 'r') {\n"
+                "                win.webContents.reload();\n"
+                "                event.preventDefault();\n"
+                "            }\n"
+                "            if (input.key === 'F5') {\n"
+                "                win.webContents.reload();\n"
+                "                event.preventDefault();\n"
+                "            }"
+            )
+            is_kb_crlf = "\r\n" in kb_code
+            t_str = target_str.replace("\n", "\r\n") if is_kb_crlf else target_str
+            r_str = repl_str.replace("\n", "\r\n") if is_kb_crlf else repl_str
+            if t_str in kb_code:
+                kb_code = kb_code.replace(t_str, r_str)
+                with open(keybindings_path, "w", encoding="utf-8") as f:
+                    f.write(kb_code)
+                print("[成功] 已成功向 keybindings.js 注入 Ctrl+R / F5 刷新快捷键")
+
+    # 5. 禁用原生 app.asar
     if os.path.exists(ASAR_PATH):
         print("[执行] 正在禁用官方 app.asar，以强制读取汉化代码...")
         os.rename(ASAR_PATH, ASAR_PATH + ".disabled")
