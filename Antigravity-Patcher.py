@@ -97,6 +97,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Ask anything, @ to mention, / for actions": "输入任何问题，使用 @ 提及，使用 / 执行操作",
     "Status": "状态", "Sort Conversations": "对话排序", "Worktree": "工作树", "Worktrees": "工作树",
     "Local": "本地", "local": "本地",
+    "Local Checkout": "本地检出", "local checkout": "本地检出", "Local checkout": "本地检出",
     "New Worktree": "新建工作树", "New worktree": "新建工作树",
     "Previous Worktrees": "历史工作树", "Previous worktrees": "历史工作树",
     "No previous worktrees": "暂无历史工作树", "Loading worktrees...": "正在加载工作树...",
@@ -108,6 +109,25 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Start in a new Fig share (go/fig-shares)": "在新的 Fig 共享中启动 (go/fig-shares)",
     "Configure Branches": "配置分支", "Select Default Branch": "选择默认分支", "Select branch": "选择分支",
     "New Fig Workspace": "新建 Fig 工作区",
+    "Worktree Branches": "工作树分支", "Worktree Branch": "工作树分支",
+    "No branches": "无分支", "Done": "完成", "done": "完成",
+    "Run in your current workspace": "在当前工作区中运行",
+    "Run in a new worktree": "在新的工作树中运行",
+    "Run in a new git worktree": "在新的 Git 工作树中运行",
+    "Run in a new jj workspace or Fig share": "在新的 jj 工作区或 Fig 共享中运行",
+    "Clone current workspace into a new independent workspace": "将当前工作区克隆到新的独立工作区中",
+    "Workspaces are not available for this project": "此项目不可使用工作区",
+    "Worktrees are available for Git repositories": "工作树仅适用于 Git 仓库",
+    "Worktrees are not available for this project": "此项目不可使用工作树",
+    "Worktrees are a git feature. This folder is shared as is.": "工作树是 Git 的功能特性。此文件夹按原样共享。",
+    "This is a CitC workspace (Fig share)": "这是一个 CitC 工作区 (Fig 共享)",
+    "Create a JJ worktree": "创建 JJ 工作树",
+    "Creating worktree for the forked conversation...": "正在为分支对话创建工作树...",
+    "JJ worktree": "JJ 工作树",
+    "Sync JJ Worktrees to Head": "将 JJ 工作树同步到 Head",
+    "Sync newly created JJ worktrees to head when starting a conversation.": "在开始对话时将新建的 JJ 工作树同步到 Head。",
+    "Branch Changes": "分支更改", "Staged Changes": "暂存的更改", "Agent Edits": "智能体编辑",
+    "Changes": "更改",
     "New Project": "新建项目", "Quick Start": "快速开始",
     "Select Project": "选择项目", "Select project": "选择项目",
     "Select Workspace": "选择工作区", "Select workspace": "选择工作区", "Select workspace...": "选择工作区...",
@@ -804,7 +824,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -1155,8 +1175,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Select Environment\s*\((.+)\)$/i))) {
       return "选择环境 (" + m[1] + ")";
     }
+    if ((m = trimmed.match(/^Select Worktree\s*\((.+)\)$/i))) {
+      return "选择工作树 (" + m[1] + ")";
+    }
     if ((m = trimmed.match(/^Work locally on\s+(.+)$/i))) {
-      return "在 " + m[1] + " 上本地工作";
+      return "在本地处理 " + m[1];
     }
     if ((m = trimmed.match(/^Worktree from\s+(.+)$/i))) {
       return "从 " + m[1] + " 创建工作树";
