@@ -764,6 +764,17 @@ DOM_TRANSLATOR_INJECTION = r"""
     "UI Extensions": "UI 扩展",
     "UI extensions": "UI 扩展",
     "UI Plugins": "UI 插件",
+    "Extensions": "扩展",
+    "extensions": "扩展",
+    "Extension": "扩展",
+    "extension": "扩展",
+    "No extensions available": "暂无可用扩展",
+    "No extensions available.": "暂无可用扩展。",
+    "Show or Hide Extensions": "显示或隐藏扩展",
+    "Start Extension": "启动扩展",
+    "UI Extension (AuxPane)": "UI 扩展 (辅助窗格)",
+    "Search tabs, files, extensions, artifacts, commands...": "搜索标签页、文件、扩展、工件、命令...",
+    "Search tabs, files, extensions, subagents, artifacts, commands...": "搜索标签页、文件、扩展、子智能体、工件、命令...",
 
     // Conversation & System Notifications / Toasts (会话与系统通知/弹窗)
     "Conversation unavailable": "对话不可用",
@@ -824,7 +835,7 @@ DOM_TRANSLATOR_INJECTION = r"""
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
-    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成",
+    "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "extension": "扩展", "extensions": "扩展", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成",
     "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
