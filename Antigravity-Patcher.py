@@ -97,7 +97,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Ask anything, @ to mention, / for actions": "输入任何问题，使用 @ 提及，使用 / 执行操作",
     "Status": "状态", "Sort Conversations": "对话排序", "Worktree": "工作树", "Worktrees": "工作树",
     "Local": "本地", "local": "本地",
-    "Local Checkout": "本地检出", "local checkout": "本地检出", "Local checkout": "本地检出",
+    "Local Checkout": "本地工作区", "local checkout": "本地工作区", "Local checkout": "本地工作区",
     "New Worktree": "新建工作树", "New worktree": "新建工作树",
     "Previous Worktrees": "历史工作树", "Previous worktrees": "历史工作树",
     "No previous worktrees": "暂无历史工作树", "Loading worktrees...": "正在加载工作树...",
