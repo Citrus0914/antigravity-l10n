@@ -298,6 +298,13 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Available AI Credits:": "可用 AI 积分：",
     "Gemini Models": "Gemini 模型", "Claude and GPT models": "Claude 和 GPT 模型",
     "Limited time": "限时", "Low": "低", "High": "高", "View Usage": "查看用量",
+    "Usage": "用量", "usage": "用量",
+    "Weekly limit": "每周限额", "weekly limit": "每周限额", "Weekly Limit": "每周限额",
+    "Daily limit": "每日限额", "daily limit": "每日限额", "Daily Limit": "每日限额",
+    "Monthly limit": "每月限额", "monthly limit": "每月限额", "Monthly Limit": "每月限额",
+    "Model Quota": "模型配额", "model quota": "模型配额",
+    "No quota information available.": "暂无配额信息。", "No quota information available": "暂无配额信息",
+    "Refreshing...": "正在刷新...", "Refreshing": "正在刷新",
 
     // Customizations & Plugins
     "Configure default behaviors, skills, and MCP servers.": "配置默认行为、技能和 MCP 服务器。",
@@ -924,6 +931,28 @@ DOM_TRANSLATOR_INJECTION = r"""
       let timeStr = m[1].replace(/days?/g, "天").replace(/hours?/g, "小时").replace(/minutes?/g, "分钟").replace(/,/g, "");
       return text.replace(trimmed, "您已使用部分五小时限额，它将在 " + timeStr + " 后完全重置。");
     }
+    if (text.indexOf("Resets in") !== -1) {
+      let m = trimmed.match(/^Resets in\s+(.+)$/i);
+      if (m) {
+        let timeStr = m[1]
+          .replace(/<1m/g, "不足 1 分钟")
+          .replace(/(\d+)\s*d/g, "$1 天")
+          .replace(/(\d+)\s*h/g, "$1 小时")
+          .replace(/(\d+)\s*m/g, "$1 分钟")
+          .replace(/\s+/g, " ")
+          .trim();
+        return text.replace(trimmed, timeStr + " 后重置");
+      }
+    }
+    if ((m = trimmed.match(/^(\d+)\s*([smhd])\s+limit$/i))) {
+      let num = m[1];
+      let unit = m[2].toLowerCase();
+      let unitName = unit === "s" ? "秒" : unit === "m" ? "分钟" : unit === "h" ? "小时" : "天";
+      return text.replace(trimmed, num + " " + unitName + "限额");
+    }
+    if ((m = trimmed.match(/^(\d+(?:\.\d+)?)%\s+left$/i))) {
+      return text.replace(trimmed, "剩余 " + m[1] + "%");
+    }
     if ((m = trimmed.match(/^Available AI Credits: ([\d,]+)$/))) {
       return text.replace(trimmed, "可用 AI 积分: " + m[1]);
     }
@@ -1234,6 +1263,16 @@ DOM_TRANSLATOR_INJECTION = r"""
       if (node.parentElement && (node.parentElement.textContent.indexOf("No matching projects") !== -1 || node.parentElement.textContent.indexOf("No matching workspaces") !== -1)) {
         if (node.textContent === "No matching ") {
           node.textContent = "未找到匹配的";
+          return;
+        }
+      }
+      if (node.textContent.trim() === "% left") {
+        if (node.previousSibling && node.previousSibling.nodeType === Node.TEXT_NODE && /^\d+$/.test(node.previousSibling.textContent.trim())) {
+          node.previousSibling.textContent = "剩余 " + node.previousSibling.textContent.trim();
+          node.textContent = "%";
+          return;
+        } else {
+          node.textContent = "% 剩余";
           return;
         }
       }
