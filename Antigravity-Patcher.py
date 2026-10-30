@@ -323,6 +323,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Available AI Credits:": "可用 AI 积分：",
     "Gemini Models": "Gemini 模型", "Claude and GPT models": "Claude 和 GPT 模型",
     "Limited time": "限时", "Low": "低", "High": "高", "View Usage": "查看用量",
+    "New": "新增", "new": "新增", "NEW": "新增",
+    "Notice": "提示", "notice": "提示", "NOTICE": "提示",
     "Usage": "用量", "usage": "用量",
     "Weekly limit": "每周限额", "weekly limit": "每周限额", "Weekly Limit": "每周限额",
     "Daily limit": "每日限额", "daily limit": "每日限额", "Daily Limit": "每日限额",
@@ -861,7 +863,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
     "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "extension": "扩展", "extensions": "扩展", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成", "pin": "置顶", "pinned": "已置顶", "archived": "已归档",
-    "create": "创建", "delete": "删除", "new": "新建", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
+    "create": "创建", "delete": "删除", "new": "新增", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
     "copy": "复制", "paste": "粘贴", "cut": "剪切", "rename": "重命名", "duplicate": "制作副本",
