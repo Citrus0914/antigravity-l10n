@@ -291,6 +291,13 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Add resource": "添加资源",
     "Edit project name": "编辑项目名称",
     "Edit workspace name": "编辑工作区名称",
+    "Duplicate project name": "项目名称重复",
+    "Duplicate workspace name": "工作区名称重复",
+    "Archive Project": "归档项目",
+    "Archive Workspace": "归档工作区",
+    "Copy Project Name": "复制项目名称",
+    "Copy Workspace Name": "复制工作区名称",
+    "Open in Cider": "在 Cider 中打开",
     "All Workspaces": "所有工作区",
     "All Projects": "所有项目",
     "Delete Project": "删除项目",
@@ -821,6 +828,29 @@ DOM_TRANSLATOR_INJECTION = r"""
     "A folder in this project could not be loaded because its location is invalid.": "此项目中的某个文件夹无法加载，因为其位置无效。",
     "A folder in this project could not be loaded because its location is invalid": "此项目中的某个文件夹无法加载，因为其位置无效",
     "Failed to save project": "保存项目失败",
+    "Project deleted": "项目已删除",
+    "Workspace deleted": "工作区已删除",
+    "Project archived": "项目已归档",
+    "Workspace archived": "工作区已归档",
+    "Failed to delete project": "删除项目失败",
+    "Failed to delete workspace": "删除工作区失败",
+    "Failed to archive project": "归档项目失败",
+    "Failed to archive workspace": "归档工作区失败",
+    "Failed to unarchive project": "取消归档项目失败",
+    "Failed to unarchive workspace": "取消归档工作区失败",
+    "Could not create project": "无法创建项目",
+    "Could not create workspace": "无法创建工作区",
+    "Could not create Cog workspace": "无法创建 Cog 工作区",
+    "Could not create CitC clone workspace": "无法创建 CitC 克隆工作区",
+    "Failed to create cloud project": "创建云端项目失败",
+    "Creating project…": "正在创建项目…",
+    "Creating workspace…": "正在创建工作区…",
+    "Creating project...": "正在创建项目…",
+    "Creating workspace...": "正在创建工作区…",
+    "Queued message deleted": "排队消息已删除",
+    "This chat is archived.": "此对话已归档。",
+    "This chat is archived": "此对话已归档",
+    "No archived conversations": "无已归档对话",
     "Failed to create workspace.": "创建工作区失败。",
     "Failed to create workspace": "创建工作区失败",
     "Failed to create worktree": "创建工作树失败",
@@ -863,7 +893,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
     "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "extension": "扩展", "extensions": "扩展", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成", "pin": "置顶", "pinned": "已置顶", "archived": "已归档",
-    "create": "创建", "delete": "删除", "new": "新增", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
+    "create": "创建", "delete": "删除", "deleted": "已删除", "unarchive": "取消归档", "new": "新增", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
     "copy": "复制", "paste": "粘贴", "cut": "剪切", "rename": "重命名", "duplicate": "制作副本",
@@ -1255,8 +1285,14 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Failed to resolve folder:\s*(.+)$/i))) {
       return text.replace(trimmed, "解析文件夹失败：" + m[1]);
     }
-    if ((m = trimmed.match(/^Failed to (create|select|save|delete) (workspace|project)(?::\s*(.+))?$/i))) {
-      let actMap = {"create": "创建", "select": "选择", "save": "保存", "delete": "删除"};
+    if ((m = trimmed.match(/^(Project|Workspace)\s+(deleted|archived)\.?$/i))) {
+      let typeCn = m[1].toLowerCase() === "workspace" ? "工作区" : "项目";
+      let actCn = m[2].toLowerCase() === "deleted" ? "已删除" : "已归档";
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, typeCn + actCn + dot);
+    }
+    if ((m = trimmed.match(/^Failed to (create|select|save|delete|archive|unarchive) (workspace|project)(?::\s*(.+))?$/i))) {
+      let actMap = {"create": "创建", "select": "选择", "save": "保存", "delete": "删除", "archive": "归档", "unarchive": "取消归档"};
       let typeMap = {"workspace": "工作区", "project": "项目"};
       let actCn = actMap[m[1].toLowerCase()] || m[1];
       let typeCn = typeMap[m[2].toLowerCase()] || m[2];
@@ -1265,7 +1301,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^Duplicate (project|workspace) name$/i))) {
       let typeCn = m[1].toLowerCase() === "workspace" ? "工作区" : "项目";
-      return text.replace(trimmed, "重复的" + typeCn + "名称");
+      return text.replace(trimmed, typeCn + "名称重复");
     }
 
     // Prefix Rules Matching
