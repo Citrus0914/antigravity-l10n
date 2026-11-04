@@ -887,12 +887,107 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Failed to render math": "渲染数学公式失败",
     "Failed to load comments": "加载评论失败",
     "Failed to load resources": "加载资源失败",
-    "Failed to open created workspace": "打开创建的工作区失败"
+    "Failed to open created workspace": "打开创建的工作区失败",
+
+    // Voice Mode & Voice Settings (常规设置与语音对话模式)
+    "Voice mode": "语音模式",
+    "Voice Mode": "语音模式",
+    "Live chat": "实时语音",
+    "Live Chat": "实时语音",
+    "The voice used in Voice mode. Powered by Gemini Live.": "语音模式使用的声音。由 Gemini Live 提供支持。",
+    "The voice Jetski speaks with.": "Jetski 使用的声音。",
+    "Choose Antigravity's Voice": "选择 Antigravity 的声音",
+    "Choose Jetski's Voice": "选择 Jetski 的声音",
+    "Powered by Gemini Live ·": "由 Gemini Live 提供支持 ·",
+    "Powered by Gemini Live \u00b7": "由 Gemini Live 提供支持 ·",
+    "Powered by Gemini Live": "由 Gemini Live 提供支持",
+    "You can change this in": "您可以稍后在",
+    "later.": "中更改。",
+    "Not set": "未设置",
+    "Voices": "声音",
+    "Clear and friendly": "清晰友好",
+    "Confident and clear": "自信清晰",
+    "Warm and engaging": "温暖生动",
+    "Warm and approachable": "温暖亲切",
+    "Deep and velvety": "深沉醇厚",
+    "Light and precise": "轻快细腻",
+    "Input device for voice mode and dictation.": "语音模式和听写的输入设备。",
+    "Voice volume": "语音音量",
+    "How loud Antigravity's voice is.": "Antigravity 声音的大小。",
+    "How loud Jetski's voice is.": "Jetski 声音的大小。",
+    "Save audio recordings": "保存录音",
+    "Only stored on your machine.": "仅保存在您的本机上。",
+    "Recordings": "录音记录",
+    "No recordings": "暂无录音",
+    "Delete all": "全部删除",
+    "Delete all recordings?": "删除所有录音？",
+    "Start Voice mode": "启动语音模式",
+    "End Voice mode": "结束语音模式",
+    "Start Live Chat": "开始实时聊天",
+    "End Live chat": "结束实时聊天",
+    "Mute Voice Mic": "静音语音麦克风",
+    "Mute Voice Speaker": "静音语音扬声器",
+    "Mute mic": "静音麦克风",
+    "Unmute mic": "取消静音麦克风",
+    "Switch mic": "切换麦克风",
+    "Switch microphone.": "切换麦克风。",
+    "Using system default microphone": "正在使用系统默认麦克风",
+    "Microphone blocked. Allow mic access.": "麦克风已被阻止。请允许访问麦克风。",
+    "No mic audio detected": "未检测到麦克风音频",
+    "Dismiss microphone warning": "忽略麦克风警告",
+    "Voice recording is unavailable while the Chief of Staff mic is on": "语音通话麦克风开启时，无法使用语音录制",
+    "Voice Speed": "语速",
+    "Voice speed": "语速",
+    "Chief of Staff voice mode is active": "语音模式已激活",
+    "Chief of Staff voice mode stopped": "语音模式已停止",
+    "Chief of Staff voice message failed": "语音消息发送失败",
+
+    // General Settings (常规设置面板新增项)
+    "New Conversation Button": "“新建对话”按钮",
+    "Which workspace the New Conversation button and keyboard shortcut start you in.": "“新建对话”按钮和键盘快捷键默认进入哪个工作区。",
+    "Create a new workspace from your first message.": "根据您的首条消息创建新工作区。",
+    "Start without a workspace, for general questions.": "不使用工作区直接开始，适用于通用问题咨询。",
+    "Reuse your last workspace.": "复用您上次使用的工作区。",
+    "Last Workspace": "上次使用的工作区",
+    "last workspace": "上次使用的工作区",
+    "Browser Actuation Rules": "浏览器操作规则",
+    "Configure allowed and denied URLs for browser actuation.": "配置允许和拒绝浏览器操作的 URL 规则。",
+    "Try out early-stage features before they ship. These may be changed or removed at any time. These features are experimental, and we make no guarantees about performance or functionality.": "在功能正式发布前抢先体验早期特性。这些功能可能随时变更或移除，属于实验性功能，我们不保证其稳定性或完整性。",
+    "Screen Reader Mode": "屏幕阅读器模式",
+    "Optimize the interface and terminal output for screen readers.": "针对屏幕阅读器优化界面和终端输出。",
+    "Conversation Width": "对话宽度",
+    "Configure the maximum width of the conversation panel.": "配置对话面板的最大宽度。",
+    "Terminal Placement": "终端放置位置",
+    "Choose where terminal sessions appear.": "选择终端会话出现的位置。",
+    "Markdown Artifact Width": "Markdown 工件宽度",
+    "Configure the default width of markdown artifacts.": "配置 Markdown 工件的默认宽度。",
+    "Context and Quota Indicator": "上下文与额度指示器",
+    "Show how full the context window is next to the send button. Click it for a breakdown and to see your model quota.": "在发送按钮旁显示上下文窗口的使用进度。点击可查看明细并查看模型额度。",
+    "Open Links In": "打开链接于",
+    "Choose where links open by default when clicked.": "选择点击链接时的默认打开位置。",
+    "Enable Browser Tools": "启用浏览器工具",
+    "Let the agent use browser tools to open URLs, read web pages, and interact with browser content. This gives the agent access to any information that you can see in the browser.": "允许智能体使用浏览器工具打开 URL、阅读网页以及与浏览器内容交互。这将使智能体能够访问您在浏览器中可以看到的任何信息。",
+    "Let the agent use browser tools to open URLs, read web pages, and interact with browser content.": "允许智能体使用浏览器工具打开 URL、阅读网页以及与浏览器内容交互。",
+    "Browser Javascript Execution Policy": "浏览器 JavaScript 执行策略",
+    "Controls whether the agent can run custom JavaScript to automate complex browser actions.": "控制智能体是否可以运行自定义 JavaScript 来自动执行复杂的浏览器操作。",
+    "Prevent Sleep": "防止系统休眠",
+    "Prevent the computer from sleeping while the app is running.": "在应用运行期间防止计算机进入睡眠状态。",
+    "Keep In Menu Bar": "保留在菜单栏",
+    "Keep the app accessible from the menu bar and running in the background when all windows are closed.": "在关闭所有窗口时，保持应用在菜单栏中可访问并在后台持续运行。",
+    "Build With Google Plugins": "Google 构建插件",
+    "Build with Google Plugins": "Google 构建插件",
+    "Build with Antigravity Plugins": "Antigravity 构建插件",
+    "Browse and enable plugins from the Build With Google catalog.": "浏览并启用 Google 构建目录中的插件。",
+    "Loading plugins...": "正在加载插件...",
+    "Refreshing...": "正在刷新...",
+    "Manage Hooks": "管理钩子 (Hooks)",
+    "Configure hooks that run on agent lifecycle events.": "配置在智能体生命周期事件上运行的钩子。" 
   };
 
   const coreWords = {
     "preview": "预览", "raw": "源码", "diff": "差异",
     "split": "拆分", "name": "名称", "prompt": "提示词", "project": "项目", "projects": "项目", "browser": "浏览器", "browsers": "浏览器", "local": "本地", "worktree": "工作树", "worktrees": "工作树", "checkout": "检出", "extension": "扩展", "extensions": "扩展", "turbo": "极速", "sound": "声音", "volume": "音量", "notification": "通知", "notifications": "通知", "unavailable": "不可用", "preset": "预设", "presets": "预设", "feedback": "反馈", "done": "完成", "pin": "置顶", "pinned": "已置顶", "archived": "已归档",
+    "speed": "语速", "mic": "麦克风", "microphone": "麦克风", "recordings": "录音", "call": "通话", "calls": "通话",
     "create": "创建", "delete": "删除", "deleted": "已删除", "unarchive": "取消归档", "new": "新增", "edit": "编辑", "save": "保存", "cancel": "取消", "confirm": "确认", "undo": "撤销", "redo": "重做",
     "close": "关闭", "open": "打开", "stop": "停止", "start": "启动", "run": "运行", "add": "添加", "remove": "移除", "download": "下载",
     "update": "更新", "select": "选择", "clear": "清除", "search": "搜索", "find": "查找", "view": "查看", "show": "显示", "hide": "隐藏",
@@ -1303,6 +1398,39 @@ DOM_TRANSLATOR_INJECTION = r"""
       let typeCn = m[1].toLowerCase() === "workspace" ? "工作区" : "项目";
       return text.replace(trimmed, typeCn + "名称重复");
     }
+    if ((m = trimmed.match(/^([A-Za-z]+),\s*voice\s*(\d+)\s*of\s*(\d+)$/i))) {
+      return text.replace(trimmed, m[1] + "，第 " + m[2] + " 个声音（共 " + m[3] + " 个）");
+    }
+    if ((m = trimmed.match(/^Voice Speed,\s*([\d\.]+)x$/i))) {
+      return text.replace(trimmed, "语速，" + m[1] + "x");
+    }
+    if ((m = trimmed.match(/^(?:Live chat|Voice mode),\s*([\d:]+)$/i))) {
+      return text.replace(trimmed, "语音模式，" + m[1]);
+    }
+    if ((m = trimmed.match(/^(\d+)\s+calls?\s+·\s+([\d\.]+\s*MB)$/i))) {
+      return text.replace(trimmed, m[1] + " 次通话 · " + m[2]);
+    }
+    if ((m = trimmed.match(/^This deletes (\d+)\s+call recordings?\s+\(([\d\.]+\s*MB)\)\s+from your machine\. You can't undo this\.$/i))) {
+      return text.replace(trimmed, "这将从您的本机中删除 " + m[1] + " 条通话录音 (" + m[2] + ")。此操作无法撤销。");
+    }
+    if ((m = trimmed.match(/^Deleted (\d+)\s+recordings?\s+\(([\d\.]+\s*MB)\)$/i))) {
+      return text.replace(trimmed, "已删除 " + m[1] + " 条录音 (" + m[2] + ")");
+    }
+    if ((m = trimmed.match(/^Failed to delete recordings:\s*(.+)$/i))) {
+      return text.replace(trimmed, "删除录音失败：" + m[1]);
+    }
+    if ((m = trimmed.match(/^No audio from\s+(.+)$/i))) {
+      return text.replace(trimmed, "未检测到来自 " + m[1] + " 的音频");
+    }
+    if ((m = trimmed.match(/^Started voice chat\s*·\s*(.+)$/i))) {
+      return text.replace(trimmed, "已开始语音聊天 · " + m[1]);
+    }
+    if ((m = trimmed.match(/^Voice chat\s*·\s*(.+)$/i))) {
+      return text.replace(trimmed, "语音聊天 · " + m[1]);
+    }
+    if ((m = trimmed.match(/^Stopped voice chat\s*·\s*(.+)$/i))) {
+      return text.replace(trimmed, "已停止语音聊天 · " + m[1]);
+    }
 
     // Prefix Rules Matching
     for (let i = 0; i < textPrefixRules.length; i++) {
@@ -1369,6 +1497,10 @@ DOM_TRANSLATOR_INJECTION = r"""
           node.textContent = "删除";
           return;
         }
+      }
+      if (node.textContent === "Use " && node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'voice-picker-use') {
+        node.textContent = "使用 ";
+        return;
       }
       if (node.parentElement && (node.parentElement.textContent.indexOf("No projects found") !== -1 || node.parentElement.textContent.indexOf("No workspaces found") !== -1)) {
         if (node.textContent === "No ") {
