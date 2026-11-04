@@ -689,9 +689,9 @@ DOM_TRANSLATOR_INJECTION = r"""
 
     // Automations & Scheduled Tasks (自动化与计划任务)
     "Automations": "自动化",
-    "Scheduled Tasks": "已计划任务",
-    "Scheduled Task": "已计划任务",
-    "Scheduled": "已计划",
+    "Scheduled Tasks": "计划任务",
+    "Scheduled Task": "计划任务",
+    "Scheduled": "计划",
     "Create with Prompt": "使用提示词创建",
     "Create with prompt": "使用提示词创建",
     "create with prompt": "使用提示词创建",
@@ -700,27 +700,41 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Prompt": "提示词",
     "prompt": "提示词",
     "Search automations...": "搜索自动化...",
+    "Search automations…": "搜索自动化…",
     "Search tasks...": "搜索任务...",
+    "Search tasks…": "搜索任务…",
     "Search plugins...": "搜索插件...",
-    "Add automation": "添加自动化",
-    "Add scheduled task": "添加已计划任务",
-    "Add Automation": "添加自动化",
-    "Add Scheduled Task": "添加已计划任务",
-    "New Automation": "新建自动化",
-    "New Scheduled Task": "新建已计划任务",
+    "Only Automations": "仅自动化",
+    "Only Scheduled": "仅计划任务",
+    "Creates a local automation that runs on this computer": "创建在此计算机上运行的本地自动化",
+    "Refresh all credentials": "刷新所有凭据",
+    "Refreshing credentials...": "正在刷新凭据...",
+    "Refreshing credentials…": "正在刷新凭据…",
+    "Refreshed credentials for all automations.": "已为所有自动化刷新凭据。",
+    "Failed to refresh credentials": "刷新凭据失败",
+    "Automation credentials expired": "自动化凭据已过期",
+    "Automation credentials expiring soon": "自动化凭据即将过期",
+    "Credentials for one or more automations have expired.": "一个或多个自动化的凭据已过期。",
+    "Credentials for one or more automations expire in less than a week.": "一个或多个自动化的凭据将在不到一周内过期。",
+    "Connect an account so the agent can run automations.": "连接账号以便智能体运行自动化。",
+    "No automations yet": "暂无自动化",
+    "No scheduled tasks yet": "暂无计划任务",
     "No automations configured.": "未配置任何自动化。",
-    "No scheduled tasks configured.": "未配置任何已计划任务。",
-    "Sidecar feature is not available.": "Sidecar 功能不可用。",
+    "No scheduled tasks configured.": "未配置任何计划任务。",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "按计划运行提示词，例如每天早晨汇总昨日变更。运行记录将显示在此处。",
+    "Sidecar feature is not available.": "附加进程功能不可用。",
     "Back to Automations": "返回自动化",
-    "Back to Scheduled Tasks": "返回已计划任务",
+    "Back to Scheduled Tasks": "返回计划任务",
     "Back to UI Plugins": "返回 UI 插件",
+    "Back to": "返回",
     "Creating…": "正在创建…",
     "Creating...": "正在创建...",
     "Enter automation name...": "输入自动化名称...",
-    "Enter scheduled task name...": "输入已计划任务名称...",
+    "Enter scheduled task name...": "输入计划任务名称...",
     "Select workspace": "选择工作区",
     "No projects created": "未创建任何项目",
     "You don't have any projects created. Please create a project first.": "您尚未创建任何项目。请先创建一个项目。",
+    "Create a project first.": "请先创建一个项目。",
     "Schedule": "计划",
     "Trigger": "触发器",
     "Frequency": "执行频率",
@@ -730,18 +744,18 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Custom": "自定义",
     "Select Day": "选择星期",
     "Select Hour": "选择时间",
-    "Monday": "周一",
-    "Tuesday": "周二",
-    "Wednesday": "周三",
-    "Thursday": "周四",
-    "Friday": "周五",
-    "Saturday": "周六",
-    "Sunday": "周日",
+    "Monday": "星期一",
+    "Tuesday": "星期二",
+    "Wednesday": "星期三",
+    "Thursday": "星期四",
+    "Friday": "星期五",
+    "Saturday": "星期六",
+    "Sunday": "星期日",
     "Cron expression e.g. 0 */6 * * *": "Cron 表达式，例如 0 */6 * * *",
     "Enter a prompt for the agent to run...": "输入供智能体执行的提示词...",
     "Prompt to execute on schedule...": "按计划执行的提示词...",
     "All automations run as Flash.": "所有自动化均以 Flash 模型运行。",
-    "All scheduled tasks run as Flash.": "所有已计划任务均以 Flash 模型运行。",
+    "All scheduled tasks run as Flash.": "所有计划任务均以 Flash 模型运行。",
     "Manage Permissions": "管理权限",
     "Run Now": "立即运行",
     "View Logs": "查看日志",
@@ -750,22 +764,102 @@ DOM_TRANSLATOR_INJECTION = r"""
     "builtin": "内置",
     "Delete Task": "删除任务",
     "Delete Automation": "删除自动化",
+    "Are you sure you want to delete": "确定要删除",
+    "? This action cannot be undone.": " 吗？此操作无法撤销。",
     "Edit task title": "编辑任务标题",
     "Edit automation title": "编辑自动化标题",
     "Open project settings": "打开项目设置",
+    "Change schedule": "更改计划",
+    "Change model": "更改模型",
+    "Edit schedule and model": "编辑计划与模型",
     "Uptime": "运行时间",
     "Process Error: ": "进程错误：",
     "Manager Error: ": "管理器错误：",
     "Events": "事件",
     "Loading events...": "正在加载事件...",
     "No events recorded.": "暂无事件记录。",
-    "This sidecar runs from a path that is not officially supported. Make sure your code is in a trusted location in google3.": "此 Sidecar 运行路径不受官方支持。请确保您的代码位于受信任的位置。",
-    "This sidecar failed to start.": "此 Sidecar 启动失败。",
-    "Not scheduled": "未安排计划",
+    "This sidecar runs from a path that is not officially supported. Make sure your code is in a trusted location in google3.": "此附加进程运行路径不受官方支持。请确保您的代码位于受信任的位置。",
+    "This sidecar failed to start.": "此附加进程未能启动。",
+    "Not scheduled": "未设置计划",
     "Command execution": "命令执行",
     "Stopped": "已停止",
     "Starting": "正在启动",
     "Backoff": "等待重试",
+    "Always on": "始终运行",
+    "Next run": "下次运行",
+    "Last run": "上次运行",
+    "Last": "上次",
+    "No runs yet": "暂无运行记录",
+    "Loading runs…": "正在加载运行记录…",
+    "Loading runs...": "正在加载运行记录...",
+    "All runs": "全部运行记录",
+    "Runs": "运行记录",
+    "Ran": "已运行",
+    "Completed": "已完成",
+    "Untrusted sidecar": "不受信任的附加进程",
+    "Sidecar error": "附加进程错误",
+    "Resolving permissions...": "正在解析权限...",
+    "Resolving permissions…": "正在解析权限…",
+    "Folders these agents can access.": "这些智能体可以访问的文件夹。",
+    "Access grants": "访问授权",
+    "Commands and files these agents can use.": "这些智能体可以使用的命令与文件。",
+    "Confirm & Save": "确认并保存",
+    "Where should it run?": "应在何处运行？",
+    "When should it run?": "应在何时运行？",
+    "What should it do?": "它应该做什么？",
+    "What should the agent do on each run?": "智能体每次运行时应该执行什么任务？",
+    "What should the agent do on each run? For example: summarize new bugs assigned to me and anything that changed overnight.": "智能体每次运行时应该执行什么任务？例如：汇总分配给我的新缺陷以及夜间发生的所有变更。",
+    "For example: every morning, summarize new bugs assigned to me and anything that changed overnight.": "例如：每天早晨汇总分配给我的新缺陷以及夜间发生的所有变更。",
+    "For example: Morning bug summary": "例如：早晨缺陷汇总",
+    "Add trigger": "添加触发器",
+    "Add schedule": "添加计划",
+    "Remove trigger": "移除触发器",
+    "Search triggers…": "搜索触发器…",
+    "Search triggers...": "搜索触发器...",
+    "On a schedule": "定时运行",
+    "When something happens": "事件触发",
+    "Instructions": "指令",
+    "Machine": "机器",
+    "Runs as": "运行身份",
+    "This computer": "此计算机",
+    "Remote": "远程",
+    "Uses your local files and tools. Schedules only.": "使用您的本地文件与工具。仅支持定时计划。",
+    "Runs even when your computer is off. Schedules and events.": "即使您的计算机已关机也会运行。支持定时计划与事件。",
+    "Runs even when your computer is off. Schedules only.": "即使您的计算机已关机也会运行。仅支持定时计划。",
+    "Schedules and events.": "定时计划与事件。",
+    "Schedules only.": "仅支持定时计划。",
+    "Create automation": "创建自动化",
+    "Create scheduled task": "创建计划任务",
+    "An automation with this name already exists on this computer. Run it remotely, or go back and rename it.": "此计算机上已存在同名的自动化。请在远程运行，或返回重命名。",
+    "An scheduled task with this name already exists on this computer. Run it remotely, or go back and rename it.": "此计算机上已存在同名的计划任务。请在远程运行，或返回重命名。",
+    "How often": "重复频率",
+    "Every hour": "每小时",
+    "Every day": "每天",
+    "Every weekday": "每个工作日",
+    "Every week": "每周",
+    "Custom…": "自定义…",
+    "Custom...": "自定义...",
+    "Repeat every": "重复周期",
+    "Number of hours": "小时数",
+    "Repeat unit": "重复单位",
+    "Day of the month": "每月几号",
+    "Day of the week": "星期",
+    "on the": "于第",
+    "hours": "小时",
+    "week": "周",
+    "month": "月",
+    "Schedule type": "计划类型",
+    "No upcoming run.": "近期无计划运行。",
+    "Paused. Resume it to schedule the next run.": "已暂停。恢复以安排下次运行。",
+    "Could not start.": "无法启动。",
+    "Runs a command": "运行命令",
+    ", always on.": "，始终运行。",
+    "Paused.": "已暂停。",
+    "Reads": "读取",
+    ", read-only": "，只读",
+    "Where it runs": "运行位置",
+    "When it runs": "运行时间",
+    "around": "约",
 
     // Sidebar Filter & Display Options (侧边栏筛选与显示选项)
     "Only Unread": "仅未读",
@@ -1084,7 +1178,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "error": "错误", "warning": "警告", "info": "信息", "success": "成功", "failed": "失败", "pending": "等待中", "running": "运行中",
     "yes": "是", "no": "否", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
-    "allow": "允许", "ask": "询问", "deny": "拒绝"
+    "allow": "允许", "ask": "询问", "deny": "拒绝",
+    "automation": "自动化", "automations": "自动化", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1326,8 +1421,38 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
 
     // Automations dynamic translations
+    if ((m = trimmed.match(/^Step\s+(\d+)\s+of\s+(\d+)$/i))) {
+      return text.replace(trimmed, "第 " + m[1] + " 步，共 " + m[2] + " 步");
+    }
+    if ((m = trimmed.match(/^An?\s+(automation|scheduled task)\s+with the ID [“"'](.+)[”"'] already exists\.?$/i))) {
+      let typeStr = m[1].toLowerCase() === "automation" ? "自动化" : "计划任务";
+      return text.replace(trimmed, "ID 为“" + m[2] + "”的" + typeStr + "已存在。");
+    }
+    if ((m = trimmed.match(/^An?\s+(automation|scheduled task)\s+with this name already exists on this computer\. Run it remotely, or go back and rename it\.?$/i))) {
+      let typeStr = m[1].toLowerCase() === "automation" ? "自动化" : "计划任务";
+      return text.replace(trimmed, "此计算机上已存在同名的" + typeStr + "。请在远程运行，或返回重命名。");
+    }
+    if ((m = trimmed.match(/^with the ID [“"'](.+)[”"'] already exists\.?$/i))) {
+      return text.replace(trimmed, "ID 为“" + m[1] + "”已存在。");
+    }
+    if ((m = trimmed.match(/^with this name already exists on this computer\. Run it remotely, or go back and rename it\.?$/i))) {
+      return text.replace(trimmed, "此名称在此计算机上已存在。请在远程运行，或返回重命名。");
+    }
+    if ((m = trimmed.match(/^No (automations|scheduled tasks) match [“"'](.+)[”"']\.?$/i))) {
+      let typeStr = m[1].toLowerCase() === "automations" ? "自动化" : "计划任务";
+      return text.replace(trimmed, "未找到匹配“" + m[2] + "”的" + typeStr + "。");
+    }
     if ((m = trimmed.match(/^No (automations|scheduled tasks) matching your search$/i))) {
-      return text.replace(trimmed, "未找到匹配您搜索的" + (m[1].toLowerCase() === "automations" ? "自动化" : "已计划任务"));
+      return text.replace(trimmed, "未找到匹配您搜索的" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
+    }
+    if ((m = trimmed.match(/^No (automations|scheduled tasks) yet$/i))) {
+      return text.replace(trimmed, "暂无" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
+    }
+    if ((m = trimmed.match(/^No (automations|scheduled tasks) configured\.?$/i))) {
+      return text.replace(trimmed, "未配置任何" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务") + "。");
+    }
+    if ((m = trimmed.match(/^Back to (Automations|Scheduled Tasks)$/i))) {
+      return text.replace(trimmed, "返回" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
     }
     if ((m = trimmed.match(/^Automation "(.+)" not found\.?$/))) {
       return text.replace(trimmed, '未找到自动化 "' + m[1] + '"。');
@@ -1335,15 +1460,26 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Task "(.+)" not found\.?$/))) {
       return text.replace(trimmed, '未找到任务 "' + m[1] + '"。');
     }
-    if ((m = trimmed.match(/^A (automation|scheduled task) with ID (.+) already exists\.?$/))) {
-      let typeStr = m[1] === "automation" ? "自动化" : "已计划任务";
-      return text.replace(trimmed, "ID 为 " + m[2] + " 的" + typeStr + "已存在。");
-    }
-    if ((m = trimmed.match(/^Created automation "(.+)"\.?$/))) {
-      return text.replace(trimmed, '已创建自动化 "' + m[1] + '"。');
+    if ((m = trimmed.match(/^Created (?:automation|scheduled task) "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已创建 "' + m[1] + '"。');
     }
     if ((m = trimmed.match(/^Failed to create (automation|scheduled task)\.?$/))) {
-      return text.replace(trimmed, "创建" + (m[1] === "automation" ? "自动化" : "已计划任务") + "失败。");
+      return text.replace(trimmed, "创建" + (m[1] === "automation" ? "自动化" : "计划任务") + "失败。");
+    }
+    if ((m = trimmed.match(/^Create (automation|scheduled task)$/i))) {
+      return text.replace(trimmed, "创建" + (m[1].toLowerCase() === "automation" ? "自动化" : "计划任务"));
+    }
+    if ((m = trimmed.match(/^Started "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已启动 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to start "(.+)"\.?$/))) {
+      return text.replace(trimmed, '启动 "' + m[1] + '" 失败。');
+    }
+    if ((m = trimmed.match(/^Restarted "(.+)"\.?$/))) {
+      return text.replace(trimmed, '已重启 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to restart "(.+)"\.?$/))) {
+      return text.replace(trimmed, '重启 "' + m[1] + '" 失败。');
     }
     if ((m = trimmed.match(/^Deleted "(.+)"\.?$/))) {
       return text.replace(trimmed, '已删除 "' + m[1] + '"。');
@@ -1351,11 +1487,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Failed to delete "(.+)"\.?$/))) {
       return text.replace(trimmed, '删除 "' + m[1] + '" 失败。');
     }
-    if ((m = trimmed.match(/^Restarted "(.+)"\.?$/))) {
-      return text.replace(trimmed, '已重启 "' + m[1] + '"。');
-    }
     if ((m = trimmed.match(/^Enabled "(.+)"\.?$/))) {
       return text.replace(trimmed, '已启用 "' + m[1] + '"。');
+    }
+    if ((m = trimmed.match(/^Failed to update "(.+)"\.?$/))) {
+      return text.replace(trimmed, '更新 "' + m[1] + '" 失败。');
     }
     if ((m = trimmed.match(/^Failed to save "(.+)"\.?$/))) {
       return text.replace(trimmed, '保存 "' + m[1] + '" 失败。');
@@ -1366,17 +1502,53 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Are you sure you want to delete (.+)\? This action cannot be undone\.?$/))) {
       return text.replace(trimmed, "您确定要删除 " + m[1] + " 吗？此操作无法撤销。");
     }
+    if ((m = trimmed.match(/^Failed:\s*(.+)$/))) {
+      return text.replace(trimmed, "失败: " + m[1]);
+    }
+    if ((m = trimmed.match(/^Waiting for your input(?::\s*(.+))?$/))) {
+      return text.replace(trimmed, m[1] ? "等待您的输入: " + m[1] : "等待您的输入");
+    }
+    if ((m = trimmed.match(/^Running(?::\s*(.+))?$/))) {
+      return text.replace(trimmed, m[1] ? "运行中: " + m[1] : "运行中");
+    }
+    if ((m = trimmed.match(/^Running for (.+)$/))) {
+      return text.replace(trimmed, "已运行 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Up (.+)$/))) {
+      return text.replace(trimmed, "运行时间 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Pause (.+)$/))) {
+      return text.replace(trimmed, "暂停 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Resume (.+)$/))) {
+      return text.replace(trimmed, "恢复 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Run (.+) now$/))) {
+      return text.replace(trimmed, "立即运行 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Restart (.+)$/))) {
+      return text.replace(trimmed, "重启 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Keep:\s*(.+)$/))) {
+      return text.replace(trimmed, "保持: " + m[1]);
+    }
+    if ((m = trimmed.match(/^Daily around (.+)$/))) {
+      return text.replace(trimmed, "每天约 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Weekly on (.+) around (.+)$/))) {
+      return text.replace(trimmed, "每周 " + m[1] + " 约 " + m[2]);
+    }
+    if ((m = trimmed.match(/^Reads (.+), read-only$/))) {
+      return text.replace(trimmed, "读取 " + m[1] + "，只读");
+    }
+    if ((m = trimmed.match(/^Reads (.+)$/))) {
+      return text.replace(trimmed, "读取 " + m[1]);
+    }
     if (trimmed.indexOf("Agents created by this") !== -1 && trimmed.indexOf("run in a dedicated") !== -1) {
       return "由此自动化创建的智能体将在具有独立权限的专用空间中运行。您可以在设置页面更改权限。";
     }
     if (trimmed === "Your changes were not saved. Please try again.") {
       return text.replace(trimmed, "您的更改未保存。请重试。");
-    }
-    if (trimmed === "around") {
-      return text.replace(trimmed, "大约在");
-    }
-    if (trimmed === "on") {
-      return text.replace(trimmed, "于");
     }
     if ((m = trimmed.match(/^(\d+):00\s+(AM|PM)$/))) {
       return text.replace(trimmed, (m[2] === "AM" ? "上午 " : "下午 ") + m[1] + ":00");
