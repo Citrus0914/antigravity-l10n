@@ -23,6 +23,22 @@ DOM_TRANSLATOR_INJECTION = r"""
 // Antigravity Chinese Localization Engine
 (function() {
   const dictionary = {
+    // 自动任务与新建向导补充词条
+    "Untitled": "未命名", "untitled": "未命名",
+    "Untitled Conversation": "未命名对话", "Untitled conversation": "未命名对话",
+    "Untitled task": "未命名任务", "Untitled Task": "未命名任务",
+    "Untitled automation": "未命名自动任务", "Untitled Automation": "未命名自动任务",
+    "at": "于", "At": "于",
+    "Custom schedule": "自定义计划", "custom schedule": "自定义计划",
+    "Prompt to run when triggered...": "触发时运行的提示词...",
+    "Hours": "小时",
+    "Day of the week": "星期",
+    "Days": "天数",
+    "Number of hours": "小时数",
+    "Mondays": "每周一", "Tuesdays": "每周二", "Wednesdays": "每周三",
+    "Thursdays": "每周四", "Fridays": "每周五", "Saturdays": "每周六", "Sundays": "每周日",
+    "weekdays": "工作日", "Weekdays": "工作日",
+    "weekends": "周末", "Weekends": "周末",
     // Top Bar & Global Navigation
     "Goals": "目标", "Tasks": "任务", "Artifacts": "工件", "Scratch": "草稿", "Chat": "对话",
     "Active": "进行中", "Inactive": "未激活", "Completed": "已完成", "Failed": "已失败",
@@ -1181,7 +1197,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "yes": "是", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝",
-    "automation": "自动任务", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
+    "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1534,11 +1550,45 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Keep:\s*(.+)$/))) {
       return text.replace(trimmed, "保持: " + m[1]);
     }
-    if ((m = trimmed.match(/^Daily around (.+)$/))) {
-      return text.replace(trimmed, "每天约 " + m[1]);
+        // 调度时间格式化辅助
+    const formatScheduleTime = (tStr) => {
+      let weekdayMap = {
+        "Monday": "周一", "Tuesday": "周二", "Wednesday": "周三", "Thursday": "周四",
+        "Friday": "周五", "Saturday": "周六", "Sunday": "周日",
+        "Mondays": "周一", "Tuesdays": "周二", "Wednesdays": "周三", "Thursdays": "周四",
+        "Fridays": "周五", "Saturdays": "周六", "Sundays": "周日",
+        "weekdays": "工作日", "weekends": "周末"
+      };
+      let res = tStr;
+      for (const [enW, zhW] of Object.entries(weekdayMap)) {
+        res = res.replace(new RegExp(`\\b${enW}\\b`, 'g'), zhW);
+      }
+      return res.replace(/(\d+):(\d{2})\s*(AM|PM)/gi, (_, h, mm, ap) => (ap.toUpperCase() === 'AM' ? '上午 ' : '下午 ') + h + ':' + mm)
+                .replace(/(\d+)\s*(AM|PM)/gi, (_, h, ap) => (ap.toUpperCase() === 'AM' ? '上午 ' : '下午 ') + h + ' 点')
+                .replace(/\band\b/g, '和');
+    };
+
+    if ((m = trimmed.match(/^Daily (?:at|around) (.+)$/i))) {
+      return text.replace(trimmed, "每天 于 " + formatScheduleTime(m[1]));
     }
-    if ((m = trimmed.match(/^Weekly on (.+) around (.+)$/))) {
-      return text.replace(trimmed, "每周 " + m[1] + " 约 " + m[2]);
+    if ((m = trimmed.match(/^Weekly on (.+) (?:at|around) (.+)$/i))) {
+      return text.replace(trimmed, "每周" + formatScheduleTime(m[1]) + " 于 " + formatScheduleTime(m[2]));
+    }
+    if ((m = trimmed.match(/^(Weekdays|Weekends) (?:at|around) (.+)$/i))) {
+      let prefix = m[1].toLowerCase() === 'weekdays' ? '工作日' : '周末';
+      return text.replace(trimmed, prefix + " 于 " + formatScheduleTime(m[2]));
+    }
+    if ((m = trimmed.match(/^Monthly on the (\d+)(?:st|nd|rd|th)? at (.+)$/i))) {
+      return text.replace(trimmed, "每月第 " + m[1] + " 天于 " + formatScheduleTime(m[2]));
+    }
+    if ((m = trimmed.match(/^Every hour at :(\d{2})$/i))) {
+      return text.replace(trimmed, "每小时第 " + m[1] + " 分");
+    }
+    if ((m = trimmed.match(/^Every hour,\s*(.+)\s+to\s+(.+)$/i))) {
+      return text.replace(trimmed, "每小时，" + formatScheduleTime(m[1]) + " 至 " + formatScheduleTime(m[2]));
+    }
+    if ((m = trimmed.match(/^Every (\d+) (minutes?|hours?)$/i))) {
+      return text.replace(trimmed, "每 " + m[1] + " " + (m[2].toLowerCase().startsWith('min') ? '分钟' : '小时'));
     }
     if ((m = trimmed.match(/^Reads (.+), read-only$/))) {
       return text.replace(trimmed, "读取 " + m[1] + "，只读");
@@ -1552,8 +1602,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     if (trimmed === "Your changes were not saved. Please try again.") {
       return text.replace(trimmed, "您的更改未保存。请重试。");
     }
-    if ((m = trimmed.match(/^(\d+):00\s+(AM|PM)$/))) {
-      return text.replace(trimmed, (m[2] === "AM" ? "上午 " : "下午 ") + m[1] + ":00");
+    if ((m = trimmed.match(/^(\d+):(\d{2})\s*(AM|PM)$/i))) {
+      return text.replace(trimmed, (m[3].toUpperCase() === "AM" ? "上午 " : "下午 ") + m[1] + ":" + m[2]);
+    }
+    if ((m = trimmed.match(/^(\d+)\s*(AM|PM)$/i))) {
+      return text.replace(trimmed, (m[2].toUpperCase() === "AM" ? "上午 " : "下午 ") + m[1] + " 点");
     }
     if ((m = trimmed.match(/^(\d+)\s+projects?$/i))) {
       return text.replace(trimmed, m[1] + " 个项目");
@@ -1740,6 +1793,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     if (node.nodeType === Node.TEXT_NODE) {
       // Avoid modifying code snippets or editor content
       if (node.parentElement && node.parentElement.closest && node.parentElement.closest('pre, code, .monaco-editor')) {
+        return;
+      }
+      // 调度时间选择器中的介词 "at" 与 "on"
+      if ((node.textContent.trim() === "at" || node.textContent.trim() === "on") && node.parentElement && node.parentElement.closest && node.parentElement.closest('[data-testid="automation-schedule-editor"]')) {
+        node.textContent = node.textContent.replace(/at|on/, "于");
         return;
       }
       if (node.textContent.trim() === "Type" && node.parentElement && node.parentElement.textContent.indexOf("generate a plan") !== -1) {
