@@ -691,6 +691,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Automations": "自动任务",
     "Scheduled Tasks": "计划任务",
     "Scheduled Task": "计划任务",
+    "scheduled tasks": "计划任务",
+    "scheduled task": "计划任务",
     "Scheduled": "计划",
     "Create with Prompt": "使用提示词创建",
     "Create with prompt": "使用提示词创建",
@@ -1176,7 +1178,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "workspace": "工作区", "workspaces": "工作区", "directory": "目录", "folder": "文件夹", "file": "文件", "files": "文件",
     "command": "命令", "commands": "命令", "terminal": "终端", "console": "控制台", "output": "输出", "input": "输入",
     "error": "错误", "warning": "警告", "info": "信息", "success": "成功", "failed": "失败", "pending": "等待中", "running": "运行中",
-    "yes": "是", "no": "否", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
+    "yes": "是", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝",
     "automation": "自动任务", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
@@ -1744,6 +1746,34 @@ DOM_TRANSLATOR_INJECTION = r"""
         node.textContent = node.textContent.replace("Type", "输入");
         return;
       }
+            // 解决 "No <noun> yet" 拆分文本节点拼接问题（如 "No automations yet" / "No scheduled tasks yet"）
+      if (node.parentElement && (node.parentElement.textContent.indexOf(" yet") !== -1 || node.parentElement.textContent.indexOf("暂无") !== -1)) {
+        if (node.textContent === "No " || node.textContent === "No" || node.textContent === "否 " || node.textContent === "否") {
+          node.textContent = "暂无";
+          return;
+        }
+        if (node.textContent === " yet" || node.textContent === "yet") {
+          node.textContent = "";
+          return;
+        }
+      }
+
+      // 解决 "No <noun> match “...”" 拆分文本节点拼接问题
+      if (node.parentElement && (node.parentElement.textContent.indexOf(" match “") !== -1 || node.parentElement.textContent.indexOf(" match \"") !== -1 || node.parentElement.textContent.indexOf("中未找到匹配") !== -1)) {
+        if (node.textContent === "No " || node.textContent === "No" || node.textContent === "否 " || node.textContent === "否") {
+          node.textContent = "";
+          return;
+        }
+        if (node.textContent === " match “" || node.textContent === " match \"") {
+          node.textContent = "中未找到匹配 “";
+          return;
+        }
+        if (node.textContent === "”." || node.textContent === "\".") {
+          node.textContent = "” 的项。";
+          return;
+        }
+      }
+
       if (node.textContent === " Settings" && node.parentElement && node.parentElement.closest && node.parentElement.closest('[data-testid="permissions-project-options"]')) {
         node.textContent = "设置";
         return;
