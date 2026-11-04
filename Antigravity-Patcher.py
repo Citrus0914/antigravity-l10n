@@ -889,6 +889,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Failed to load resources": "加载资源失败",
     "Failed to open created workspace": "打开创建的工作区失败",
 
+    // Font Settings (外观字体设置)
+    "Font": "字体",
+    "font": "字体",
+    "System UI": "系统默认",
+    "system ui": "系统默认",
     // Keyboard Shortcuts Settings (快捷键设置全量词典)
     "Shortcuts": "快捷键",
     "Keyboard shortcuts for quick navigation and control.": "用于快速导航和控制的键盘快捷键。",
@@ -917,7 +922,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Conversation Steps": "对话步骤",
     "Choose how much detail is shown during a conversation.": "选择对话期间显示的详细程度。",
     "Verbose": "详细",
-    "verbose": "详细", "shortcuts": "快捷键", "shortcut": "快捷键", "click": "点击",
+    "verbose": "详细", "shortcuts": "快捷键", "font": "字体", "shortcut": "快捷键", "click": "点击",
     "Fill": "填满",
     "Bottom Panel": "底部面板",
     "Custom Context Menus": "自定义右键菜单",
