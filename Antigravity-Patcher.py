@@ -889,9 +889,30 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Failed to load resources": "加载资源失败",
     "Failed to open created workspace": "打开创建的工作区失败",
 
+    // Connectors Submenu & Menu Panel (连接器菜单与浮层)
+    "Connectors": "连接器",
+    "connectors": "连接器",
+    "Connector": "连接器",
+    "connector": "连接器",
+    "Browse Connectors": "浏览连接器",
+    "No connectors available in this project": "此项目中暂无可用连接器",
+    "No connectors available in this workspace": "此工作区中暂无可用连接器",
+    "No connectors available": "暂无可用连接器",
+    "Search connectors": "搜索连接器",
+    "Search connectors...": "搜索连接器...",
+    "Manage": "管理",
+    "manage": "管理",
+    "Sign In": "登录",
+    "Sign in": "登录",
+    "Fix": "修复",
+    "fix": "修复",
+    "on for this conversation": "个已在此对话开启",
+    "Loading connectors…": "正在加载连接器…",
+    "Loading connectors...": "正在加载连接器…",
+    "Loading connectors": "正在加载连接器",
     // Font Settings (外观字体设置)
     "Font": "字体",
-    "font": "字体",
+    "font": "字体", "connector": "连接器", "connectors": "连接器", "manage": "管理", "fix": "修复",
     "System UI": "系统默认",
     "system ui": "系统默认",
     // Keyboard Shortcuts Settings (快捷键设置全量词典)
@@ -1514,6 +1535,12 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^Conflicts with "([^"]+)" \(press Enter to replace\)$/i))) {
       let cmdCn = dictionary[m[1]] || m[1];
       return text.replace(trimmed, "与“" + cmdCn + "”冲突（按 Enter 替换）");
+    }
+    if ((m = trimmed.match(/^(\d+)\s+on for this conversation$/i))) {
+      return text.replace(trimmed, m[1] + " 个已在此对话开启");
+    }
+    if ((m = trimmed.match(/^No connectors match [“\u201c](.+)[”\u201d]$/i))) {
+      return text.replace(trimmed, "未找到匹配“" + m[1] + "”的连接器");
     }
 
     // Prefix Rules Matching
