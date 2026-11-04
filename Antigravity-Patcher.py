@@ -688,7 +688,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Turn on Remote Control in app settings": "请在应用设置中开启“远程控制”",
 
     // Automations & Scheduled Tasks (自动化与计划任务)
-    "Automations": "自动化",
+    "Automations": "自动任务",
     "Scheduled Tasks": "计划任务",
     "Scheduled Task": "计划任务",
     "Scheduled": "计划",
@@ -699,37 +699,37 @@ DOM_TRANSLATOR_INJECTION = r"""
     "name": "名称",
     "Prompt": "提示词",
     "prompt": "提示词",
-    "Search automations...": "搜索自动化...",
-    "Search automations…": "搜索自动化…",
+    "Search automations...": "搜索自动任务...",
+    "Search automations…": "搜索自动任务…",
     "Search tasks...": "搜索任务...",
     "Search tasks…": "搜索任务…",
     "Search plugins...": "搜索插件...",
-    "Only Automations": "仅自动化",
+    "Only Automations": "仅自动任务",
     "Only Scheduled": "仅计划任务",
-    "Creates a local automation that runs on this computer": "创建在此计算机上运行的本地自动化",
+    "Creates a local automation that runs on this computer": "创建在此计算机上运行的本地自动任务",
     "Refresh all credentials": "刷新所有凭据",
     "Refreshing credentials...": "正在刷新凭据...",
     "Refreshing credentials…": "正在刷新凭据…",
-    "Refreshed credentials for all automations.": "已为所有自动化刷新凭据。",
+    "Refreshed credentials for all automations.": "已为所有自动任务刷新凭据。",
     "Failed to refresh credentials": "刷新凭据失败",
-    "Automation credentials expired": "自动化凭据已过期",
-    "Automation credentials expiring soon": "自动化凭据即将过期",
-    "Credentials for one or more automations have expired.": "一个或多个自动化的凭据已过期。",
-    "Credentials for one or more automations expire in less than a week.": "一个或多个自动化的凭据将在不到一周内过期。",
-    "Connect an account so the agent can run automations.": "连接账号以便智能体运行自动化。",
-    "No automations yet": "暂无自动化",
+    "Automation credentials expired": "自动任务凭据已过期",
+    "Automation credentials expiring soon": "自动任务凭据即将过期",
+    "Credentials for one or more automations have expired.": "一个或多个自动任务的凭据已过期。",
+    "Credentials for one or more automations expire in less than a week.": "一个或多个自动任务的凭据将在不到一周内过期。",
+    "Connect an account so the agent can run automations.": "连接账号以便智能体运行自动任务。",
+    "No automations yet": "暂无自动任务",
     "No scheduled tasks yet": "暂无计划任务",
-    "No automations configured.": "未配置任何自动化。",
+    "No automations configured.": "未配置任何自动任务。",
     "No scheduled tasks configured.": "未配置任何计划任务。",
     "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "按计划运行提示词，例如每天早晨汇总昨日变更。运行记录将显示在此处。",
     "Sidecar feature is not available.": "附加进程功能不可用。",
-    "Back to Automations": "返回自动化",
+    "Back to Automations": "返回自动任务",
     "Back to Scheduled Tasks": "返回计划任务",
     "Back to UI Plugins": "返回 UI 插件",
     "Back to": "返回",
     "Creating…": "正在创建…",
     "Creating...": "正在创建...",
-    "Enter automation name...": "输入自动化名称...",
+    "Enter automation name...": "输入自动任务名称...",
     "Enter scheduled task name...": "输入计划任务名称...",
     "Select workspace": "选择工作区",
     "No projects created": "未创建任何项目",
@@ -754,7 +754,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Cron expression e.g. 0 */6 * * *": "Cron 表达式，例如 0 */6 * * *",
     "Enter a prompt for the agent to run...": "输入供智能体执行的提示词...",
     "Prompt to execute on schedule...": "按计划执行的提示词...",
-    "All automations run as Flash.": "所有自动化均以 Flash 模型运行。",
+    "All automations run as Flash.": "所有自动任务均以 Flash 模型运行。",
     "All scheduled tasks run as Flash.": "所有计划任务均以 Flash 模型运行。",
     "Manage Permissions": "管理权限",
     "Run Now": "立即运行",
@@ -763,11 +763,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Close Logs Modal": "关闭日志弹窗",
     "builtin": "内置",
     "Delete Task": "删除任务",
-    "Delete Automation": "删除自动化",
+    "Delete Automation": "删除自动任务",
     "Are you sure you want to delete": "确定要删除",
     "? This action cannot be undone.": " 吗？此操作无法撤销。",
     "Edit task title": "编辑任务标题",
-    "Edit automation title": "编辑自动化标题",
+    "Edit automation title": "编辑自动任务标题",
     "Open project settings": "打开项目设置",
     "Change schedule": "更改计划",
     "Change model": "更改模型",
@@ -828,9 +828,9 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Runs even when your computer is off. Schedules only.": "即使您的计算机已关机也会运行。仅支持定时计划。",
     "Schedules and events.": "定时计划与事件。",
     "Schedules only.": "仅支持定时计划。",
-    "Create automation": "创建自动化",
+    "Create automation": "创建自动任务",
     "Create scheduled task": "创建计划任务",
-    "An automation with this name already exists on this computer. Run it remotely, or go back and rename it.": "此计算机上已存在同名的自动化。请在远程运行，或返回重命名。",
+    "An automation with this name already exists on this computer. Run it remotely, or go back and rename it.": "此计算机上已存在同名的自动任务。请在远程运行，或返回重命名。",
     "An scheduled task with this name already exists on this computer. Run it remotely, or go back and rename it.": "此计算机上已存在同名的计划任务。请在远程运行，或返回重命名。",
     "How often": "重复频率",
     "Every hour": "每小时",
@@ -1179,7 +1179,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "yes": "是", "no": "否", "true": "真", "false": "假", "off": "关", "enable": "启用", "disable": "禁用",
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝",
-    "automation": "自动化", "automations": "自动化", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
+    "automation": "自动任务", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1425,11 +1425,11 @@ DOM_TRANSLATOR_INJECTION = r"""
       return text.replace(trimmed, "第 " + m[1] + " 步，共 " + m[2] + " 步");
     }
     if ((m = trimmed.match(/^An?\s+(automation|scheduled task)\s+with the ID [“"'](.+)[”"'] already exists\.?$/i))) {
-      let typeStr = m[1].toLowerCase() === "automation" ? "自动化" : "计划任务";
+      let typeStr = m[1].toLowerCase() === "automation" ? "自动任务" : "计划任务";
       return text.replace(trimmed, "ID 为“" + m[2] + "”的" + typeStr + "已存在。");
     }
     if ((m = trimmed.match(/^An?\s+(automation|scheduled task)\s+with this name already exists on this computer\. Run it remotely, or go back and rename it\.?$/i))) {
-      let typeStr = m[1].toLowerCase() === "automation" ? "自动化" : "计划任务";
+      let typeStr = m[1].toLowerCase() === "automation" ? "自动任务" : "计划任务";
       return text.replace(trimmed, "此计算机上已存在同名的" + typeStr + "。请在远程运行，或返回重命名。");
     }
     if ((m = trimmed.match(/^with the ID [“"'](.+)[”"'] already exists\.?$/i))) {
@@ -1439,23 +1439,23 @@ DOM_TRANSLATOR_INJECTION = r"""
       return text.replace(trimmed, "此名称在此计算机上已存在。请在远程运行，或返回重命名。");
     }
     if ((m = trimmed.match(/^No (automations|scheduled tasks) match [“"'](.+)[”"']\.?$/i))) {
-      let typeStr = m[1].toLowerCase() === "automations" ? "自动化" : "计划任务";
+      let typeStr = m[1].toLowerCase() === "automations" ? "自动任务" : "计划任务";
       return text.replace(trimmed, "未找到匹配“" + m[2] + "”的" + typeStr + "。");
     }
     if ((m = trimmed.match(/^No (automations|scheduled tasks) matching your search$/i))) {
-      return text.replace(trimmed, "未找到匹配您搜索的" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
+      return text.replace(trimmed, "未找到匹配您搜索的" + (m[1].toLowerCase() === "automations" ? "自动任务" : "计划任务"));
     }
     if ((m = trimmed.match(/^No (automations|scheduled tasks) yet$/i))) {
-      return text.replace(trimmed, "暂无" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
+      return text.replace(trimmed, "暂无" + (m[1].toLowerCase() === "automations" ? "自动任务" : "计划任务"));
     }
     if ((m = trimmed.match(/^No (automations|scheduled tasks) configured\.?$/i))) {
-      return text.replace(trimmed, "未配置任何" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务") + "。");
+      return text.replace(trimmed, "未配置任何" + (m[1].toLowerCase() === "automations" ? "自动任务" : "计划任务") + "。");
     }
     if ((m = trimmed.match(/^Back to (Automations|Scheduled Tasks)$/i))) {
-      return text.replace(trimmed, "返回" + (m[1].toLowerCase() === "automations" ? "自动化" : "计划任务"));
+      return text.replace(trimmed, "返回" + (m[1].toLowerCase() === "automations" ? "自动任务" : "计划任务"));
     }
     if ((m = trimmed.match(/^Automation "(.+)" not found\.?$/))) {
-      return text.replace(trimmed, '未找到自动化 "' + m[1] + '"。');
+      return text.replace(trimmed, '未找到自动任务 "' + m[1] + '"。');
     }
     if ((m = trimmed.match(/^Task "(.+)" not found\.?$/))) {
       return text.replace(trimmed, '未找到任务 "' + m[1] + '"。');
@@ -1464,10 +1464,10 @@ DOM_TRANSLATOR_INJECTION = r"""
       return text.replace(trimmed, '已创建 "' + m[1] + '"。');
     }
     if ((m = trimmed.match(/^Failed to create (automation|scheduled task)\.?$/))) {
-      return text.replace(trimmed, "创建" + (m[1] === "automation" ? "自动化" : "计划任务") + "失败。");
+      return text.replace(trimmed, "创建" + (m[1] === "automation" ? "自动任务" : "计划任务") + "失败。");
     }
     if ((m = trimmed.match(/^Create (automation|scheduled task)$/i))) {
-      return text.replace(trimmed, "创建" + (m[1].toLowerCase() === "automation" ? "自动化" : "计划任务"));
+      return text.replace(trimmed, "创建" + (m[1].toLowerCase() === "automation" ? "自动任务" : "计划任务"));
     }
     if ((m = trimmed.match(/^Started "(.+)"\.?$/))) {
       return text.replace(trimmed, '已启动 "' + m[1] + '"。');
@@ -1545,7 +1545,7 @@ DOM_TRANSLATOR_INJECTION = r"""
       return text.replace(trimmed, "读取 " + m[1]);
     }
     if (trimmed.indexOf("Agents created by this") !== -1 && trimmed.indexOf("run in a dedicated") !== -1) {
-      return "由此自动化创建的智能体将在具有独立权限的专用空间中运行。您可以在设置页面更改权限。";
+      return "由此自动任务创建的智能体将在具有独立权限的专用空间中运行。您可以在设置页面更改权限。";
     }
     if (trimmed === "Your changes were not saved. Please try again.") {
       return text.replace(trimmed, "您的更改未保存。请重试。");
