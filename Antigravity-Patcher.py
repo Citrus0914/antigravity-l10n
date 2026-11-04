@@ -889,11 +889,35 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Failed to load resources": "加载资源失败",
     "Failed to open created workspace": "打开创建的工作区失败",
 
+    // Keyboard Shortcuts Settings (快捷键设置全量词典)
+    "Shortcuts": "快捷键",
+    "Keyboard shortcuts for quick navigation and control.": "用于快速导航和控制的键盘快捷键。",
+    "Search shortcuts...": "搜索快捷键...",
+    "Search shortcuts": "搜索快捷键",
+    "Clear search": "清除搜索",
+    "Reset All to Defaults": "全部恢复默认",
+    "Reset all shortcuts to defaults": "将所有快捷键重置为默认值",
+    "No keyboard shortcuts found matching your filter.": "未找到匹配您筛选条件的键盘快捷键。",
+    "Edit Shortcut": "编辑快捷键",
+    "Add Shortcut": "添加快捷键",
+    "Remove Shortcut": "移除快捷键",
+    "Reset to Default": "恢复默认",
+    "Layout Controls": "布局控制",
+    "Navigation": "导航",
+    "Open File Search": "打开文件搜索",
+    "Add to Chat/Quote": "添加到对话/引用",
+    "Click": "点击",
+    "Middle Click": "鼠标中键点击",
+    "Next Side Panel Tab": "下一个侧边面板标签页",
+    "Previous Side Panel Tab": "上一个侧边面板标签页",
+    "Open Conversation in New Tab": "在新标签页中打开对话",
+    "Toggle Maximize Side Panel": "切换最大化侧边面板",
+    "Toggle Side Panel": "切换侧边面板",
     // Appearance & Chat Settings (外观与对话设置补漏)
     "Conversation Steps": "对话步骤",
     "Choose how much detail is shown during a conversation.": "选择对话期间显示的详细程度。",
     "Verbose": "详细",
-    "verbose": "详细",
+    "verbose": "详细", "shortcuts": "快捷键", "shortcut": "快捷键", "click": "点击",
     "Fill": "填满",
     "Bottom Panel": "底部面板",
     "Custom Context Menus": "自定义右键菜单",
@@ -1466,6 +1490,25 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^Stopped voice chat\s*·\s*(.+)$/i))) {
       return text.replace(trimmed, "已停止语音聊天 · " + m[1]);
+    }
+    if ((m = trimmed.match(/^Shortcut (.+) for (.+)$/i))) {
+      let cmdCn = dictionary[m[2]] || m[2];
+      return text.replace(trimmed, cmdCn + " 的快捷键 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Remove shortcut (.+) for (.+)$/i))) {
+      let cmdCn = dictionary[m[2]] || m[2];
+      return text.replace(trimmed, "移除 " + cmdCn + " 的快捷键 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Recording shortcut for (.+)\. Press keys to bind, Enter to save, Escape to cancel\.$/i))) {
+      let cmdCn = dictionary[m[1]] || m[1];
+      return text.replace(trimmed, "正在为 " + cmdCn + " 录制快捷键。按键进行绑定，按 Enter 保存，按 Escape 取消。");
+    }
+    if ((m = trimmed.match(/^Conflict: also assigned to (.+)$/i))) {
+      return text.replace(trimmed, "冲突：已同时分配给 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Conflicts with "([^"]+)" \(press Enter to replace\)$/i))) {
+      let cmdCn = dictionary[m[1]] || m[1];
+      return text.replace(trimmed, "与“" + cmdCn + "”冲突（按 Enter 替换）");
     }
 
     // Prefix Rules Matching
