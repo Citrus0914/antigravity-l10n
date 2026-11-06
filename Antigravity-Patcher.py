@@ -205,6 +205,17 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Configure what the agent can do in local and remote conversations": "配置智能体在本地和远程对话中可以执行的操作",
     "Controls permissions for remote conversations.": "控制远程对话的权限。",
     "Controls permissions for remote conversations": "控制远程对话的权限",
+    "Clones this repo in a cloud environment.": "在云端环境中克隆此仓库。",
+    "Clones this repo in a cloud environment": "在云端环境中克隆此仓库",
+    "Runs in a cloud environment.": "在云端环境中运行。",
+    "Runs in a cloud environment": "在云端环境中运行",
+    "Checking for a local clone": "正在检查本地克隆",
+    "Not cloned locally": "未在本地克隆",
+    "Only GitHub repos are included in Remote": "远程仅包含 GitHub 仓库",
+    "Uses your local clone,": "使用您的本地克隆，",
+    "Uses your local clone": "使用您的本地克隆",
+    "More cloud environments": "更多云端环境",
+    "Where the agent runs": "智能体运行位置",
     "Modify permissions for file and terminal tools.": "修改文件和终端工具的权限。",
     "Modify permissions for file and terminal tools": "修改文件和终端工具的权限",
     "Restricts agent tools to a secure, isolated local sandbox.": "将智能体工具限制在安全隔离的本地沙盒中。",
@@ -1702,6 +1713,11 @@ DOM_TRANSLATOR_INJECTION = r"""
       let cur = m[1].trim();
       let transCur = dictionary[cur] || cur;
       return "智能体权限预设选择器，当前：" + transCur;
+    }
+    if ((m = trimmed.match(/^Where the agent runs,\s*current:\s*(.+)$/i))) {
+      let cur = m[1].trim();
+      let transCur = dictionary[cur] || cur;
+      return "智能体运行位置，当前：" + transCur;
     }
     if ((m = trimmed.match(/^Failed to save project settings:\s*(.+)$/i))) {
       return text.replace(trimmed, "保存项目设置失败：" + m[1]);
