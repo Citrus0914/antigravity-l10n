@@ -120,6 +120,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Local": "本地", "local": "本地",
     "Local Checkout": "本地工作区", "local checkout": "本地工作区", "Local checkout": "本地工作区",
     "New Worktree": "新建工作树", "New worktree": "新建工作树",
+    "Work in a New Worktree": "在新建 Worktree 中工作",
+    "Work in a new worktree": "在新建 Worktree 中工作",
+    "Work in a New worktree": "在新建 Worktree 中工作",
+    "Keeps your checkout untouched.": "保持您的 checkout 不受影响。",
+    "Keeps your checkout untouched": "保持您的 checkout 不受影响",
     "Previous Worktrees": "历史工作树", "Previous worktrees": "历史工作树",
     "No previous worktrees": "暂无历史工作树", "Loading worktrees...": "正在加载工作树...",
     "Select Worktree": "选择工作树", "Select worktree": "选择工作树",
@@ -1695,6 +1700,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     if ((m = trimmed.match(/^Worktree from\s+(.+)$/i))) {
       return "从 " + m[1] + " 创建工作树";
+    }
+    if ((m = trimmed.match(/^Work in\s+a\s+new\s+(.+)$/i))) {
+      let target = m[1].trim();
+      let transTarget = dictionary[target] || dictionary[target.charAt(0).toUpperCase() + target.slice(1)] || translateText(target);
+      return "在新建 " + transTarget + " 中工作";
     }
     if ((m = trimmed.match(/^Work in\s+(.+)$/i))) {
       return "在 " + m[1] + " 中工作";
