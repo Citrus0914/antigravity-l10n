@@ -55,3 +55,10 @@ tools/latest_frontend.js
 
 # Scratch & temporary analysis scripts
 scratch/
+
+# PyInstaller
+*.spec
+
+# Release outputs
+release-assets/
+*.zip

@@ -36,7 +36,7 @@
 
 ### 方式一：独立免安装版 (Windows / macOS) ⭐ 推荐普通用户
 
-**下载：** [前往 Release 下载对应系统版本](https://github.com/MIMICTE/Antigravity-zh-CN/releases/latest) (支持 Windows x64, macOS Intel/M芯片)
+**下载：** [前往 Release 下载对应系统版本](https://github.com/Citrus0914/-/releases/latest) (支持 Windows x64, macOS Intel/M芯片)
 
 **特点：**
 - ✅ 开箱即用，**无需安装 Python** 环境
@@ -61,14 +61,14 @@
 
 **克隆仓库：**
 ```bash
-git clone https://github.com/MIMICTE/Antigravity-zh-CN.git
+git clone https://github.com/Citrus0914/-.git
 cd Antigravity-zh-CN
 python Antigravity-Patcher.py
 ```
 
 **或下载源码压缩包：**
 
-从 [Releases 页面](https://github.com/MIMICTE/Antigravity-zh-CN/releases/latest) 下载 `Source code (zip)` 或 `Source code (tar.gz)`，解压后运行 `Antigravity-Patcher.py`。
+从 [Releases 页面](https://github.com/Citrus0914/-/releases/latest) 下载 `Source code (zip)` 或 `Source code (tar.gz)`，解压后运行 `Antigravity-Patcher.py`。
 
 ## 💡 技术原理
 
