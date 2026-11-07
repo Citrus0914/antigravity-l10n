@@ -155,6 +155,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Branch Changes": "分支更改", "Staged Changes": "暂存的更改", "Agent Edits": "智能体编辑",
     "Changes": "更改",
     "New Project": "新建项目", "Quick Start": "快速开始",
+    "New Remote Project": "新建远程项目",
+    "Recent": "最近", "recent": "最近",
+    "Recent Events": "最近事件", "Recent Files": "最近文件", "Recent files": "最近文件",
+    "Recent Conversations": "最近对话", "Recently opened": "最近打开", "No recent downloads": "无最近下载",
+    "Create a project whose conversations run remotely.": "创建对话在远程运行的项目。",
+    "Create a project whose conversations run remotely": "创建对话在远程运行的项目",
+    "Create a new project from one or more folders.": "从一个或多个文件夹创建新项目。",
+    "Create a new project from one or more folders": "从一个或多个文件夹创建新项目",
+    "Remote Projects": "远程项目",
+    "Search Remote…": "搜索远程…", "Search Remote...": "搜索远程...",
+    "Failed to create remote project": "创建远程项目失败",
+    "No remote projects": "未找到远程项目", "No remote workspaces": "未找到远程工作区",
+    "No remote configured": "未配置远程",
     "Select Project": "选择项目", "Select project": "选择项目",
     "Select Workspace": "选择工作区", "Select workspace": "选择工作区", "Select workspace...": "选择工作区...",
     "No Project": "无项目", "No Workspace": "无工作区", "New Workspace": "新建工作区",
@@ -1238,7 +1251,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝",
     "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启",
-    "permission": "权限", "permissions": "权限"
+    "permission": "权限", "permissions": "权限", "recent": "最近"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1689,6 +1702,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     if (trimmed === "No matching") {
       return text.replace(trimmed, "未找到匹配的");
     }
+    if ((m = trimmed.match(/^No\s+remote\s+(projects?|workspaces?)$/i))) {
+      let typeStr = m[1].toLowerCase().startsWith("project") ? "远程项目" : "远程工作区";
+      return text.replace(trimmed, "未找到" + typeStr);
+    }
     if ((m = trimmed.match(/^Select Environment\s*\((.+)\)$/i))) {
       return "选择环境 (" + m[1] + ")";
     }
@@ -2042,7 +2059,10 @@ MENU_TRANSLATOR_INJECTION = r"""
     'Quit': '退出',
     'Connect to WSL': '连接到 WSL',
     'Reopen Locally': '在本地重新打开',
-    'Docs': '文档'
+    'Docs': '文档',
+    'Open Recent': '打开最近',
+    'Recent': '最近',
+    'New Remote Project': '新建远程项目'
   };
   function translateMenu(menuItem) {
     if (menuItem.label) {
