@@ -16,6 +16,10 @@ An open-source Chinese localization patch for Google Antigravity Desktop
 
 ## 📖 Project Overview
 
+> [!NOTE]
+> **Original Author & Attribution**:
+> This project is continuously developed and maintained based on the upstream repository [Antigravity-zh-CN](https://github.com/MIMICTE/Antigravity-zh-CN) by **[MIMICTE](https://github.com/MIMICTE)**. Special thanks to MIMICTE for creating the foundational localization architecture.
+
 **Antigravity v2.11.0 Chinese Localization Patch** - Provides complete Chinese interface support for Google Antigravity desktop application.
 
 This project uses innovative **Web Injection and Native ASAR Unpacking Technology** to achieve perfect localization without compromising the original software's security and stability.
@@ -233,6 +237,12 @@ Issues and Pull Requests are welcome!
 - Have better technical solutions? Discuss in [Discussions](../../discussions)
 
 For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 🙏 Credits & Attribution
+
+- **Upstream Project**: [MIMICTE / Antigravity-zh-CN](https://github.com/MIMICTE/Antigravity-zh-CN)
+- **Original Author**: [MIMICTE](https://github.com/MIMICTE)
+- **License**: Inherits and complies with the [MIT License](LICENSE) from the upstream repository, preserving all original copyright notices.
 
 ## 📄 License
 
