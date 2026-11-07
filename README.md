@@ -16,6 +16,10 @@
 
 ## 📖 项目简介
 
+> [!NOTE]
+> **原作者致谢与项目溯源**：
+> 本项目基于原作者 **[MIMICTE](https://github.com/MIMICTE)** 的开源项目 [Antigravity-zh-CN](https://github.com/MIMICTE/Antigravity-zh-CN) 进行二次开发与功能扩展维护。向原作者 MIMICTE 贡献的基础架构致以诚挚感谢。
+
 **Antigravity v2.11.0 一键汉化补丁** - 为 Google Antigravity 桌面端提供完整的中文界面支持。
 
 本项目采用独创的 **Web 注入与原生 ASAR 解包技术**，在完全不破坏原版软件安全性和稳定性的前提下，实现了目前技术上限内的最完美汉化。
@@ -233,6 +237,12 @@ A: 目前仅支持 Windows。macOS 和 Linux 版本的路径和机制不同，�
 - 有更好的技术方案？欢迎在 [Discussions](../../discussions) 讨论
 
 详细的贡献指南请查看 [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 🙏 致谢与原作者 (Credits & Attribution)
+
+- **上游原项目**：[MIMICTE / Antigravity-zh-CN](https://github.com/MIMICTE/Antigravity-zh-CN)
+- **初始作者**：[MIMICTE](https://github.com/MIMICTE)
+- **开源协议**：本项目继承原项目之 [MIT License](LICENSE)，保留原作者著作权声明与原始授权条款。
 
 ## 📄 许可证
 
