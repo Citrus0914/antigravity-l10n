@@ -1,0 +1,113 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Build Windows Executables
+        run: |
+          pyinstaller --noconfirm --clean -F Antigravity-Patcher.py
+          pyinstaller --noconfirm --clean -F Restore.py
+
+      - name: Package Windows Zip
+        shell: pwsh
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          if (-not $tag) { $tag = "v2.22.0" }
+          $zipName = "Antigravity-zh-CN-$tag-windows-x64.zip"
+          Compress-Archive -Path dist/Antigravity-Patcher.exe, dist/Restore.exe, 一键汉化.bat, 一键还原.bat, README.md, LICENSE -DestinationPath $zipName
+          Write-Host "Created $zipName"
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64-zip
+          path: Antigravity-zh-CN-*-windows-x64.zip
+
+  build-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [x86_64, arm64]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Build Mac Executables
+        run: |
+          pyinstaller --noconfirm --clean -F --target-arch ${{ matrix.arch }} Antigravity-Patcher.py
+          pyinstaller --noconfirm --clean -F --target-arch ${{ matrix.arch }} Restore.py
+          mv dist/Antigravity-Patcher dist/Antigravity-Patcher-macOS-${{ matrix.arch }}
+          mv dist/Restore dist/Restore-macOS-${{ matrix.arch }}
+
+      - name: Package Mac Zip
+        run: |
+          TAG=${GITHUB_REF_NAME:-v2.22.0}
+          ZIP_NAME="Antigravity-zh-CN-${TAG}-macos-${{ matrix.arch }}-binaries.zip"
+          cd dist
+          zip "../$ZIP_NAME" Antigravity-Patcher-macOS-${{ matrix.arch }} Restore-macOS-${{ matrix.arch }}
+          cd ..
+          ls -la "$ZIP_NAME"
+
+      - name: Upload Mac Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}-zip
+          path: Antigravity-zh-CN-*-macos-*-binaries.zip
+
+  publish-release:
+    needs: [build-windows, build-mac]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Display downloaded files
+        run: ls -la release-assets
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
