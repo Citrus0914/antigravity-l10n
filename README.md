@@ -54,37 +54,58 @@
 
 - **下载地址**：[前往 Releases 下载最新版本](https://github.com/Citrus0914/antigravity-l10n/releases/latest)
   - Windows 用户下载：`Antigravity-zh-CN-v*-windows-x64.zip`
-  - macOS (Apple Silicon M系列) 下载：`Antigravity-zh-CN-v*-macos-arm64-binaries.zip`
-  - macOS (Intel系列) 下载：`Antigravity-zh-CN-v*-macos-x86_64-binaries.zip`
+  - macOS (Apple Silicon M1/M2/M3/M4 系列) 下载：`Antigravity-zh-CN-v*-macos-arm64-binaries.zip`
+  - macOS (Intel 系列) 下载：`Antigravity-zh-CN-v*-macos-x86_64-binaries.zip`
 
-**【Windows 使用方法】**
+---
+
+#### 🪟 Windows 使用步骤
 1. 下载并解压压缩包；
 2. 双击运行 `Antigravity-Patcher.exe` 即可自动完成汉化并重启软件；
 3. 如需还原官方原版英文，双击运行 `Restore.exe` 即可。
 
-**【macOS 使用方法】**
-1. 下载对应架构的压缩包并解压；
-2. 打开终端（Terminal），进入解压目录，赋予执行权限后运行：
+---
+
+#### 🍎 macOS 使用步骤
+1. 根据 Mac 芯片类型下载对应压缩包并解压；
+2. 打开**终端 (Terminal)**，进入解压目录，赋予执行权限后运行补丁：
    ```bash
    chmod +x Antigravity-Patcher-macOS-*
    ./Antigravity-Patcher-macOS-*
    ```
-> 🍎 **macOS 提示**：若系统提示“无法验证开发者”，前往「系统设置 -> 隐私与安全性」向下滑动点击「仍要打开」，或在终端执行 `xattr -cr Antigravity-Patcher-macOS-*` 即可解除限制。
+   *(如需还原官方原版英文，同理在终端运行：`./Restore-macOS-*`)*
+
+> 💡 **macOS 常见问题速查**：
+> - **权限提示 `Permission denied`**：`/Applications` 属于受保护目录，若写入受限，在前置加上 `sudo` 运行即可：
+>   ```bash
+>   sudo ./Antigravity-Patcher-macOS-*
+>   ```
+> - **系统提示“无法验证开发者”或“文件已损坏”**：这是 macOS Gatekeeper 门禁机制拦截未购买苹果签名的开源软件。在终端执行以下命令即可解除拦截：
+>   ```bash
+>   # 解除补丁程序自身拦截
+>   xattr -cr ./Antigravity-Patcher-macOS-*
+>   # 若汉化后软件启动被系统拦截
+>   xattr -cr /Applications/Antigravity.app
+>   ```
+>   或者前往「系统设置 -> 隐私与安全性」，向下滑动并点击「仍要打开」。
 
 ---
 
-### 方式二：源码运行 ⭐ 推荐开发者与二开
+### 方式二：源码运行 ⭐ 推荐开发者与二次开发
 
-**克隆仓库：**
+需要本地安装 Python 3.8+ 环境：
+
 ```bash
 git clone https://github.com/Citrus0914/antigravity-l10n.git
 cd antigravity-l10n
-python Antigravity-Patcher.py
-```
 
-如需还原官方原版英文，运行：
-```bash
-python Restore.py
+# 执行汉化补丁 (Windows 运行 python，macOS 运行 python3)
+python Antigravity-Patcher.py   # Windows
+python3 Antigravity-Patcher.py  # macOS
+
+# 还原官方原版英文
+python Restore.py   # Windows
+python3 Restore.py  # macOS
 ```
 
 ---

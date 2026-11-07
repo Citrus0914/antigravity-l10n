@@ -54,37 +54,58 @@ No Python environment required:
 
 - **Download:** [Download latest release from GitHub Releases](https://github.com/Citrus0914/antigravity-l10n/releases/latest)
   - Windows: `Antigravity-zh-CN-v*-windows-x64.zip`
-  - macOS (Apple Silicon M-Series): `Antigravity-zh-CN-v*-macos-arm64-binaries.zip`
-  - macOS (Intel): `Antigravity-zh-CN-v*-macos-x86_64-binaries.zip`
+  - macOS (Apple Silicon M1/M2/M3/M4 Series): `Antigravity-zh-CN-v*-macos-arm64-binaries.zip`
+  - macOS (Intel Series): `Antigravity-zh-CN-v*-macos-x86_64-binaries.zip`
 
-**【For Windows】**
-1. Download and extract the archive;
+---
+
+#### 🪟 Windows Instructions
+1. Download and extract the zip archive;
 2. Double-click `Antigravity-Patcher.exe` to apply the patch;
-3. To revert to the official English version, double-click `Restore.exe`.
+3. To restore the official English version, double-click `Restore.exe`.
 
-**【For macOS】**
-1. Download the archive for your architecture and extract it;
-2. Open Terminal, navigate to the extracted folder, grant permissions and run:
+---
+
+#### 🍎 macOS Instructions
+1. Download the archive for your Mac architecture (Apple Silicon vs. Intel) and extract it;
+2. Open **Terminal**, navigate to the extracted directory, grant execution permissions and run:
    ```bash
    chmod +x Antigravity-Patcher-macOS-*
    ./Antigravity-Patcher-macOS-*
    ```
-> 🍎 **macOS Note**: If blocked by Gatekeeper ("developer cannot be verified"), go to "System Settings -> Privacy & Security", scroll down and click "Open Anyway", or run `xattr -cr Antigravity-Patcher-macOS-*` in Terminal.
+   *(To restore the official English version, run `./Restore-macOS-*`)*
+
+> 💡 **macOS Common Troubleshooting**:
+> - **`Permission denied`**: Since `/Applications` is a protected system directory, run with `sudo` if write permissions are restricted:
+>   ```bash
+>   sudo ./Antigravity-Patcher-macOS-*
+>   ```
+> - **"Developer cannot be verified" or "App is damaged"**: This is macOS Gatekeeper blocking unsigned open-source binaries. Run the following command in Terminal to clear quarantine attributes:
+>   ```bash
+>   # Clear quarantine for the patcher binary
+>   xattr -cr ./Antigravity-Patcher-macOS-*
+>   # If Antigravity fails to launch after patching
+>   xattr -cr /Applications/Antigravity.app
+>   ```
+>   Alternatively, go to "System Settings -> Privacy & Security", scroll down and click "Open Anyway".
 
 ---
 
 ### Option 2: Run from Source ⭐ Recommended for Developers
 
-**Clone the repository:**
+Requires local Python 3.8+ environment:
+
 ```bash
 git clone https://github.com/Citrus0914/antigravity-l10n.git
 cd antigravity-l10n
-python Antigravity-Patcher.py
-```
 
-To revert to English:
-```bash
-python Restore.py
+# Run patcher (Windows uses python, macOS uses python3)
+python Antigravity-Patcher.py   # Windows
+python3 Antigravity-Patcher.py  # macOS
+
+# Restore official English version
+python Restore.py   # Windows
+python3 Restore.py  # macOS
 ```
 
 ---
