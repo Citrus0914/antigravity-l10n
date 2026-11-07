@@ -36,7 +36,7 @@ This project uses innovative **Web Injection and Native ASAR Unpacking Technolog
 
 ### Option 1: Standalone Version (Windows / macOS) ⭐ Recommended for Most Users
 
-**Download:** [Download your OS version from Releases](https://github.com/Citrus0914/-/releases/latest) (Supports Windows x64, macOS Intel/Apple Silicon)
+**Download:** [Download your OS version from Releases](https://github.com/Citrus0914/antigravity-l10n/releases/latest) (Supports Windows x64, macOS Intel/Apple Silicon)
 
 **Features:**
 - ✅ Ready to use, **no Python environment required**
@@ -61,14 +61,14 @@ This project uses innovative **Web Injection and Native ASAR Unpacking Technolog
 
 **Clone the repository:**
 ```bash
-git clone https://github.com/Citrus0914/-.git
+git clone https://github.com/Citrus0914/antigravity-l10n.git
 cd Antigravity-zh-CN
 python Antigravity-Patcher.py
 ```
 
 **Or download source code archive:**
 
-Download `Source code (zip)` or `Source code (tar.gz)` from [Releases page](https://github.com/Citrus0914/-/releases/latest), extract and run `Antigravity-Patcher.py`.
+Download `Source code (zip)` or `Source code (tar.gz)` from [Releases page](https://github.com/Citrus0914/antigravity-l10n/releases/latest), extract and run `Antigravity-Patcher.py`.
 
 ## 💡 Technical Approach
 
