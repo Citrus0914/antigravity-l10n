@@ -52,3 +52,6 @@ desktop.ini
 
 # Cache and extracted bundles
 tools/latest_frontend.js
+
+# Scratch & temporary analysis scripts
+scratch/
