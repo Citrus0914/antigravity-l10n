@@ -1860,7 +1860,7 @@ DOM_TRANSLATOR_INJECTION = r"""
   function processNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
       // Avoid modifying code snippets or editor content
-      if (node.parentElement && node.parentElement.closest && node.parentElement.closest('pre, code, .monaco-editor')) {
+      if (node.parentElement && node.parentElement.closest && node.parentElement.closest('pre, code, .monaco-editor, .cm-editor, .token, .font-mono, [class*="diffEditor"], [class*="diff-line"]')) {
         return;
       }
       // 调度时间选择器中的介词 "at" 与 "on"
@@ -1981,6 +1981,7 @@ DOM_TRANSLATOR_INJECTION = r"""
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'CODE' || node.tagName === 'PRE') return;
+      if (node.classList && node.classList.contains && (node.classList.contains('monaco-editor') || node.classList.contains('cm-editor') || node.classList.contains('font-mono') || node.classList.contains('token'))) return;
       if (node.placeholder) {
         const translated = translateText(node.placeholder);
         if (translated !== node.placeholder) {
