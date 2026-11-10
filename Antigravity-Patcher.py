@@ -214,6 +214,14 @@ DOM_TRANSLATOR_INJECTION = r"""
     "By using this app, you agree to its ": "使用本应用即表示您同意其 ",
     "Terms of Service": "服务条款",
     "Configure agent execution, queued message delivery, and permissions.": "配置智能体执行、排队消息发送以及权限。",
+    "Interface Layout": "界面布局", "interface layout": "界面布局",
+    "Knowledge Work": "知识工作", "knowledge work": "知识工作",
+    "Simplified interface for research, writing, and everyday tasks.": "用于研究、写作和日常任务的简化界面。",
+    "Simplified interface for research, writing, and everyday tasks": "用于研究、写作和日常任务的简化界面",
+    "Software Engineering": "软件工程", "software engineering": "软件工程",
+    "Full interface for coding, developer tools, and managing agents.": "用于编码、开发者工具和管理智能体的完整界面。",
+    "Full interface for coding, developer tools, and managing agents": "用于编码、开发者工具和管理智能体的完整界面",
+    "Project 4K": "Project 4K",
     "Execution": "执行", "Agent Settings": "智能体设置", "Agent Behavior": "智能体行为",
     "File Permissions": "文件权限", "Network Permissions": "网络权限",
     "Global Permissions": "全局权限", "Tool Permissions": "工具权限",
@@ -1120,6 +1128,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Send messages with the keyboard": "使用键盘发送消息",
     "Choose between the Default and Project 4K experience.": "在默认体验和 Project 4K 体验之间进行选择。",
     "Project 4K interface without developer tooling.": "不带开发者工具的 Project 4K 界面。",
+    "Project 4K interface without developer tooling": "不带开发者工具的 Project 4K 界面",
+    "The full developer experience": "完整的开发者体验",
     "The full developer experience.": "完整的开发者体验。",
     // Browser & Voice Specific Fixes (内置浏览器与语音设置补漏)
     "Voice": "声音",
@@ -1251,7 +1261,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "global": "全局", "retry": "重试", "regenerate": "重新生成", "dismiss": "忽略",
     "allow": "允许", "ask": "询问", "deny": "拒绝",
     "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启",
-    "permission": "权限", "permissions": "权限", "recent": "最近"
+    "permission": "权限", "permissions": "权限", "recent": "最近",
+    "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
