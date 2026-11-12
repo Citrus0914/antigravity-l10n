@@ -330,6 +330,16 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Plugins": "插件", "Browse and enable plugins from the Build With Google catalog.": "浏览并启用“使用 Google 构建”目录中的插件。",
     "Cloud CLI MCP Server provides tools to run gcloud and bq CLIcommands in a remote sandbox environment": "Cloud CLI MCP 服务器提供了在远程沙盒环境中运行 gcloud 和 bq CLI 命令的工具。",
     "Browser Actuation Permissions": "浏览器操作权限", "Execute URLs": "URL 执行", "Allow/deny agent browser actuation access to specific URLs.": "允许/拒绝智能体对特定 URL 的浏览器操作权限。",
+    "Allow/deny agent browser actuation access to specific URLs": "允许/拒绝智能体对特定 URL 的浏览器操作权限",
+    "Download files": "下载文件", "download files": "下载文件",
+    "Allow/deny agent browser file downloads from specific sites.": "允许/拒绝智能体从特定站点下载文件。",
+    "Allow/deny agent browser file downloads from specific sites": "允许/拒绝智能体从特定站点下载文件",
+    "Organization Allowed Domains (Read-Only)": "组织允许的域名（只读）",
+    "These allowed domain rules are set by your organization's administrator and cannot be removed.": "这些允许的域名规则由您组织的管理员设置，无法移除。",
+    "These allowed domain rules are set by your organization's administrator and cannot be removed": "这些允许的域名规则由您组织的管理员设置，无法移除",
+    "Allowed Domains": "允许的域名", "Allowed domains": "允许的域名",
+    "Enter target...": "输入目标...", "Enter target": "输入目标",
+    "e.g., https://example.com": "例如：https://example.com", "e.g., example.com": "例如：example.com",
     "Media": "媒体", "Mentions": "提及", "Actions": "操作",
     "Enable Remote Control": "启用远程控制", "Work with local agents from another device.": "在其他设备上与本地智能体协同工作。",
     "Enter Queues after the turn": "Enter 键：在当前轮次后排队",
@@ -630,7 +640,14 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Request Review": "请求审阅", "Prompt for approval before running browser scripts.": "在运行浏览器脚本前提示批准。",
     "Allow full browser script execution without prompting.": "允许执行完整的浏览器脚本而不提示。",
     "Actuation Permissions": "操作权限", "Browser Actuation Rules": "浏览器操作规则",
-    "Configure allowed and denied URLs for browser actuation.": "配置允许和拒绝进行浏览器操作的 URL。",
+    "Configure allowed and denied URLs for browser actuation.": "配置允许和拒绝浏览器操作的 URL 规则。",
+    "Configure allowed and denied URLs for browser actuation": "配置允许和拒绝浏览器操作的 URL 规则",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "配置浏览器子智能体允许和拒绝访问的 URL。它在内置浏览器中运行，因此无需单独安装浏览器。",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed": "配置浏览器子智能体允许和拒绝访问的 URL。它在内置浏览器中运行，因此无需单独安装浏览器",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "配置浏览器子智能体（通过 /browser 调用）允许和拒绝访问的 URL。需要安装 ",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires ": "配置浏览器子智能体（通过 /browser 调用）允许和拒绝访问的 URL。需要安装 ",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "配置内置浏览器、链接打开方式以及浏览器子智能体偏好设置。",
+    "Configure built-in browser, link opening, and browser subagent preferences": "配置内置浏览器、链接打开方式以及浏览器子智能体偏好设置",
 
     // App Tab
     "App Settings": "应用设置", "Manage application settings.": "管理应用设置。",
@@ -1213,6 +1230,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "last workspace": "上次使用的工作区",
     "Browser Actuation Rules": "浏览器操作规则",
     "Configure allowed and denied URLs for browser actuation.": "配置允许和拒绝浏览器操作的 URL 规则。",
+    "Configure allowed and denied URLs for browser actuation": "配置允许和拒绝浏览器操作的 URL 规则",
     "Try out early-stage features before they ship. These may be changed or removed at any time. These features are experimental, and we make no guarantees about performance or functionality.": "在功能正式发布前抢先体验早期特性。这些功能可能随时变更或移除，属于实验性功能，我们不保证其稳定性或完整性。",
     "Screen Reader Mode": "屏幕阅读器模式",
     "Optimize the interface and terminal output for screen readers.": "针对屏幕阅读器优化界面和终端输出。",
@@ -1262,7 +1280,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "allow": "允许", "ask": "询问", "deny": "拒绝",
     "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启",
     "permission": "权限", "permissions": "权限", "recent": "最近",
-    "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程"
+    "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
