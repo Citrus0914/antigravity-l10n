@@ -416,7 +416,21 @@ DOM_TRANSLATOR_INJECTION = r"""
     "See Activity": "查看活动", "Get More AI Credits": "获取更多 AI 积分",
     "Available AI Credits:": "可用 AI 积分：",
     "Gemini Models": "Gemini 模型", "Claude and GPT models": "Claude 和 GPT 模型",
-    "Limited time": "限时", "Low": "低", "High": "高", "View Usage": "查看用量",
+    "Limited time": "限时", "Low": "低", "High": "高", "Extra": "超高", "Max": "最高", "View Usage": "查看用量",
+    "No Model Selected": "未选择模型",
+    "Best of N Models": "Best of N 模型",
+    "No models available": "暂无可用模型",
+    "Loading models...": "正在加载模型...",
+    "Add Model": "添加模型",
+    "Edit Model": "编辑模型",
+    "Custom models are only supported on Linux machines.": "自定义模型仅在 Linux 机器上受支持。",
+    "Custom models are only supported on Linux machines": "自定义模型仅在 Linux 机器上受支持",
+    "View plans": "查看套餐",
+    "Your quota for this model is running low.": "您该模型的配额即将耗尽。",
+    "Your quota for this model is running low": "您该模型的配额即将耗尽",
+    "Refresh quota and credits data": "刷新配额与积分数据",
+    "Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.": "可能会将常规步骤分流至 Hydrogen 的 Argon。保持同等 Argon 级质量，消耗更少 Token。",
+    "Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used": "可能会将常规步骤分流至 Hydrogen 的 Argon。保持同等 Argon 级质量，消耗更少 Token",
     "New": "新增", "new": "新增", "NEW": "新增",
     "Notice": "提示", "notice": "提示", "NOTICE": "提示",
     "Usage": "用量", "usage": "用量",
@@ -1260,7 +1274,16 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Loading plugins...": "正在加载插件...",
     "Refreshing...": "正在刷新...",
     "Manage Hooks": "管理钩子 (Hooks)",
-    "Configure hooks that run on agent lifecycle events.": "配置在智能体生命周期事件上运行的钩子。" 
+    "Configure hooks that run on agent lifecycle events.": "配置在智能体生命周期事件上运行的钩子。",
+
+    // Tip Cards (提示卡片)
+    "Dismiss Tip": "关闭提示",
+    "Explore the plugin marketplace": "探索插件市场",
+    "Browse the Marketplace": "浏览市场",
+    "Find plugins - bundles of skills, agents, MCP servers, UI extensions and more, and install them in one click.": "查找插件——包含技能、智能体、MCP 服务器、UI 扩展等的打包集合，并可一键安装。",
+    "Find plugins - bundles of skills, agents, MCP servers, UI extensions and more, and install them in one click": "查找插件——包含技能、智能体、MCP 服务器、UI 扩展等的打包集合，并可一键安装",
+    "New models have been enabled for you!": "已为您启用新模型！",
+    "Select a model in the model selector": "在模型选择器中选择模型"
   };
 
   const coreWords = {
@@ -1419,18 +1442,72 @@ DOM_TRANSLATOR_INJECTION = r"""
       let timeStr = m[1].replace(/days?/g, "天").replace(/hours?/g, "小时").replace(/minutes?/g, "分钟").replace(/,/g, "");
       return text.replace(trimmed, "您已使用部分五小时限额，它将在 " + timeStr + " 后完全重置。");
     }
-    if (text.indexOf("Resets in") !== -1) {
-      let m = trimmed.match(/^Resets in\s+(.+)$/i);
-      if (m) {
-        let timeStr = m[1]
-          .replace(/<1m/g, "不足 1 分钟")
-          .replace(/(\d+)\s*d/g, "$1 天")
-          .replace(/(\d+)\s*h/g, "$1 小时")
-          .replace(/(\d+)\s*m/g, "$1 分钟")
-          .replace(/\s+/g, " ")
-          .trim();
-        return text.replace(trimmed, timeStr + " 后重置");
+    if (text.toLowerCase().indexOf("resets in") !== -1) {
+      const formatResetDuration = (durStr) => durStr
+        .replace(/<1m/g, "不足 1 分钟")
+        .replace(/(\d+)\s*d/g, "$1 天")
+        .replace(/(\d+)\s*h/g, "$1 小时")
+        .replace(/(\d+)\s*m/g, "$1 分钟")
+        .replace(/(\d+)\s*s/g, "$1 秒")
+        .replace(/\s+/g, " ")
+        .trim();
+      if ((m = trimmed.match(/^(.+),\s*resets in\s+(.+)$/i))) {
+        let limitRaw = m[1].trim();
+        let limitCn = dictionary[limitRaw] || (limitRaw.toLowerCase().indexOf("resets in") === -1 ? translateText(limitRaw) : limitRaw);
+        return text.replace(trimmed, limitCn + "，" + formatResetDuration(m[2]) + " 后重置");
       }
+      if ((m = trimmed.match(/^Resets in\s+(.+)$/i))) {
+        return text.replace(trimmed, formatResetDuration(m[1]) + " 后重置");
+      }
+    }
+    if ((m = trimmed.match(/^Select model with (.+)$/i))) {
+      return text.replace(trimmed, "使用 " + m[1] + " 选择模型");
+    }
+    if ((m = trimmed.match(/^(\d+)\s+models selected$/i))) {
+      return text.replace(trimmed, m[1] + " 个已选模型");
+    }
+    const modelEffortMap = { "Low": "低", "Medium": "中", "High": "高", "Extra": "超高", "Max": "最高" };
+    if ((m = trimmed.match(/^(Low|Medium|High|Extra|Max)\s*\u00b7\s*(.+)$/))) {
+      return text.replace(trimmed, (modelEffortMap[m[1]] || m[1]) + " · " + m[2]);
+    }
+    if ((m = trimmed.match(/^Select model,\s*current:\s*(.+)$/i))) {
+      let cur = m[1].trim();
+      cur = dictionary[cur] || cur.replace(/\s+(Low|Medium|High|Extra|Max)(\s*\u00b7\s*.+)?$/, (_, e, rest) => " " + (modelEffortMap[e] || e) + (rest || ""));
+      return text.replace(trimmed, "选择模型，当前：" + cur);
+    }
+    if (text.indexOf("quota") !== -1 || text.indexOf("AI Credit") !== -1) {
+      let updated = trimmed;
+      updated = updated.replace(
+        /Your quota for (.+?) will reset on (.+?)\. Switch to another available model to continue\./g,
+        (_, mdl, dt) => (mdl === "this model" ? "您对此模型的配额" : "您对 " + mdl + " 的配额") + "将在 " + dt + " 重置。请切换至其他可用模型以继续。"
+      );
+      updated = updated.replace(
+        /Your quota for (.+?) has been reached\. Switch to another available model to continue\./g,
+        (_, mdl) => (mdl === "this model" ? "您对此模型的配额" : "您对 " + mdl + " 的配额") + "已用尽。请切换至其他可用模型以继续。"
+      );
+      updated = updated.replace(
+        /You need (at least \d+|more) AI Credits to send messages\.\s*To continue using (.+?) now, purchase more AI Credits\./g,
+        (_, amt, mdl) => {
+          let amtCn = amt === "more" ? "更多" : "至少 " + amt.slice(9);
+          let mdlCn = mdl === "this model" ? "此模型" : " " + mdl;
+          return "您需要" + amtCn + " AI 积分才能发送消息。要立即继续使用" + mdlCn + "，请购买更多 AI 积分。";
+        }
+      );
+      updated = updated.replace(
+        /\s*Your plan's baseline quota will refresh on (.+?)\./g,
+        " 您套餐的基础配额将在 $1 刷新。"
+      );
+      updated = updated.replace(
+        /\s*To continue using this model now, enable AI Credit overages\./g,
+        " 要立即继续使用此模型，请启用 AI 积分超额使用。"
+      );
+      if (updated !== trimmed) {
+        return text.replace(trimmed, updated.trim());
+      }
+    }
+    if ((m = trimmed.match(/^(.+?)\s+that may offload routine steps to\s+(.+?)\.\s*Same\s+(.+?)-level quality,\s*fewer tokens used\.?$/i))) {
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, "可能会将常规步骤分流至 " + m[2] + " 的 " + m[1] + "。保持同等 " + m[3] + " 级质量，消耗更少 Token" + dot);
     }
     if ((m = trimmed.match(/^(\d+)\s*([smhd])\s+limit$/i))) {
       let num = m[1];
