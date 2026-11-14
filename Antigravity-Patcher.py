@@ -1143,6 +1143,23 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Open Conversation in New Tab": "在新标签页中打开对话",
     "Toggle Maximize Side Panel": "切换最大化侧边面板",
     "Toggle Side Panel": "切换侧边面板",
+    "Submit Prompt (Alternate to Enter)": "提交提示词（替代 Enter 键）",
+    "Enter always submits. This adds a second shortcut.": "Enter 键始终提交。此项用于添加第二个快捷键。",
+    "Enter always submits. This adds a second shortcut": "Enter 键始终提交。此项用于添加第二个快捷键",
+    "Jump to Previous Prompt": "跳转到上一条提示词",
+    "Jump to Next Prompt": "跳转到下一条提示词",
+    "Pin / Unpin Conversation": "置顶 / 取消置顶对话",
+    "Press keys...": "请按键...",
+    "Stop Editing": "停止编辑",
+    "Stop editing": "停止编辑",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "此快捷键已被浏览器标签页保留，在 Web 模式下可能无法触发。在桌面端中心或已安装的 PWA 中可正常使用。",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA": "此快捷键已被浏览器标签页保留，在 Web 模式下可能无法触发。在桌面端中心或已安装的 PWA 中可正常使用",
+    "Toggle Word Wrap": "切换自动换行",
+    "Connect to SSH Host…": "连接到 SSH 主机…",
+    "Connect to SSH Host...": "连接到 SSH 主机...",
+    "Stop SSH Server…": "停止 SSH 服务器…",
+    "Stop SSH Server...": "停止 SSH 服务器...",
+    "Switch to This Computer": "切换到此计算机",
     // Appearance & Chat Settings (外观与对话设置补漏)
     "Conversation Steps": "对话步骤",
     "Choose how much detail is shown during a conversation.": "选择对话期间显示的详细程度。",
@@ -1931,7 +1948,8 @@ DOM_TRANSLATOR_INJECTION = r"""
       return text.replace(trimmed, "正在为 " + cmdCn + " 录制快捷键。按键进行绑定，按 Enter 保存，按 Escape 取消。");
     }
     if ((m = trimmed.match(/^Conflict: also assigned to (.+)$/i))) {
-      return text.replace(trimmed, "冲突：已同时分配给 " + m[1]);
+      let targets = dictionary[m[1]] || m[1].split(/,\s*/).map(t => dictionary[t] || t).join("、");
+      return text.replace(trimmed, "冲突：已同时分配给 " + targets);
     }
     if ((m = trimmed.match(/^Conflicts with "([^"]+)" \(press Enter to replace\)$/i))) {
       let cmdCn = dictionary[m[1]] || m[1];
