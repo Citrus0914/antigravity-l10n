@@ -249,7 +249,28 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Outside of folders file access policy": "工作文件夹外文件访问策略",
     "Configures how the agent tries to access files outside of its working folders.": "配置智能体尝试访问其工作文件夹外部文件的方式。",
     "Configures how the agent tries to access files outside of its working folders": "配置智能体尝试访问其工作文件夹外部文件的方式",
+    "Terminal sandbox is not supported in this environment.": "当前环境不支持终端沙盒。",
     "Terminal sandbox is not supported in this environment": "当前环境不支持终端沙盒",
+    "Enable Terminal Sandbox": "启用终端沙盒",
+    "Run terminal commands with sandbox restrictions.": "在沙盒限制下运行终端命令。",
+    "Run terminal commands with sandbox restrictions": "在沙盒限制下运行终端命令",
+    "Sandbox Allow Network": "允许沙盒访问网络",
+    "Allow sandboxed commands to make network requests.": "允许沙盒中的命令发起网络请求。",
+    "Allow sandboxed commands to make network requests": "允许沙盒中的命令发起网络请求",
+    "Require Review": "需要审阅",
+    "Remote Permissions": "远程权限",
+    "Checking availability…": "正在检查可用性…",
+    "Checking availability...": "正在检查可用性...",
+    "Only this conversation uses this preset.": "仅当前对话使用此预设。",
+    "Only this conversation uses this preset": "仅当前对话使用此预设",
+    "Your Remote setting": "您的远程设置",
+    "Your This Computer setting": "您的此电脑设置",
+    "Project setting": "项目设置",
+    "Workspace setting": "工作区设置",
+    "Default and Auto need the terminal sandbox, which isn't available on this host.": "默认和自动模式需要终端沙盒，但此主机上不可用。",
+    "Default and Auto need the terminal sandbox, which isn't available on this host": "默认和自动模式需要终端沙盒，但此主机上不可用",
+    "Default needs the terminal sandbox, which isn't available on this host.": "默认模式需要终端沙盒，但此主机上不可用。",
+    "Auto needs the terminal sandbox, which isn't available on this host.": "自动模式需要终端沙盒，但此主机上不可用。",
     "Your agent’s ability to execute commands is also controlled by enterprise security policies.": "智能体执行命令的能力同样受企业安全策略控制。",
     "Your agent's ability to execute commands is also controlled by enterprise security policies.": "智能体执行命令的能力同样受企业安全策略控制。",
     "Disabled by organization policy": "因组织策略已禁用",
@@ -1858,6 +1879,16 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^This (project|workspace) overrides your global permission settings\.?$/i))) {
       let typeStr = m[1].toLowerCase() === "project" ? "此项目" : "此工作区";
       return text.replace(trimmed, typeStr + "覆盖了您的全局权限设置。");
+    }
+    if ((m = trimmed.match(/^(.+?)\s+needs?\s+the terminal sandbox,\s*which isn't available on this host\.?$/i))) {
+      let items = m[1].split(/\s+and\s+/i).map(s => dictionary[s.trim()] || s.trim());
+      let dot = trimmed.endsWith(".") ? "。" : "";
+      return text.replace(trimmed, items.join("和") + "模式需要终端沙盒，但此主机上不可用" + dot);
+    }
+    if ((m = trimmed.match(/^Agent permissions preset:\s*([^,]+),\s*(.+)$/i))) {
+      let cur = m[1].trim();
+      let transCur = dictionary[cur] || cur;
+      return "智能体权限预设：" + transCur + "，" + translateText(m[2].trim());
     }
     if ((m = trimmed.match(/^Agent permissions preset selector,\s*current:\s*(.+)$/i))) {
       let cur = m[1].trim();
