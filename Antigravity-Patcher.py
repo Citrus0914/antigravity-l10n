@@ -1321,7 +1321,56 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Find plugins - bundles of skills, agents, MCP servers, UI extensions and more, and install them in one click.": "查找插件——包含技能、智能体、MCP 服务器、UI 扩展等的打包集合，并可一键安装。",
     "Find plugins - bundles of skills, agents, MCP servers, UI extensions and more, and install them in one click": "查找插件——包含技能、智能体、MCP 服务器、UI 扩展等的打包集合，并可一键安装",
     "New models have been enabled for you!": "已为您启用新模型！",
-    "Select a model in the model selector": "在模型选择器中选择模型"
+    "Select a model in the model selector": "在模型选择器中选择模型",
+
+    // Aux Pane New Tab, Quick Open & Side Question (辅助窗格新标签页、快捷搜索与侧边提问)
+    "Search or enter a URL": "搜索或输入 URL",
+    "Search tabs, files and more": "搜索标签页、文件等",
+    "Search for content to open": "搜索要打开的内容",
+    "No results": "无结果",
+    "Search results": "搜索结果",
+    "Customize Sections": "自定义版块",
+    "Open File": "打开文件",
+    "Open Tabs": "已打开的标签页",
+    "Subagents": "子智能体",
+    "Documents": "文档",
+    "Links": "链接",
+    "Background Tasks": "后台任务",
+    "Web": "网页",
+    "Modified Files": "已修改的文件",
+    "Uploads": "上传内容",
+    "See all": "查看全部",
+    "See less": "收起",
+    "Keep Open": "保持打开",
+    "Pin Tab": "固定标签页",
+    "Unpin Tab": "取消固定标签页",
+    "Close Other Tabs": "关闭其他标签页",
+    "Close Tabs to the Left": "关闭左侧标签页",
+    "Close Tabs to the Right": "关闭右侧标签页",
+    "Side Question": "侧边提问",
+    "Side question": "侧边提问",
+    "Side Questions": "侧边提问",
+    "New Side Question": "新建侧边提问",
+    "Side Question:": "侧边提问：",
+    "Send a message in the main conversation first to start a side question": "请先在主对话中发送消息，然后再发起侧边提问",
+    "Ask a side question without interrupting the main conversation": "在不中断主对话的情况下发起侧边提问",
+    "Promote to Conversation": "升级为主对话",
+    "Promote to conversation": "升级为主对话",
+    "Cannot promote during Battle Mode — end the battle first": "对战模式下无法升级为主对话——请先结束对战",
+    "Cannot promote a subagent's side question": "无法将子智能体的侧边提问升级为主对话",
+    "Cannot promote while side question is running": "侧边提问运行期间无法升级为主对话",
+    "Stop Side Question": "停止侧边提问",
+    "Stop side question": "停止侧边提问",
+    "Delete Side Question": "删除侧边提问",
+    "Delete side question": "删除侧边提问",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "您确定要删除此侧边提问吗？此操作无法撤销。",
+    "Are you sure you want to delete this side question? This action cannot be undone": "您确定要删除此侧边提问吗？此操作无法撤销",
+    "Failed to send side question": "发送侧边提问失败",
+    "Failed to start side question": "启动侧边提问失败",
+    "Side question answered.": "侧边提问已回答。",
+    "Side question answered": "侧边提问已回答",
+    "Quote": "引用",
+    "Ask /btw": "侧边提问 /btw"
   };
 
   const coreWords = {
@@ -1341,7 +1390,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "allow": "允许", "ask": "询问", "deny": "拒绝",
     "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启",
     "permission": "权限", "permissions": "权限", "recent": "最近",
-    "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件"
+    "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件",
+    "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1992,6 +2042,41 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^No connectors match [“\u201c](.+)[”\u201d]$/i))) {
       return text.replace(trimmed, "未找到匹配“" + m[1] + "”的连接器");
     }
+    if ((m = trimmed.match(/^Search Google for "(.+)"$/))) {
+      return text.replace(trimmed, "使用 Google 搜索“" + m[1] + "”");
+    }
+    if ((m = trimmed.match(/^Open (https?:\/\/.+|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:\/.*)?|localhost(?::\d+)?(?:\/.*)?)$/))) {
+      return text.replace(trimmed, "打开 " + m[1]);
+    }
+    if ((m = trimmed.match(/^Side Question:\s*(.+)$/))) {
+      return text.replace(trimmed, "侧边提问：" + m[1]);
+    }
+    if ((m = trimmed.match(/^Edit side question title:\s*(.+)$/i))) {
+      return text.replace(trimmed, "编辑侧边提问标题：" + m[1]);
+    }
+    if ((m = trimmed.match(/^Delete side question:\s*(.+)$/i))) {
+      return text.replace(trimmed, "删除侧边提问：" + m[1]);
+    }
+    if ((m = trimmed.match(/^Side question failed:\s*(.+)$/i))) {
+      return text.replace(trimmed, "侧边提问失败：" + m[1]);
+    }
+    if ((m = trimmed.match(/^(\d+)\s+Side Questions?$/))) {
+      return text.replace(trimmed, m[1] + " 个侧边提问");
+    }
+    if ((m = trimmed.match(/^View (\d+) side questions?$/i))) {
+      return text.replace(trimmed, "查看 " + m[1] + " 个侧边提问");
+    }
+    if ((m = trimmed.match(/^Started (during|from) [“\u201c"](.+)[”\u201d"]$/))) {
+      return text.replace(trimmed, (m[1] === "during" ? "在“" : "从“") + m[2] + (m[1] === "during" ? "”期间发起" : "”发起"));
+    }
+    if ((m = trimmed.match(/^Started (during|from) the (main|subagent) conversation$/))) {
+      let scope = m[2] === "main" ? "主对话" : "子智能体对话";
+      return text.replace(trimmed, (m[1] === "during" ? "在" : "从") + scope + (m[1] === "during" ? "期间发起" : "发起"));
+    }
+    if ((m = trimmed.match(/^(.+)\.\s*Show in (main|subagent) conversation$/))) {
+      let scope = m[2] === "main" ? "主对话" : "子智能体对话";
+      return text.replace(trimmed, translateText(m[1]) + "。在" + scope + "中显示");
+    }
 
     // Prefix Rules Matching
     for (let i = 0; i < textPrefixRules.length; i++) {
@@ -2010,6 +2095,37 @@ DOM_TRANSLATOR_INJECTION = r"""
     }
     
     return text;
+  }
+
+  function isProtectedElement(node) {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+    if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'CODE' || node.tagName === 'PRE') return true;
+    if (node.classList && node.classList.contains && (node.classList.contains('monaco-editor') || node.classList.contains('cm-editor') || node.classList.contains('font-mono') || node.classList.contains('token'))) return true;
+    if (node.closest && node.closest('pre, code, .monaco-editor, .cm-editor, .token, .font-mono, [class*="diffEditor"], [class*="diff-line"]')) return true;
+    return false;
+  }
+
+  function translateElementAttribute(node, attrName) {
+    if (!node || isProtectedElement(node)) return;
+    if ((!attrName || attrName === 'placeholder') && node.placeholder) {
+      const translated = translateText(node.placeholder);
+      if (translated !== node.placeholder) {
+        node.placeholder = translated;
+      }
+    }
+    if ((!attrName || attrName === 'title') && node.title) {
+      const translated = translateText(node.title);
+      if (translated !== node.title) {
+        node.title = translated;
+      }
+    }
+    if ((!attrName || attrName === 'aria-label') && node.getAttribute && node.getAttribute('aria-label')) {
+      const ariaLabel = node.getAttribute('aria-label');
+      const translated = translateText(ariaLabel);
+      if (translated !== ariaLabel) {
+        node.setAttribute('aria-label', translated);
+      }
+    }
   }
 
   function processNode(node) {
@@ -2135,27 +2251,8 @@ DOM_TRANSLATOR_INJECTION = r"""
         node.textContent = translated;
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'CODE' || node.tagName === 'PRE') return;
-      if (node.classList && node.classList.contains && (node.classList.contains('monaco-editor') || node.classList.contains('cm-editor') || node.classList.contains('font-mono') || node.classList.contains('token'))) return;
-      if (node.placeholder) {
-        const translated = translateText(node.placeholder);
-        if (translated !== node.placeholder) {
-          node.placeholder = translated;
-        }
-      }
-      if (node.title) {
-        const translated = translateText(node.title);
-        if (translated !== node.title) {
-          node.title = translated;
-        }
-      }
-      if (node.getAttribute && node.getAttribute('aria-label')) {
-        const ariaLabel = node.getAttribute('aria-label');
-        const translated = translateText(ariaLabel);
-        if (translated !== ariaLabel) {
-          node.setAttribute('aria-label', translated);
-        }
-      }
+      if (isProtectedElement(node)) return;
+      translateElementAttribute(node);
       // Recursively process child nodes
       Array.from(node.childNodes).forEach(processNode);
     }
@@ -2169,6 +2266,8 @@ DOM_TRANSLATOR_INJECTION = r"""
         });
       } else if (mutation.type === 'characterData') {
         processNode(mutation.target);
+      } else if (mutation.type === 'attributes') {
+        translateElementAttribute(mutation.target, mutation.attributeName);
       }
     });
   });
@@ -2178,7 +2277,9 @@ DOM_TRANSLATOR_INJECTION = r"""
     observer.observe(document.body, {
       childList: true,
       subtree: true,
-      characterData: true
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['placeholder', 'title', 'aria-label']
     });
   });
 
