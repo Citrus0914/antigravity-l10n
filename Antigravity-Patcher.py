@@ -604,7 +604,11 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Open Conversation": "打开对话",
     "Mark as Read": "标记为已读", "Mark as Unread": "标记为未读",
     "Archive / Restore": "归档 / 恢复",
-    "Terminal: Add to Chat": "终端：添加到对话",
+    "Terminal: Add to Chat": "终端：添加到对话", "terminal: add to chat": "终端：添加到对话",
+    "Terminal: Select All": "终端：全选", "Terminal: Select all": "终端：全选", "terminal: select all": "终端：全选", "Terminal: select all": "终端：全选",
+    "Terminal command auto execution": "终端命令自动执行", "Terminal commands": "终端命令",
+    "Terminal window": "终端窗口", "Toggle Terminal Panel": "切换终端面板", "Standalone Terminals": "独立终端",
+    "Kill Terminal": "终止终端", "Insert in Terminal": "插入到终端", "Insert in terminal": "插入到终端", "Attach terminal output": "附加终端输出",
     "Refresh gcert Credentials": "刷新 gcert 凭据",
     "Copy Conversation Markdown": "复制对话 Markdown",
     "Restart Main Language Server": "重启主语言服务器",
@@ -1428,7 +1432,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件",
     "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算",
     "tool permissions": "工具权限", "network access rules": "网络访问规则", "input box": "输入框", "queued messages": "排队消息", "network access": "网络访问",
-    "side question selection": "在选区上侧边提问"
+    "side question selection": "在选区上侧边提问",
+    "terminal: select all": "终端：全选", "terminal: add to chat": "终端：添加到对话"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
