@@ -451,7 +451,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "See Activity": "查看活动", "Get More AI Credits": "获取更多 AI 积分",
     "Available AI Credits:": "可用 AI 积分：",
     "Gemini Models": "Gemini 模型", "Claude and GPT models": "Claude 和 GPT 模型",
-    "Limited time": "限时", "Low": "低", "High": "高", "Extra": "超高", "Max": "最高", "View Usage": "查看用量",
+    "Limited time": "限时", "Low": "低", "High": "高", "Extra High": "超高", "Extra high": "超高", "extra high": "超高", "Extra": "超高", "Max": "最高", "View Usage": "查看用量",
     "Off": "关闭", "Minimal": "最低", "minimal": "最低",
     "Thinking effort": "思考强度", "Thinking Effort": "思考强度", "thinking effort": "思考强度",
     "Thinking effort:": "思考强度：", "Thinking Effort:": "思考强度：", "thinking effort:": "思考强度：",
@@ -479,6 +479,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Refresh quota and credits data": "刷新配额与积分数据",
     "Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.": "可能会将常规步骤分流至 Hydrogen 的 Argon。保持同等 Argon 级质量，消耗更少 Token。",
     "Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used": "可能会将常规步骤分流至 Hydrogen 的 Argon。保持同等 Argon 级质量，消耗更少 Token",
+    "Offloads routine steps to a faster executor. Same quality, fewer tokens used.": "将常规步骤分流至更快的执行器。保持同等质量，消耗更少 Token。",
+    "Offloads routine steps to a faster executor. Same quality, fewer tokens used": "将常规步骤分流至更快的执行器。保持同等质量，消耗更少 Token",
+    "Orchestrator": "编排器",
+    "The Orchestrator's own planner": "编排器自带规划器",
+    "Orchestrator Settings": "编排器设置",
+    "Choose the models Orchestrator uses. A larger, smarter orchestrator model with a faster, cheaper executor gives high quality for fewer tokens.": "选择编排器使用的模型。用更强大、更智能的编排器模型搭配更快、更经济的执行器，可在消耗更少 Token 的情况下保持高质量。",
+    "Choose the models Orchestrator uses. A larger, smarter orchestrator model with a faster, cheaper executor gives high quality for fewer tokens": "选择编排器使用的模型。用更强大、更智能的编排器模型搭配更快、更经济的执行器，可在消耗更少 Token 的情况下保持高质量",
+    "Orchestrator Model": "编排器模型",
+    "Plans the work, makes design decisions, and reviews the result. Pick a top-tier model. You can also pick one per conversation from the Orchestrator row in the model menu.": "规划工作、做出设计决策并审查结果。请选择顶级模型。您也可以在模型菜单的“编排器”行中为每个对话单独选择。",
+    "Plans the work, makes design decisions, and reviews the result. Pick a top-tier model. You can also pick one per conversation from the Orchestrator row in the model menu": "规划工作、做出设计决策并审查结果。请选择顶级模型。您也可以在模型菜单的“编排器”行中为每个对话单独选择",
+    "Executor Model": "执行器模型",
+    "Carries out the plan: searches, edits, builds, and tests. Pick a faster, cheaper model.": "执行计划：搜索、编辑、构建和测试。请选择更快、更经济的模型。",
+    "Carries out the plan: searches, edits, builds, and tests. Pick a faster, cheaper model": "执行计划：搜索、编辑、构建和测试。请选择更快、更经济的模型",
     "New": "新增", "new": "新增", "NEW": "新增",
     "Notice": "提示", "notice": "提示", "NOTICE": "提示",
     "Usage": "用量", "usage": "用量",
@@ -1433,7 +1446,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算",
     "tool permissions": "工具权限", "network access rules": "网络访问规则", "input box": "输入框", "queued messages": "排队消息", "network access": "网络访问",
     "side question selection": "在选区上侧边提问",
-    "terminal: select all": "终端：全选", "terminal: add to chat": "终端：添加到对话"
+    "terminal: select all": "终端：全选", "terminal: add to chat": "终端：添加到对话",
+    "extra high": "超高", "orchestrator settings": "编排器设置", "orchestrator model": "编排器模型", "executor model": "执行器模型"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1533,6 +1547,10 @@ DOM_TRANSLATOR_INJECTION = r"""
     ["See our", "查看我们的 "]
   ];
 
+  const modelEffortMap = { "Off": "关闭", "Minimal": "最低", "Low": "低", "Medium": "中", "High": "高", "Extra High": "超高", "Extra": "超高", "Max": "最高" };
+  const EFFORT_SUFFIX_RE = /\s+(Off|Minimal|Low|Medium|High|Extra High|Extra|Max)(\s*\u00b7\s*.+)?$/;
+  const translateEffortSuffix = (label) => label.replace(EFFORT_SUFFIX_RE, (_, e, rest) => " " + (modelEffortMap[e] || e) + (rest || ""));
+
   function translateText(text) {
     if (!text || typeof text !== 'string') return text;
     let trimmed = text.trim();
@@ -1596,13 +1614,18 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(\d+)\s+models selected$/i))) {
       return text.replace(trimmed, m[1] + " 个已选模型");
     }
-    const modelEffortMap = { "Off": "关闭", "Minimal": "最低", "Low": "低", "Medium": "中", "High": "高", "Extra": "超高", "Max": "最高" };
-    if ((m = trimmed.match(/^(Off|Minimal|Low|Medium|High|Extra|Max)\s*\u00b7\s*(.+)$/))) {
+    if ((m = trimmed.match(/^(Off|Minimal|Low|Medium|High|Extra High|Extra|Max)\s*\u00b7\s*(.+)$/))) {
       return text.replace(trimmed, (modelEffortMap[m[1]] || m[1]) + " · " + m[2]);
+    }
+    if (/^(?:Gemini|Claude|GPT-OSS|GPT)\s+.+/.test(trimmed) && EFFORT_SUFFIX_RE.test(trimmed)) {
+      return text.replace(trimmed, translateEffortSuffix(trimmed));
     }
     if ((m = trimmed.match(/^Select model,\s*current:\s*(.+)$/i))) {
       let cur = m[1].trim();
-      cur = dictionary[cur] || cur.replace(/\s+(Off|Minimal|Low|Medium|High|Extra|Max)(\s*\u00b7\s*.+)?$/, (_, e, rest) => " " + (modelEffortMap[e] || e) + (rest || ""));
+      if (cur.startsWith("Orchestrator ")) {
+        cur = "编排器 " + cur.slice("Orchestrator ".length);
+      }
+      cur = dictionary[cur] || translateEffortSuffix(cur);
       return text.replace(trimmed, "选择模型，当前：" + cur);
     }
     if (text.indexOf("Controls how much time and quota") !== -1 || text.indexOf("spends reasoning before responding") !== -1) {
@@ -2273,6 +2296,14 @@ DOM_TRANSLATOR_INJECTION = r"""
       if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'delete-project-button') {
         if (node.textContent === "Delete ") {
           node.textContent = "删除";
+          return;
+        }
+      }
+      if (node.parentElement && node.parentElement.getAttribute && node.parentElement.getAttribute('data-testid') === 'model-selector-orchestrator-model') {
+        const curText = node.textContent.trim();
+        const translatedEffort = translateEffortSuffix(curText);
+        if (translatedEffort !== curText) {
+          node.textContent = node.textContent.replace(curText, translatedEffort);
           return;
         }
       }
