@@ -572,6 +572,13 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Quote Selection": "引用选区",
     "Open in Code Search": "在代码搜索中打开",
     "Comment on Selection": "在选区上评论",
+    "Side Question Selection": "在选区上侧边提问", "Side question selection": "在选区上侧边提问", "side question selection": "在选区上侧边提问",
+    "Side Question on Selection": "在选区上侧边提问",
+    "Minimize side question": "最小化侧边提问", "Next side question": "下一个侧边提问", "Previous side question": "上一个侧边提问",
+    "Resize side question panel": "调整侧边提问面板大小", "New Side Question": "新建侧边提问",
+    "This side question isn't available in this conversation.": "此侧边提问在此对话中不可用。",
+    "This side question isn't available in this conversation": "此侧边提问在此对话中不可用",
+    "Insert into main conversation": "插入到主对话",
     "Start Voice Recording": "开始语音录制", "Stop Voice Recording": "停止语音录制",
     "Toggle Terminal": "切换终端",
     "Toggle File Viewer": "切换文件查看器",
@@ -1420,7 +1427,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件",
     "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件",
     "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算",
-    "tool permissions": "工具权限", "network access rules": "网络访问规则", "input box": "输入框", "queued messages": "排队消息", "network access": "网络访问"
+    "tool permissions": "工具权限", "network access rules": "网络访问规则", "input box": "输入框", "queued messages": "排队消息", "network access": "网络访问",
+    "side question selection": "在选区上侧边提问"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
