@@ -438,6 +438,19 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Available AI Credits:": "可用 AI 积分：",
     "Gemini Models": "Gemini 模型", "Claude and GPT models": "Claude 和 GPT 模型",
     "Limited time": "限时", "Low": "低", "High": "高", "Extra": "超高", "Max": "最高", "View Usage": "查看用量",
+    "Off": "关闭", "Minimal": "最低", "minimal": "最低",
+    "Thinking effort": "思考强度", "Thinking Effort": "思考强度", "thinking effort": "思考强度",
+    "Thinking effort:": "思考强度：", "Thinking Effort:": "思考强度：", "thinking effort:": "思考强度：",
+    "Reasoning effort": "思考强度", "Reasoning Effort": "思考强度", "reasoning effort": "思考强度",
+    "Reasoning effort:": "思考强度：", "Reasoning Effort:": "思考强度：", "reasoning effort:": "思考强度：",
+    "Thinking budget": "思考预算", "Thinking Budget": "思考预算", "thinking budget": "思考预算",
+    "Thinking level": "思考级别", "Thinking Level": "思考级别", "thinking level": "思考级别",
+    "Controls how much time and quota the model spends reasoning before responding. Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use.": "控制模型在做出响应前用于推理的时间和配额。更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。",
+    "Controls how much time and quota the model spends reasoning before responding. Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use": "控制模型在做出响应前用于推理的时间和配额。更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额",
+    "Controls how much time and quota the model spends reasoning before responding.": "控制模型在做出响应前用于推理的时间和配额。",
+    "Controls how much time and quota the model spends reasoning before responding": "控制模型在做出响应前用于推理的时间和配额",
+    "Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use.": "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。",
+    "Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use": "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额",
     "No Model Selected": "未选择模型",
     "Best of N Models": "Best of N 模型",
     "No models available": "暂无可用模型",
@@ -1391,7 +1404,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "automation": "自动任务", "untitled": "未命名", "hours": "小时", "automations": "自动任务", "schedule": "计划", "scheduled": "已计划", "trigger": "触发器", "triggers": "触发器", "runs": "运行记录", "paused": "已暂停", "resume": "恢复", "pause": "暂停", "restart": "重启",
     "permission": "权限", "permissions": "权限", "recent": "最近",
     "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件",
-    "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件"
+    "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件",
+    "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1554,14 +1568,30 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(\d+)\s+models selected$/i))) {
       return text.replace(trimmed, m[1] + " 个已选模型");
     }
-    const modelEffortMap = { "Low": "低", "Medium": "中", "High": "高", "Extra": "超高", "Max": "最高" };
-    if ((m = trimmed.match(/^(Low|Medium|High|Extra|Max)\s*\u00b7\s*(.+)$/))) {
+    const modelEffortMap = { "Off": "关闭", "Minimal": "最低", "Low": "低", "Medium": "中", "High": "高", "Extra": "超高", "Max": "最高" };
+    if ((m = trimmed.match(/^(Off|Minimal|Low|Medium|High|Extra|Max)\s*\u00b7\s*(.+)$/))) {
       return text.replace(trimmed, (modelEffortMap[m[1]] || m[1]) + " · " + m[2]);
     }
     if ((m = trimmed.match(/^Select model,\s*current:\s*(.+)$/i))) {
       let cur = m[1].trim();
-      cur = dictionary[cur] || cur.replace(/\s+(Low|Medium|High|Extra|Max)(\s*\u00b7\s*.+)?$/, (_, e, rest) => " " + (modelEffortMap[e] || e) + (rest || ""));
+      cur = dictionary[cur] || cur.replace(/\s+(Off|Minimal|Low|Medium|High|Extra|Max)(\s*\u00b7\s*.+)?$/, (_, e, rest) => " " + (modelEffortMap[e] || e) + (rest || ""));
       return text.replace(trimmed, "选择模型，当前：" + cur);
+    }
+    if (text.indexOf("Controls how much time and quota") !== -1 || text.indexOf("spends reasoning before responding") !== -1) {
+      let updated = text;
+      updated = updated.replace(
+        /Controls how much time and quota the model spends reasoning before responding\.\s*Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use\.?/g,
+        "控制模型在做出响应前用于推理的时间和配额。更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。"
+      );
+      updated = updated.replace(
+        /Controls how much time and quota the model spends reasoning before responding\.?/g,
+        "控制模型在做出响应前用于推理的时间和配额。"
+      );
+      updated = updated.replace(
+        /Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use\.?/g,
+        "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。"
+      );
+      return updated;
     }
     if (text.indexOf("quota") !== -1 || text.indexOf("AI Credit") !== -1) {
       let updated = trimmed;
