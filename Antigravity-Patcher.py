@@ -224,7 +224,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Project 4K": "Project 4K",
     "Execution": "执行", "Agent Settings": "智能体设置", "Agent Behavior": "智能体行为",
     "File Permissions": "文件权限", "Network Permissions": "网络权限",
-    "Global Permissions": "全局权限", "Tool Permissions": "工具权限",
+    "Global Permissions": "全局权限", "Tool Permissions": "工具权限", "Tool permissions": "工具权限", "tool permissions": "工具权限",
     "Permissions": "权限", "permissions": "权限", "Permission": "权限", "permission": "权限",
     "Cloud Permissions": "云端权限",
     "Configure what the agent can do in local and remote conversations.": "配置智能体在本地和远程对话中可以执行的操作。",
@@ -293,7 +293,21 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Whether the agent asks you to review its documents": "智能体是否请求您审阅其文档",
     "Untitled project": "未命名项目", "Inherit Global": "继承全局",
     "managed by your organization": "由您的组织管理",
-    "Queued Messages": "排队消息", "Configure when follow-up messages are sent.": "配置发送后续消息的时机。",
+    "Queued Messages": "排队消息", "Queued messages": "排队消息", "queued messages": "排队消息",
+    "Configure when follow-up messages are sent.": "配置发送后续消息的时机。",
+    "Configure when follow-up messages are sent": "配置发送后续消息的时机",
+    "Sends after agent finishes working": "在智能体完成工作后发送",
+    "Collapse queued messages": "折叠排队消息", "Expand queued messages": "展开排队消息",
+    "Input Box": "输入框", "Input box": "输入框", "input box": "输入框",
+    "Choose which key sends a message in the chat composer.": "选择在对话输入框中发送消息的按键。",
+    "Choose which key sends a message in the chat composer": "选择在对话输入框中发送消息的按键",
+    "Press Ctrl+Enter to send, Enter for a new line.": "按 Ctrl+Enter 发送，按 Enter 换行。",
+    "Press Ctrl+Enter to send, Enter for a new line": "按 Ctrl+Enter 发送，按 Enter 换行",
+    "Press Enter to send, Shift+Enter for a new line.": "按 Enter 发送，按 Shift+Enter 换行。",
+    "Press Enter to send, Shift+Enter for a new line": "按 Enter 发送，按 Shift+Enter 换行",
+    "Messages now send immediately. Configure in": "消息现将立即发送。请在以下位置配置：",
+    "Instead of queueing, try asking the agent to do something after the current task.": "您也可以不用排队，而是让智能体在完成当前任务后接着执行操作。",
+    "Instead of queueing, try asking the agent to do something after the current task": "您也可以不用排队，而是让智能体在完成当前任务后接着执行操作",
     "Queue": "排队", "Send Immediately": "立即发送", "Keyboard shortcuts": "键盘快捷键",
     "Security Preset": "安全预设", 
     "Choose a predefined security preset for the agent. This controls terminal auto-execution policy, and file access policy.": "为智能体选择一个预定义的安全预设。这将控制终端自动执行策略和文件访问策略。",
@@ -336,7 +350,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Type": "类型",
     "Specifies Agent's behavior when asking for review on artifacts, which are documents it creates to enable a richer conversation experience.": "指定智能体在请求审核工件时的行为，工件是其为提供更丰富对话体验而创建的文档。",
     "File Access Rules": "文件访问规则", "Configure allowed and denied paths for file reads and writes.": "配置允许和拒绝的文件读取和写入路径。",
-    "Network Access Rules": "网络访问规则", "Configure allowed and denied URLs for reading.": "配置允许和拒绝读取的 URL。",
+    "Network Access Rules": "网络访问规则", "Network access rules": "网络访问规则", "network access rules": "网络访问规则", "Network access": "网络访问", "network access": "网络访问", "Configure allowed and denied URLs for reading.": "配置允许和拒绝读取的 URL。",
     "File Reads": "文件读取", "Allow/deny agent read access to specific files or directories.": "允许/拒绝智能体对特定文件或目录的读取权限。",
     "File Writes": "文件写入", "Allow/deny agent write access to specific files or directories.": "允许/拒绝智能体对特定文件或目录的写入权限。",
     "Network Reads": "网络读取", "Allow/deny agent read access to specific URLs.": "允许/拒绝智能体对特定 URL 的读取权限。",
@@ -1405,7 +1419,8 @@ DOM_TRANSLATOR_INJECTION = r"""
     "permission": "权限", "permissions": "权限", "recent": "最近",
     "interface layout": "界面布局", "knowledge work": "知识工作", "software engineering": "软件工程", "allowed domains": "允许的域名", "download files": "下载文件",
     "open file": "打开文件", "side question": "侧边提问", "side questions": "侧边提问", "customize sections": "自定义版块", "open tabs": "已打开的标签页", "background tasks": "后台任务", "modified files": "已修改的文件",
-    "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算"
+    "thinking effort": "思考强度", "reasoning effort": "思考强度", "thinking budget": "思考预算",
+    "tool permissions": "工具权限", "network access rules": "网络访问规则", "input box": "输入框", "queued messages": "排队消息", "network access": "网络访问"
   };
 
   // Structured Prefix & Content Match Rules for Complex / Truncated Text
@@ -1592,6 +1607,16 @@ DOM_TRANSLATOR_INJECTION = r"""
         "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。"
       );
       return updated;
+    }
+    if (text.indexOf("Choose which key sends a message in the chat composer") !== -1) {
+      let updated = text.replace(
+        /Choose which key sends a message in the chat composer\.?/g,
+        "选择在对话输入框中发送消息的按键。"
+      );
+      return updated;
+    }
+    if (text.indexOf("Messages now send immediately. Configure in") !== -1) {
+      return text.replace("Messages now send immediately. Configure in", "消息现将立即发送。请在以下位置配置：");
     }
     if (text.indexOf("quota") !== -1 || text.indexOf("AI Credit") !== -1) {
       let updated = trimmed;
