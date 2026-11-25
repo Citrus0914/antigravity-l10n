@@ -467,7 +467,7 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Controls how much time and quota the model spends reasoning before responding": "控制模型在做出响应前用于推理的时间和配额",
     "Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use.": "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额。",
     "Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use": "更高的思考强度可提高解决难题的准确率，但代价是响应更慢且消耗更多配额",
-    "No Model Selected": "未选择模型",
+    "No Model Selected": "未选择模型", "Select Model": "选择模型", "Select model": "选择模型", "just now": "刚刚", "Just now": "刚刚", "Just Now": "刚刚", "now": "刚刚",
     "Best of N Models": "Best of N 模型",
     "No models available": "暂无可用模型",
     "Loading models...": "正在加载模型...",
@@ -1730,6 +1730,15 @@ DOM_TRANSLATOR_INJECTION = r"""
     if ((m = trimmed.match(/^(\d+)m$/))) return text.replace(trimmed, m[1] + "分钟前");
     if ((m = trimmed.match(/^(\d+)h$/))) return text.replace(trimmed, m[1] + "小时前");
     if ((m = trimmed.match(/^(\d+)d$/))) return text.replace(trimmed, m[1] + "天前");
+    if ((m = trimmed.match(/^(\d+)(w|mo|y)$/i))) {
+      const unitCn = { "w": "周前", "mo": "个月前", "y": "年前" }[m[2].toLowerCase()];
+      if (unitCn) return text.replace(trimmed, m[1] + unitCn);
+    }
+    if ((m = trimmed.match(/^(\d+)\s*(s|sec|secs|second|seconds|m|min|mins|minute|minutes|h|hr|hrs|hour|hours|d|day|days|w|wk|wks|week|weeks|mo|mon|mons|month|months|y|yr|yrs|year|years)\s+ago$/i))) {
+      const u = m[2].toLowerCase();
+      const unitCn = u.startsWith("mo") ? "个月前" : u.startsWith("s") ? "秒前" : u.startsWith("m") ? "分钟前" : u.startsWith("h") ? "小时前" : u.startsWith("d") ? "天前" : u.startsWith("w") ? "周前" : "年前";
+      return text.replace(trimmed, m[1] + unitCn);
+    }
 
     // Dynamic Time Formatter
     if (text.indexOf("Worked for") !== -1) {
