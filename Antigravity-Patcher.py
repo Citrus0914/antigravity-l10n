@@ -205,13 +205,36 @@ DOM_TRANSLATOR_INJECTION = r"""
     "Models": "模型", "Customizations": "自定义", "Browser": "浏览器", "App": "应用", "Application": "应用", "Applications": "应用",
     "Projects": "项目", "Conversations": "对话", "Provide Feedback": "提供反馈",
     "Manage your plan, credentials, and general preferences.": "管理您的套餐、凭据和常规偏好设置。",
-    "Enable Telemetry": "启用遥测",
+    "Enable Telemetry": "启用遥测", "Enable telemetry": "启用遥测",
+    "Telemetry is turned off for your account.": "您的账号已关闭遥测功能。",
     "When toggled on, Antigravity collects usage data to help Google enhance performance and features.": "开启后，Antigravity 将收集使用数据，以帮助 Google 提升性能和功能。",
-    "Marketing Emails": "营销邮件",
+    "Marketing Emails": "营销邮件", "Marketing emails": "营销邮件",
+    "This setting is turned off for your account.": "您的账号已关闭此设置。",
     "Receive product updates, tips, and promotions from Google Antigravity via email.": "通过电子邮件接收来自 Google Antigravity 的产品更新、提示和促销信息。",
     "Your Plan: Google AI Pro": "当前计划：Google AI Pro", "Your Plan:": "当前计划：",
     "Your plan: Google AI Pro": "当前计划：Google AI Pro", "Your plan:": "当前计划：", "Your plan": "当前计划",
     "You can upgrade to a Google AI Ultra plan to receive higher rate limits.": "您可以升级至 Google AI Ultra 套餐以获得更高的使用限额。",
+    "Authenticated via Enterprise Gateway": "已通过企业网关验证",
+    "Managed by Enterprise Gateway": "由企业网关管理",
+    "Project ID:": "项目 ID：",
+    "Google One referral": "Google One 推荐",
+    "Share your referral link with friends": "与好友分享您的推荐链接",
+    "Invite a Friend": "邀请好友",
+    "Project required": "需要项目",
+    "License required": "需要许可证",
+    "A Google Cloud project is required to use Antigravity.": "需要 Google Cloud 项目才能使用 Antigravity。",
+    "A license or project selection is required to use Antigravity.": "需要选择许可证或项目才能使用 Antigravity。",
+    "Manage License": "管理许可证",
+    "Signing Out...": "正在退出登录...",
+    "Not signed in": "未登录",
+    "Remote Agents Data": "远程智能体数据",
+    "Delete all Remote Agents data": "删除所有远程智能体数据",
+    "Permanently delete your remote conversations, projects, scheduled tasks, connected plugins and settings. Data in the desktop app and your Google account are not affected.": "永久删除您的远程对话、项目、计划任务、已连接的插件和设置。桌面应用和您的 Google 账号中的数据不受影响。",
+    "Delete All Data": "删除所有数据",
+    "Delete All Remote Agents Data?": "删除所有远程智能体数据？",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "这将永久删除您所有的远程智能体对话、项目、计划任务、已连接的插件和设置，并停止所有正在运行的远程智能体。此操作无法撤销。桌面应用和您的 Google 账号中的数据不受影响，之后您仍可继续使用远程智能体。",
+    "Couldn't delete your data. Try again.": "无法删除您的数据。请重试。",
+    "By using this app, you agree to its": "使用本应用即表示您同意其",
     "By using this app, you agree to its ": "使用本应用即表示您同意其 ",
     "Terms of Service": "服务条款",
     "Configure agent execution, queued message delivery, and permissions.": "配置智能体执行、排队消息发送以及权限。",
@@ -1567,6 +1590,14 @@ DOM_TRANSLATOR_INJECTION = r"""
     
     // Dynamic Regex Translations
     let m;
+    if (text.indexOf("Telemetry is turned off for your account.") !== -1) {
+      let updated = text
+        .replace(/When toggled on, (.+?) collects usage data to help Google enhance performance and features\./g, "开启后，$1 将收集使用数据，以帮助 Google 提升性能和功能。")
+        .replace(/Telemetry is turned off for your account\.\s*This means (.+?) does not collect any of your prompts, content, or model responses, but will still collect general usage patterns \(e\.g\., feature adoption, active user counts\)\./g, "您的账号已关闭遥测功能。这意味着 $1 不会收集您的任何提示词、内容或模型响应，但仍会收集一般使用模式（例如功能采用情况、活跃用户数）。");
+      if (updated !== text) {
+        return updated;
+      }
+    }
     if (text.indexOf("of the customization budget is available") !== -1) {
       text = text.replace(/(\d+(?:\.\d+)?)% of the customization budget is available\.?/g, "自定义项预算可用额度为 $1%。");
       text = text.replace(/%\s*of the customization budget is available\.?/g, "% 的自定义项预算可用额度。");
